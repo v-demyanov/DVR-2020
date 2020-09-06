@@ -46,6 +46,7 @@ namespace In
 				{
 					structIN.lines++;
 					col = 1;
+
 					/*if (prevSymbol != '|')
 					{
 						str[word][letter] = '\0';
@@ -55,7 +56,6 @@ namespace In
 					str[word][letter] = '?';
 					letter++;
 					str[word][letter] = '\0';
-
 					word++;
 					letter = 0;
 					continue;
@@ -69,9 +69,8 @@ namespace In
 					prevSymbol = symbol;
 					continue;
 				}*/
-				/*	Если символ не является пробелом	*/
-				/*if ((int)symbol != 32)
-					str[word][letter] = symbol;*/
+
+				str[word][letter] = symbol;
 				prevSymbol = symbol;
 				letter++;
 			}
