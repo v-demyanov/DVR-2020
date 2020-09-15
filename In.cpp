@@ -84,6 +84,10 @@ namespace In
 			}
 		}
 
+		//*
+		str[word][letter] = '?';
+		letter++;
+
 		if (symbol != '|')
 		{
 			str[word][letter] = '\0';

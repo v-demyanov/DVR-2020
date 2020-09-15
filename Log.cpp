@@ -117,7 +117,7 @@ namespace Log
 	{
 		for (int i = 0; i < in.lmyStr; i++)
 		{
-			*out.stream << "Строка " << in.myStr[i] << "\n";
+			*out.stream << in.myStr[i] << "\n";
 		}
 	}
 
