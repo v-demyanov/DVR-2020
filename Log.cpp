@@ -19,6 +19,16 @@ namespace Log
 		wcscpy_s(log.logfile, logfile);
 		return log;
 	}
+	OUT getout(wchar_t outfile[]) //*
+	{
+		OUT out;
+		out.stream = new std::ofstream;
+		out.stream->open(outfile);
+		if (!out.stream->is_open())
+			ERROR_THROW(112);
+		wcscpy_s(out.outfile, outfile);
+		return out;
+	}
 	void WriteLine(LOG log, const char* c, ...)
 	{
 		std::string str;
@@ -82,11 +92,6 @@ namespace Log
 		*log.stream << "Проигнорировано: " << in.ignor << "\n";
 		*log.stream << "Количество строк: " << in.lines << "\n";
 
-		for (int i = 0; i < in.lmyStr; i++)
-		{
-			*log.stream << "Строка " << in.myStr[i] << "\n";
-		}
-
 		/*for (int i = 0; i < in.lmyStr; i++)
 		{
 			FST::FST myStr(
@@ -108,6 +113,14 @@ namespace Log
 		}*/
 	}
 
+	void WriteOut(OUT out, In::IN in) //*
+	{
+		for (int i = 0; i < in.lmyStr; i++)
+		{
+			*out.stream << in.myStr[i] << "\n";
+		}
+	}
+
 	void WriteError(LOG log, Error::ERROR error)
 	{
 		if (log.stream != NULL)
@@ -123,5 +136,10 @@ namespace Log
 	void Close(LOG log)
 	{
 		log.stream->close();
+	}
+
+	void CloseOut(OUT out) //*
+	{
+		out.stream->close();
 	}
 }

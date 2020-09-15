@@ -19,10 +19,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 #if LOG_TEST
 	Log::LOG log = Log::INITLOG;
+	Log::OUT out = Log::INITOUT;
 	try
 	{
 		Parm::PARM parm = Parm::getparm(argc, argv);
 		log = Log::getlog(parm.log);
+		out = Log::getout(parm.out);
 		Log::WriteLine(log, "Тест:", "без ошибок ", "");
 		Log::WriteLog(log);
 		Log::WriteParm(log, parm);
@@ -30,6 +32,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		In::IN in = In::getin(parm.in);
 		Log::WriteIn(log, in);
 		Log::Close(log);
+		Log::WriteOut(out, in);
+		Log::CloseOut(out);
 	}
 	catch (Error::ERROR e)
 	{

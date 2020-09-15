@@ -1,46 +1,10 @@
 Тест:без ошибок 
- ---- Протокол ---- Дата: 02.09.2020 17:11:54 ----
+ ---- Протокол ---- Дата: 08.09.2020 15:50:37 ----
 ---- Параметры ----
 -log: In.txt.log
 -out: In.txt.out
 -in: In.txt
 ---- Исходные данные ----
 Количество символов: 563
-Проигнорировано: 0
+Проигнорировано: 62
 Количество строк: 36
-Строка integerНfunctionНfi(integerНx,НintegerНy)?
-Строка {?
-Строка declareНintegerНz;?
-Строка z=Нx*(x+y);?
-Строка returnНz;?
-Строка };?
-Строка stringНfunctionНfsН(stringНa,НstringНb)?
-Строка {?
-Строка declareНstringНс;?
-Строка declareНstringНfunctionНsubstr(stringНa,НintegerНp,?
-Строка integerНn);?
-Строка cН=Нsubstr(a,Н1,3)+Нb;?
-Строка returnНc;?
-Строка };?
-Строка main?
-Строка {?
-Строка declareНintegerНx;?
-Строка declareНintegerНy;?
-Строка declareНintegerНz;?
-Строка declareНstringНsa;?
-Строка declareНstringНsb;?
-Строка declareНstringНsc;?
-Строка declareНintegerНstrlen(stringНp);?
-Строка xН=Н1;?
-Строка yН=Н5;?
-Строка saН=Н'1234567890';?
-Строка sbН=Н'1234567890';?
-Строка zН=Нfi(x,y);?
-Строка scН=Нfs(sa,sb);?
-Строка printН'контрольныйНпример';?
-Строка printНz;?
-Строка 4?
-Строка printНsc;?
-Строка printНstrlen(sc);?
-Строка returnН0;?
-Строка };
