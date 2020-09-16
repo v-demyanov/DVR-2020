@@ -19,8 +19,8 @@ namespace In
 		structIN.ignor = 0;
 		structIN.lines = 1;
 		int ASCII_Table[] = IN_CODE_TABLE;
-		char symbol, prevSymbol;
-		int index;
+		char symbol, nextSymbol = 'a';
+		int index, prevSymbolId = NULL, nextSymbolId = NULL;
 		int letter = 0;
 		int word = 0;
 		char** str = new char* [LEN];
@@ -30,17 +30,29 @@ namespace In
 		for (int col = 1; file.get(symbol); col++)
 		{
 			structIN.size++;
+			file.get(nextSymbol);
+			file.unget();
 
 			if ((int)symbol < 0)
+			{
 				index = (int)symbol + 256;
+				nextSymbolId = (int)nextSymbol + 256;
+			}	
 			else
+			{
 				index = (int)symbol;
-
+				nextSymbolId = (int)nextSymbol;
+			}
+				
 			if (ASCII_Table[index] == structIN.F)
 			{
 				throw ERROR_THROW_IN(111, structIN.lines, col);
 			}
-			else if (ASCII_Table[index] == structIN.T)
+			else if (ASCII_Table[index] == structIN.I || (symbol == ' ' && (ASCII_Table[prevSymbolId] == structIN.S || ASCII_Table[nextSymbolId] == structIN.S)))
+			{
+				structIN.ignor++;
+			}
+			else if (ASCII_Table[index] == structIN.T || ASCII_Table[index] == structIN.S)
 			{
 				if (symbol == '\n')
 				{
@@ -71,12 +83,8 @@ namespace In
 				}*/
 
 				str[word][letter] = symbol;
-				prevSymbol = symbol;
+				prevSymbolId = (int)symbol;
 				letter++;
-			}
-			else if (ASCII_Table[index] == structIN.I)
-			{
-				structIN.ignor++;
 			}
 			else if (ASCII_Table[index] != symbol)
 			{
