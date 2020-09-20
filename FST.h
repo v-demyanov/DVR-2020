@@ -27,6 +27,6 @@ namespace FST
 		FST(const char* s, short ns, NODE n, ...);
 	};
 
-	bool execute(FST& fst);
+	bool execute(FST& fst, char lex);
 	bool step(FST& fst, short*& rstates);
 };

@@ -37,7 +37,7 @@ namespace FST
 		position = -1; // текущая позиция в цепочке
 	}
 
-	bool execute(FST& fst)
+	bool execute(FST& fst, char lex)
 	{
 		short* rstates = new short[fst.nstates];
 		memset(rstates, 0xff, sizeof(short) * fst.nstates);
@@ -49,6 +49,11 @@ namespace FST
 			rc = step(fst, rstates);
 		}
 		delete[] rstates;
+		/*if (rc ? (fst.rstates[fst.nstates - 1] == lstring) : rc)
+			return lex;
+		else*/
+
+		//return lex;
 		return (rc ? (fst.rstates[fst.nstates - 1] == lstring) : rc);
 	}
 
