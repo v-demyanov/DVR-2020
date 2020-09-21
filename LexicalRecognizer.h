@@ -4,8 +4,5 @@
 
 namespace LR
 {
-	/*char returnLex()
-	{
-
-	}*/
+	
 }

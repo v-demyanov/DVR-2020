@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+
+#define FST_ARR_SIZE 20
+
 namespace FST
 {
 	struct RELATION
@@ -24,9 +27,12 @@ namespace FST
 		short nstates;
 		NODE* nodes;
 		short* rstates;
-		FST(const char* s, short ns, NODE n, ...);
+		char lex;
+		FST();
+		FST(const char* s, short ns, char l, NODE n, ...);
 	};
 
-	bool execute(FST& fst, char lex);
+	bool execute(FST& fst);
 	bool step(FST& fst, short*& rstates);
+	FST* arrFST();
 };
