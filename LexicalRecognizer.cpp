@@ -1,11 +1,8 @@
 
-#include <iostream>
-#include "FST.h"
-#include "LT.h"
-#include "IT.h"
+#include "Headers.h"
 
 
 namespace LR
 {
-
+	
 }

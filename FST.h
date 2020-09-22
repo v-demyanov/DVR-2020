@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include "Headers.h"
 
 #define FST_ARR_SIZE 20
 

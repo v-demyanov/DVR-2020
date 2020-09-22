@@ -21,6 +21,22 @@ namespace LT
 		return lextable.table[n];
 	}
 
+	Entry CheckLexem(const char* lex)
+	{
+		FST::FST* arrFST = new FST::FST;
+		LT::Entry result;
+		for (int i = 0; i < FST_ARR_SIZE; i++)
+		{
+			arrFST[i].string = lex;
+			if (execute(arrFST[i]))
+			{
+				result.lexema = arrFST[i].lex;
+				return result;
+			}
+		}
+		return {};
+	}
+
 	void Delete(LexTable& lextable)
 	{
 		delete[] lextable.table;

@@ -1,4 +1,5 @@
 #pragma once
+#include "Headers.h"
 #define LEXEMA_FIXSIZE				1				// фикс размер лексемы
 #define LT_MAXSIZE					4096			// макс кол-во строк в таблице лексем
 #define LT_TI_NULLIDX				0xffffffff		// нет элемента таблицы идентификаторов
@@ -28,7 +29,7 @@ namespace LT									// таблица лексем
 {
 	struct Entry								// строка таблицы лексем
 	{
-		char lexema[LEXEMA_FIXSIZE];			// лексема
+		char lexema;							// лексема
 		int sn;									// номер строки в исходном коде
 		int idxTI;								// индекс в таблице идентификаторов или LT_TI_NULLIDX
 	};
@@ -44,4 +45,5 @@ namespace LT									// таблица лексем
 	void Add(LexTable& lextable, Entry entry);	// добавить строку в таблицу лексем 
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем, n - номер получаемой строки
 	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
+	Entry CheckLexem(const char* lex);
 }

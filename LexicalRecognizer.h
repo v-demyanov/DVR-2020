@@ -1,6 +1,5 @@
 #pragma once
-#include "IT.h"
-#include "LT.h"
+#include "Headers.h"
 
 namespace LR
 {
