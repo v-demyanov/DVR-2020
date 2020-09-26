@@ -3,6 +3,8 @@
 #define IN_MAX_LEN_TEXT 1024*1024
 #define IN_CODE_ENDL '\n'
 #define LEN 100
+#define END_OF_STR '?'
+#define SPACE ' '
 // 3 1
 #define IN_CODE_TABLE {\
 	IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, \

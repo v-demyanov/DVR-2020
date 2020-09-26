@@ -27,11 +27,13 @@
 
 namespace LT									// таблица лексем
 {
+	//enum {};
 	struct Entry								// строка таблицы лексем
 	{
 		char lexema;							// лексема
 		int sn;									// номер строки в исходном коде
 		int idxTI;								// индекс в таблице идентификаторов или LT_TI_NULLIDX
+
 	};
 
 	struct LexTable								// экзэмпл€р таблицы лексем
@@ -45,5 +47,5 @@ namespace LT									// таблица лексем
 	void Add(LexTable& lextable, Entry entry);	// добавить строку в таблицу лексем 
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем, n - номер получаемой строки
 	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить пам€ть)
-	Entry CheckLexem(const char* lex);
+	Entry CheckLexem(const char* lex, int line);
 }

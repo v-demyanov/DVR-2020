@@ -21,7 +21,7 @@ namespace LT
 		return lextable.table[n];
 	}
 
-	Entry CheckLexem(const char* lex)
+	Entry CheckLexem(const char* lex, int line)
 	{
 		FST::FST* arrFST = new FST::FST;
 		LT::Entry result;
@@ -31,6 +31,7 @@ namespace LT
 			if (execute(arrFST[i]))
 			{
 				result.lexema = arrFST[i].lex;
+				result.sn = line;
 				return result;
 			}
 		}

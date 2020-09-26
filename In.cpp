@@ -48,7 +48,7 @@ namespace In
 			{
 				throw ERROR_THROW_IN(111, structIN.lines, col);
 			}
-			else if (ASCII_Table[index] == structIN.I || (symbol == ' ' && (ASCII_Table[prevSymbolId] == structIN.S || ASCII_Table[nextSymbolId] == structIN.S)))
+			else if (ASCII_Table[index] == structIN.I || (symbol == SPACE && (ASCII_Table[prevSymbolId] == structIN.S || ASCII_Table[nextSymbolId] == structIN.S)))
 			{
 				structIN.ignor++;
 			}
@@ -93,7 +93,7 @@ namespace In
 		}
 
 		//*
-		str[word][letter] = '?';
+		str[word][letter] = END_OF_STR;
 		letter++;
 
 		if (symbol != '|')
