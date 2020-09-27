@@ -1,7 +1,8 @@
+
 #include "LT.h"
 
 namespace LT
-{
+{	
 	LexTable Create(int size)
 	{
 		LexTable* tableEx = new LexTable;
@@ -19,23 +20,6 @@ namespace LT
 	Entry GetEntry(LexTable& lextable, int n)
 	{
 		return lextable.table[n];
-	}
-
-	Entry CheckLexem(const char* lex, int line)
-	{
-		FST::FST* arrFST = new FST::FST;
-		LT::Entry result;
-		for (int i = 0; i < FST_ARR_SIZE; i++)
-		{
-			arrFST[i].string = lex;
-			if (execute(arrFST[i]))
-			{
-				result.lexema = arrFST[i].lex;
-				result.sn = line;
-				return result;
-			}
-		}
-		return {};
 	}
 
 	void Delete(LexTable& lextable)

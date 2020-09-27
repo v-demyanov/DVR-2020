@@ -25,6 +25,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Log::WriteIn(log, in);
 		Log::Close(log);
 		Log::WriteOut(out, in);
+		LR::FillingTables(in);
 		Log::CloseOut(out);
 	}
 	catch (Error::ERROR e)

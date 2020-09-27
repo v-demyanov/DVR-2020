@@ -5,6 +5,14 @@
 
 namespace FST
 {
+
+	enum LEXTYPE { LEX_NOT_FOUND = -1, TABLE_LEX = 0, LEX_TABLE_ID };
+	struct FST_RESULT
+	{
+		char lex;
+		LEXTYPE lex_type;
+	};
+
 	struct RELATION
 	{
 		char symbol;
@@ -28,11 +36,13 @@ namespace FST
 		NODE* nodes;
 		short* rstates;
 		char lex;
+		LEXTYPE lex_type;
 		FST();
-		FST(const char* s, short ns, char l, NODE n, ...);
+		FST(const char* s, short ns, char l, LEXTYPE l_t, NODE n, ...);
 	};
 
 	bool execute(FST& fst);
 	bool step(FST& fst, short*& rstates);
 	FST* arrFST();
+	FST_RESULT CheckLexem(const char* lex);
 };

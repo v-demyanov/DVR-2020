@@ -39,4 +39,5 @@ namespace In
 		char** myStr;
 	};
 	IN getin(wchar_t infile[]);
+	int* return_IN_CODE_TABLE();
 };

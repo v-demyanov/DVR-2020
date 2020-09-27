@@ -1,10 +1,10 @@
 ﻿  Error.cpp
   FST.cpp
-D:\Study\LP3sem\LPLab14\FST.cpp(45,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-D:\Study\LP3sem\LPLab14\FST.cpp(167,4): warning C4305: аргумент: усечение из "int" в "char"
-D:\Study\LP3sem\LPLab14\FST.cpp(155,22): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\LPLab14\FST.cpp(231,4): warning C4305: аргумент: усечение из "int" в "char"
-D:\Study\LP3sem\LPLab14\FST.cpp(168,25): warning C4309: аргумент: усечение константного значения
+F:\HDD\ЯП2Курс\LPLab\Compiler\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+F:\HDD\ЯП2Курс\LPLab\Compiler\FST.cpp(168,4): warning C4305: аргумент: усечение из "int" в "char"
+F:\HDD\ЯП2Курс\LPLab\Compiler\FST.cpp(156,22): warning C4309: аргумент: усечение константного значения
+F:\HDD\ЯП2Курс\LPLab\Compiler\FST.cpp(232,4): warning C4305: аргумент: усечение из "int" в "char"
+F:\HDD\ЯП2Курс\LPLab\Compiler\FST.cpp(169,25): warning C4309: аргумент: усечение константного значения
   In.cpp
   IT.cpp
   LexicalRecognizer.cpp
@@ -13,4 +13,5 @@ D:\Study\LP3sem\LPLab14\FST.cpp(168,25): warning C4309: аргумент: усе
   LT.cpp
   Parm.cpp
   Создание кода...
-  LPLab14.vcxproj -> D:\Study\LP3sem\LPLab14\Debug\LPLab14.exe
+F:\HDD\ЯП2Курс\LPLab\Compiler\In.cpp(114): warning C4172: возвращение адреса локальной или временной переменной : ASCII_Table
+  LPLab14.vcxproj -> F:\HDD\ЯП2Курс\LPLab\Compiler\Debug\LPLab14.exe

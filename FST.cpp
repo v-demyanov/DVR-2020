@@ -24,7 +24,7 @@ namespace FST
 		for (short i = 0; i < n; i++) relations[i] = p[i];
 	}
 
-	FST::FST(const char* s, short ns, char l, NODE n, ...)
+	FST::FST(const char* s, short ns, char l, LEXTYPE l_t, NODE n, ...)
 	{
 		lex = l;
 		string = s; // цепочка
@@ -36,6 +36,7 @@ namespace FST
 		memset(rstates, 0xff, sizeof(short) * nstates);
 		rstates[0] = 0;
 		position = -1; // текущая позиция в цепочке
+		lex_type = l_t;
 	}
 
 	bool execute(FST& fst)
@@ -74,47 +75,47 @@ namespace FST
 
 	FST* arrFST()
 	{
-		FST dirslashFST("", 2, LEX_DIRSLASH,
+		FST dirslashFST("", 2, LEX_DIRSLASH, TABLE_LEX,
 			NODE(1, RELATION('/', 1)),
 			NODE()
 		);
-		FST starFST("", 2, LEX_STAR,
+		FST starFST("", 2, LEX_STAR, TABLE_LEX,
 			NODE(1, RELATION('*', 1)),
 			NODE()
 		);
-		FST minusFST("", 2, LEX_MINUS,
+		FST minusFST("", 2, LEX_MINUS, TABLE_LEX,
 			NODE(1, RELATION('-', 1)),
 			NODE()
 		);
-		FST plusFST("", 2, LEX_PLUS,
+		FST plusFST("", 2, LEX_PLUS, TABLE_LEX,
 			NODE(1, RELATION('+', 1)),
 			NODE()
 		);
-		FST righthesisFST("", 2, LEX_RIGHTHESIS,
+		FST righthesisFST("", 2, LEX_RIGHTHESIS, TABLE_LEX,
 			NODE(1, RELATION(')', 1)),
 			NODE()
 		);
-		FST lefthesisFST("", 2, LEX_LEFTHESIS,
+		FST lefthesisFST("", 2, LEX_LEFTHESIS, TABLE_LEX,
 			NODE(1, RELATION('(', 1)),
 			NODE()
 		);
-		FST braceletFST("", 2, LEX_BRACELET,
+		FST braceletFST("", 2, LEX_BRACELET, TABLE_LEX,
 			NODE(1, RELATION('}', 1)),
 			NODE()
 		);
-		FST leftbraceFST("", 2, LEX_LEFTBRACE,
+		FST leftbraceFST("", 2, LEX_LEFTBRACE, TABLE_LEX,
 			NODE(1, RELATION('{', 1)),
 			NODE()
 		);
-		FST commaFST("", 2, LEX_COMMA,
+		FST commaFST("", 2, LEX_COMMA, TABLE_LEX,
 			NODE(1, RELATION(',', 1)),
 			NODE()
 		);
-		FST semicolonFST("", 2, LEX_SEMICOLON,
+		FST semicolonFST("", 2, LEX_SEMICOLON, TABLE_LEX,
 			NODE(1, RELATION(';', 1)),
 			NODE()
 		);
-		FST integerFST("", 8, LEX_INTEGER,
+		FST integerFST("", 8, LEX_INTEGER, TABLE_LEX,
 			NODE(1, RELATION('i', 1)),
 			NODE(1, RELATION('n', 2)),
 			NODE(1, RELATION('t', 3)),
@@ -124,7 +125,7 @@ namespace FST
 			NODE(1, RELATION('r', 7)),
 			NODE()
 		);
-		FST stringFST("", 7, LEX_INTEGER,
+		FST stringFST("", 7, LEX_INTEGER, TABLE_LEX,
 			NODE(1, RELATION('s', 1)),
 			NODE(1, RELATION('t', 2)),
 			NODE(1, RELATION('r', 3)),
@@ -133,7 +134,7 @@ namespace FST
 			NODE(1, RELATION('g', 6)),
 			NODE()
 		);
-		FST idFST("", 2, LEX_ID,
+		FST idFST("", 2, LEX_ID, LEX_TABLE_ID,
 			NODE(52,
 			RELATION('a', 0), RELATION('b', 0), RELATION('c', 0), RELATION('d', 0),
 			RELATION('e', 0), RELATION('f', 0), RELATION('g', 0), RELATION('h', 0),
@@ -152,7 +153,7 @@ namespace FST
 			RELATION('y', 1), RELATION('z', 1)),
 			NODE()
 		);
-		FST numlFST("", 2, LEX_NUMERICAL_LITERAL,
+		FST numlFST("", 2, LEX_NUMERICAL_LITERAL, TABLE_LEX,
 			NODE(20,
 				RELATION('0', 0), RELATION('1', 0), RELATION('2', 0),
 				RELATION('3', 0), RELATION('4', 0), RELATION('5', 0),
@@ -165,7 +166,7 @@ namespace FST
 				RELATION('9', 1)),
 			NODE()
 		);
-		FST stringlFST("", 4, LEX_STRING_LITERAL,
+		FST stringlFST("", 4, LEX_STRING_LITERAL, TABLE_LEX,
 			NODE(2,
 				RELATION('\'', 1),
 				RELATION('\'', 2)),
@@ -229,17 +230,18 @@ namespace FST
 			NODE(1, RELATION('\'', 3)),
 			NODE()
 		);
-		FST functionFST("", 8, LEX_FUNCTION,
+		FST functionFST("", 9, LEX_FUNCTION, TABLE_LEX,
 			NODE(1, RELATION('f', 1)),
 			NODE(1, RELATION('u', 2)),
-			NODE(1, RELATION('c', 3)),
-			NODE(1, RELATION('t', 4)),
-			NODE(1, RELATION('i', 5)),
-			NODE(1, RELATION('o', 6)),
-			NODE(1, RELATION('n', 7)),
+			NODE(1, RELATION('n', 3)),
+			NODE(1, RELATION('c', 4)),
+			NODE(1, RELATION('t', 5)),
+			NODE(1, RELATION('i', 6)),
+			NODE(1, RELATION('o', 7)),
+			NODE(1, RELATION('n', 8)),
 			NODE()
 		);
-		FST declareFST("", 8, LEX_DECLARE,
+		FST declareFST("", 8, LEX_DECLARE, TABLE_LEX,
 			NODE(1, RELATION('d', 1)),
 			NODE(1, RELATION('e', 2)),
 			NODE(1, RELATION('c', 3)),
@@ -249,7 +251,7 @@ namespace FST
 			NODE(1, RELATION('e', 7)),
 			NODE()
 		);
-		FST returnFST("", 7, LEX_RETURN,
+		FST returnFST("", 7, LEX_RETURN, TABLE_LEX,
 			NODE(1, RELATION('r', 1)),
 			NODE(1, RELATION('e', 2)),
 			NODE(1, RELATION('t', 3)),
@@ -258,7 +260,7 @@ namespace FST
 			NODE(1, RELATION('n', 6)),
 			NODE()
 		);
-		FST printFST("", 6, LEX_PRINT,
+		FST printFST("", 6, LEX_PRINT, TABLE_LEX,
 			NODE(1, RELATION('p', 1)),
 			NODE(1, RELATION('r', 2)),
 			NODE(1, RELATION('i', 3)),
@@ -266,7 +268,7 @@ namespace FST
 			NODE(1, RELATION('t', 5)),
 			NODE()
 		);
-		FST mainFST("", 5, LEX_MAIN,
+		FST mainFST("", 5, LEX_MAIN, TABLE_LEX,
 			NODE(1, RELATION('m', 1)),
 			NODE(1, RELATION('a', 2)),
 			NODE(1, RELATION('i', 3)),
@@ -287,15 +289,33 @@ namespace FST
 		result[9] = semicolonFST;
 		result[10] = integerFST;
 		result[11] = stringFST;
-		result[12] = idFST;
-		result[13] = numlFST;
-		result[14] = stringlFST;
+		result[12] = mainFST;
+		result[13] = printFST;
+		result[14] = returnFST;
 		result[15] = functionFST;
 		result[16] = declareFST;
-		result[17] = returnFST;
-		result[18] = printFST;
-		result[19] = mainFST;
+		result[17] = stringlFST;
+		result[18] = numlFST;
+		result[19] = idFST;
 		return result;
+	}
+
+	FST_RESULT CheckLexem(const char* lex)
+	{
+		FST* arr_of_FST;
+		arr_of_FST = arrFST();
+		FST_RESULT result;
+		for (int i = 0; i < FST_ARR_SIZE; i++)
+		{
+			arr_of_FST[i].string = lex;
+			if (execute(arr_of_FST[i]))
+			{
+				result.lex = arr_of_FST[i].lex;
+				result.lex_type = arr_of_FST[i].lex_type;
+				return result;
+			}
+		}
+		return { NULL, LEX_NOT_FOUND };
 	}
 
 }

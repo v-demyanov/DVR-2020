@@ -47,5 +47,5 @@ namespace LT									// таблица лексем
 	void Add(LexTable& lextable, Entry entry);	// добавить строку в таблицу лексем 
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем, n - номер получаемой строки
 	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
-	Entry CheckLexem(const char* lex, int line);
+	
 }

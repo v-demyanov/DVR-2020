@@ -107,4 +107,10 @@ namespace In
 		file.close();
 		return structIN;
 	}
+
+	int* return_IN_CODE_TABLE()
+	{
+		int ASCII_Table[] = IN_CODE_TABLE;
+		return ASCII_Table;
+	}
 };
