@@ -1,7 +1,7 @@
 #pragma once
 #include "Headers.h"
 
-#define FST_ARR_SIZE 20
+#define FST_ARR_SIZE 21
 
 namespace FST
 {

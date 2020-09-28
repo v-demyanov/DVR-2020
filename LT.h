@@ -8,8 +8,8 @@
 #define LEX_STRING					't'				// string
 #define LEX_ID						'i'				// идентификатор
 #define LEX_LITERAL					'l'				// литерал
-#define LEX_STRING_LITERAL			'sl'			// строковый литерал
-#define LEX_NUMERICAL_LITERAL		'nl'			// числовой литерал
+#define LEX_STRING_LITERAL			's'				// строковый литерал
+#define LEX_NUMERICAL_LITERAL		'n'				// числовой литерал
 #define LEX_FUNCTION				'f'				// function
 #define LEX_DECLARE					'd'				// declare
 #define LEX_RETURN					'r'				// return
@@ -24,6 +24,7 @@
 #define LEX_MINUS					'v'				// -
 #define LEX_STAR					'v'				// *
 #define LEX_DIRSLASH				'v'				// /
+#define LEX_EQUAL					'='				// =
 
 namespace LT									// таблица лексем
 {

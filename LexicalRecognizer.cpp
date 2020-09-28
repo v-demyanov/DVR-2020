@@ -54,32 +54,15 @@ namespace LR
 				}
 			}
 		}
+
+		std::cout << "......Test......" << std::endl;
+		for (int i = 0; i < t; i++)
+		{
+			std::cout << "\t" << result[i] << std::endl;
+		}
 		
 		/*tables.idTable = idTable;
 		tables.lexTable = lexTable;
 		return tables;*/
 	}
 }
-
-//while (in.myStr[i][j] != END_OF_STR)
-//{
-//	if (in.myStr[i][j] == in.S && k == 0)
-//	{
-//		lexStr[k] = in.myStr[i][j];
-//		lexema = FST::CheckLexem(lexStr);
-//
-//	}
-//	else if (in.myStr[i][j] == SPACE || in.myStr[i][j] == in.S)
-//	{
-//		lexema = FST::CheckLexem(lexStr);
-//		if (in.myStr[i][j] == in.S)
-//		{
-//			j--;
-//		}
-//		k = 0;
-//	}
-//	else
-//	{
-//		lexStr[++k] = in.myStr[i][j];
-//	}
-//}

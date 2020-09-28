@@ -75,6 +75,10 @@ namespace FST
 
 	FST* arrFST()
 	{
+		FST equalFST("", 2, LEX_EQUAL, TABLE_LEX,
+			NODE(1, RELATION('=', 1)),
+			NODE()
+		);
 		FST dirslashFST("", 2, LEX_DIRSLASH, TABLE_LEX,
 			NODE(1, RELATION('/', 1)),
 			NODE()
@@ -278,25 +282,26 @@ namespace FST
 
 		FST* result = new FST[FST_ARR_SIZE];
 		result[0] = dirslashFST;
-		result[1] = starFST;
-		result[2] = minusFST;
-		result[3] = plusFST;
-		result[4] = righthesisFST;
-		result[5] = lefthesisFST;
-		result[6] = braceletFST;
-		result[7] = leftbraceFST;
-		result[8] = commaFST;
-		result[9] = semicolonFST;
-		result[10] = integerFST;
-		result[11] = stringFST;
-		result[12] = mainFST;
-		result[13] = printFST;
-		result[14] = returnFST;
-		result[15] = functionFST;
-		result[16] = declareFST;
-		result[17] = stringlFST;
-		result[18] = numlFST;
-		result[19] = idFST;
+		result[1] = equalFST;
+		result[2] = starFST;
+		result[3] = minusFST;
+		result[4] = plusFST;
+		result[5] = righthesisFST;
+		result[6] = lefthesisFST;
+		result[7] = braceletFST;
+		result[8] = leftbraceFST;
+		result[9] = commaFST;
+		result[10] = semicolonFST;
+		result[11] = integerFST;
+		result[12] = stringFST;
+		result[13] = mainFST;
+		result[14] = printFST;
+		result[15] = returnFST;
+		result[16] = functionFST;
+		result[17] = declareFST;
+		result[18] = stringlFST;
+		result[19] = numlFST;
+		result[20] = idFST;
 		return result;
 	}
 
