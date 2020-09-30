@@ -28,12 +28,12 @@
 
 namespace LT									// таблица лексем
 {
-	//enum {};
+	
 	struct Entry								// строка таблицы лексем
 	{
 		char lexema;							// лексема
-		int sn;									// номер строки в исходном коде
-		int idxTI;								// индекс в таблице идентификаторов или LT_TI_NULLIDX
+		int lineSource;							// номер строки в исходном коде
+		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
 
 	};
 

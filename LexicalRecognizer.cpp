@@ -5,6 +5,38 @@
 using namespace In;
 namespace LR
 {
+	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable)
+	{
+		LT::Entry result;
+		result.lexema = lex;
+		result.lineSource = lineSource;
+		result.indexIdTable = indexIdTable;
+		return result;
+	}
+
+	IT::Entry CreateId(int idxfirstLE, char id[ID_MAXSIZE], IT::IDDATATYPE iddatatype, IT::IDTYPE idtype, int vint)
+	{
+		IT::Entry result;
+		result.id = new char[ID_MAXSIZE];
+		result.idxfirstLE = idxfirstLE;
+		result.id = id;
+		result.iddatatype = iddatatype;
+		result.idtype = idtype;
+		result.value.vint = vint;
+		return result;
+	}
+
+	IT::Entry CreateId(int idxfirstLE, char id[ID_MAXSIZE], IT::IDDATATYPE iddatatype, IT::IDTYPE idtype, char str[TI_STR_MAXSIZE - 1])
+	{
+		IT::Entry result;
+		result.id = new char[ID_MAXSIZE];
+		result.idxfirstLE = idxfirstLE;
+		result.id = id;
+		result.iddatatype = iddatatype;
+		result.idtype = idtype;
+		result.value.vstr->str = str;
+		return result;
+	}
 	//Tables FillingTables(LT::LexTable& lexTable, IT::IdTable& idTable, In::IN in)
 	void FillingTables(In::IN in)
 	{
