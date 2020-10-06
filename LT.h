@@ -1,11 +1,10 @@
 #pragma once
-#include "Headers.h"
 #define LEXEMA_FIXSIZE				1				// фикс размер лексемы
 #define LT_MAXSIZE					4096			// макс кол-во строк в таблице лексем
 #define LT_TI_NULLIDX				0xffffffff		// нет элемента таблицы идентификаторов
 #define LEX_MAIN					'm'				// main
-#define LEX_INTEGER					't'				// integer
-#define LEX_STRING					't'				// string
+#define LEX_INTEGER					'x'				// integer
+#define LEX_STRING					'y'				// string
 #define LEX_ID						'i'				// идентификатор
 #define LEX_LITERAL					'l'				// литерал
 #define LEX_STRING_LITERAL			's'				// строковый литерал
@@ -28,13 +27,11 @@
 
 namespace LT									// таблица лексем
 {
-	
 	struct Entry								// строка таблицы лексем
 	{
 		char lexema;							// лексема
 		int lineSource;							// номер строки в исходном коде
-		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
-
+		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX	
 	};
 
 	struct LexTable								// экзэмпляр таблицы лексем

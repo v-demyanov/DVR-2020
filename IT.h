@@ -13,7 +13,7 @@ namespace IT										// таблица идентификатов
 
 	struct Entry									// строка таблицы идентификаторов
 	{
-		int			idxfirstLE;						// индекс первой строки в таблицы лексем
+		int			idxfirstLE;						// индекс первой строки в таблице лексем
 		char*		id;								// идентификатор (автоматически усекается до ID_MAXSIZE)
 		IDDATATYPE	iddatatype;						// тип данных
 		IDTYPE		idtype;							// тип идентикатора
@@ -22,7 +22,7 @@ namespace IT										// таблица идентификатов
 			int vint;								// значение integer
 			struct
 			{
-				char len;							// количесвто символов в string
+				int len;							// количесвто символов в string
 				char* str;							// символы string
 			} vstr[TI_STR_MAXSIZE];					// значение string
 		} value;									// значение идентификатора

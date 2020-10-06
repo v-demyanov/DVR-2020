@@ -1,10 +1,4 @@
-﻿  FST.cpp
-F:\HDD\ЯП2Курс\LPLab\Compiler\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
-  In.cpp
-  LPLab14.cpp
-  LT.cpp
-  LexicalRecognizer.cpp
-  Log.cpp
-  Создание кода...
-F:\HDD\ЯП2Курс\LPLab\Compiler\In.cpp(114): warning C4172: возвращение адреса локальной или временной переменной : ASCII_Table
-  LPLab14.vcxproj -> F:\HDD\ЯП2Курс\LPLab\Compiler\Debug\LPLab14.exe
+﻿  LexicalRecognizer.cpp
+D:\Study\LP3sem\LPLab14\LexicalRecognizer.cpp(122,18): warning C4101: iddatatype: неиспользованная локальная переменная
+D:\Study\LP3sem\LPLab14\LexicalRecognizer.cpp(123,14): warning C4101: idtype: неиспользованная локальная переменная
+  LPLab14.vcxproj -> D:\Study\LP3sem\LPLab14\Debug\LPLab14.exe

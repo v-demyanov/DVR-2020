@@ -75,51 +75,51 @@ namespace FST
 
 	FST* arrFST()
 	{
-		FST equalFST("", 2, LEX_EQUAL, TABLE_LEX,
+		FST equalFST("", 2, LEX_EQUAL, COMMON_LEX,
 			NODE(1, RELATION('=', 1)),
 			NODE()
 		);
-		FST dirslashFST("", 2, LEX_DIRSLASH, TABLE_LEX,
+		FST dirslashFST("", 2, LEX_DIRSLASH, ACTION_LEX,
 			NODE(1, RELATION('/', 1)),
 			NODE()
 		);
-		FST starFST("", 2, LEX_STAR, TABLE_LEX,
+		FST starFST("", 2, LEX_STAR, ACTION_LEX,
 			NODE(1, RELATION('*', 1)),
 			NODE()
 		);
-		FST minusFST("", 2, LEX_MINUS, TABLE_LEX,
+		FST minusFST("", 2, LEX_MINUS, ACTION_LEX,
 			NODE(1, RELATION('-', 1)),
 			NODE()
 		);
-		FST plusFST("", 2, LEX_PLUS, TABLE_LEX,
+		FST plusFST("", 2, LEX_PLUS, ACTION_LEX,
 			NODE(1, RELATION('+', 1)),
 			NODE()
 		);
-		FST righthesisFST("", 2, LEX_RIGHTHESIS, TABLE_LEX,
+		FST righthesisFST("", 2, LEX_RIGHTHESIS, PRIORITY_LEX,
 			NODE(1, RELATION(')', 1)),
 			NODE()
 		);
-		FST lefthesisFST("", 2, LEX_LEFTHESIS, TABLE_LEX,
+		FST lefthesisFST("", 2, LEX_LEFTHESIS, PRIORITY_LEX,
 			NODE(1, RELATION('(', 1)),
 			NODE()
 		);
-		FST braceletFST("", 2, LEX_BRACELET, TABLE_LEX,
+		FST braceletFST("", 2, LEX_BRACELET, COMMON_LEX,
 			NODE(1, RELATION('}', 1)),
 			NODE()
 		);
-		FST leftbraceFST("", 2, LEX_LEFTBRACE, TABLE_LEX,
+		FST leftbraceFST("", 2, LEX_LEFTBRACE, COMMON_LEX,
 			NODE(1, RELATION('{', 1)),
 			NODE()
 		);
-		FST commaFST("", 2, LEX_COMMA, TABLE_LEX,
+		FST commaFST("", 2, LEX_COMMA, PRIORITY_LEX,
 			NODE(1, RELATION(',', 1)),
 			NODE()
 		);
-		FST semicolonFST("", 2, LEX_SEMICOLON, TABLE_LEX,
+		FST semicolonFST("", 2, LEX_SEMICOLON, COMMON_LEX,
 			NODE(1, RELATION(';', 1)),
 			NODE()
 		);
-		FST integerFST("", 8, LEX_INTEGER, TABLE_LEX,
+		FST integerFST("", 8, LEX_INTEGER, COMMON_LEX,
 			NODE(1, RELATION('i', 1)),
 			NODE(1, RELATION('n', 2)),
 			NODE(1, RELATION('t', 3)),
@@ -129,7 +129,7 @@ namespace FST
 			NODE(1, RELATION('r', 7)),
 			NODE()
 		);
-		FST stringFST("", 7, LEX_INTEGER, TABLE_LEX,
+		FST stringFST("", 7, LEX_STRING, COMMON_LEX,
 			NODE(1, RELATION('s', 1)),
 			NODE(1, RELATION('t', 2)),
 			NODE(1, RELATION('r', 3)),
@@ -138,7 +138,7 @@ namespace FST
 			NODE(1, RELATION('g', 6)),
 			NODE()
 		);
-		FST idFST("", 2, LEX_ID, LEX_TABLE_ID,
+		FST idFST("", 2, LEX_ID, LEX_ID_TABLE,
 			NODE(52,
 			RELATION('a', 0), RELATION('b', 0), RELATION('c', 0), RELATION('d', 0),
 			RELATION('e', 0), RELATION('f', 0), RELATION('g', 0), RELATION('h', 0),
@@ -157,7 +157,7 @@ namespace FST
 			RELATION('y', 1), RELATION('z', 1)),
 			NODE()
 		);
-		FST numlFST("", 2, LEX_NUMERICAL_LITERAL, TABLE_LEX,
+		FST numlFST("", 2, LEX_NUMERICAL_LITERAL, LITERAL_LEX,
 			NODE(20,
 				RELATION('0', 0), RELATION('1', 0), RELATION('2', 0),
 				RELATION('3', 0), RELATION('4', 0), RELATION('5', 0),
@@ -170,7 +170,7 @@ namespace FST
 				RELATION('9', 1)),
 			NODE()
 		);
-		FST stringlFST("", 4, LEX_STRING_LITERAL, TABLE_LEX,
+		FST stringlFST("", 4, LEX_STRING_LITERAL, LITERAL_LEX,
 			NODE(2,
 				RELATION('\'', 1),
 				RELATION('\'', 2)),
@@ -234,7 +234,7 @@ namespace FST
 			NODE(1, RELATION('\'', 3)),
 			NODE()
 		);
-		FST functionFST("", 9, LEX_FUNCTION, TABLE_LEX,
+		FST functionFST("", 9, LEX_FUNCTION, COMMON_LEX,
 			NODE(1, RELATION('f', 1)),
 			NODE(1, RELATION('u', 2)),
 			NODE(1, RELATION('n', 3)),
@@ -245,7 +245,7 @@ namespace FST
 			NODE(1, RELATION('n', 8)),
 			NODE()
 		);
-		FST declareFST("", 8, LEX_DECLARE, TABLE_LEX,
+		FST declareFST("", 8, LEX_DECLARE, COMMON_LEX,
 			NODE(1, RELATION('d', 1)),
 			NODE(1, RELATION('e', 2)),
 			NODE(1, RELATION('c', 3)),
@@ -255,7 +255,7 @@ namespace FST
 			NODE(1, RELATION('e', 7)),
 			NODE()
 		);
-		FST returnFST("", 7, LEX_RETURN, TABLE_LEX,
+		FST returnFST("", 7, LEX_RETURN, COMMON_LEX,
 			NODE(1, RELATION('r', 1)),
 			NODE(1, RELATION('e', 2)),
 			NODE(1, RELATION('t', 3)),
@@ -264,7 +264,7 @@ namespace FST
 			NODE(1, RELATION('n', 6)),
 			NODE()
 		);
-		FST printFST("", 6, LEX_PRINT, TABLE_LEX,
+		FST printFST("", 6, LEX_PRINT, COMMON_LEX,
 			NODE(1, RELATION('p', 1)),
 			NODE(1, RELATION('r', 2)),
 			NODE(1, RELATION('i', 3)),
@@ -272,7 +272,7 @@ namespace FST
 			NODE(1, RELATION('t', 5)),
 			NODE()
 		);
-		FST mainFST("", 5, LEX_MAIN, TABLE_LEX,
+		FST mainFST("", 5, LEX_MAIN, COMMON_LEX,
 			NODE(1, RELATION('m', 1)),
 			NODE(1, RELATION('a', 2)),
 			NODE(1, RELATION('i', 3)),

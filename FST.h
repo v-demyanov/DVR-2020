@@ -5,8 +5,9 @@
 
 namespace FST
 {
-
-	enum LEXTYPE { LEX_NOT_FOUND = -1, TABLE_LEX = 0, LEX_TABLE_ID };
+	enum LEXTYPE {
+		LEX_NOT_FOUND = -1, COMMON_LEX = 0, LEX_ID_TABLE, PRIORITY_LEX, LITERAL_LEX, ACTION_LEX
+	};
 	struct FST_RESULT
 	{
 		char lex;
