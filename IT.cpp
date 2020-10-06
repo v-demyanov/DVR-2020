@@ -1,4 +1,5 @@
 #include "IT.h"
+#include <iostream>
 
 
 namespace IT
@@ -22,12 +23,28 @@ namespace IT
 		return idtable.table[n];
 	}
 
+	int IsId(IdTable& idtable, char id[ID_MAXSIZE], int beginPosition)
+	{
+		for (int i = idtable.size - beginPosition; i < idtable.size; i++)
+		{
+			if (i < 0) i = 0;
+			int t1 = strcmp(idtable.table[i].id, id);
+			if (t1 == 0)
+			{
+				return i;
+			}	
+		}
+		return TI_NULLIDX;
+	}
+
 	int IsId(IdTable& idtable, char id[ID_MAXSIZE])
 	{
 		for (int i = 0; i < idtable.size; i++)
 		{
 			if (idtable.table[i].id == id)
+			{
 				return i;
+			}
 		}
 		return TI_NULLIDX;
 	}

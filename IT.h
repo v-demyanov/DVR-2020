@@ -8,8 +8,8 @@
 
 namespace IT										// таблица идентификатов
 {
-	enum IDDATATYPE {INT=1, STR=2};					// типы данных идентификаторов: integer, string
-	enum IDTYPE		{V = 1, F = 2, P = 3, L = 3};	// типы идентификаторов: переменная, функция, параметр, литерал 
+	enum IDDATATYPE {INT=1, STR=2, NDT=3};					// типы данных идентификаторов: integer, string
+	enum IDTYPE		{V = 1, F = 2, P = 3, L = 3, NT = 4};	// типы идентификаторов: переменная, функция, параметр, литерал 
 
 	struct Entry									// строка таблицы идентификаторов
 	{
@@ -37,6 +37,8 @@ namespace IT										// таблица идентификатов
 
 	IdTable Create(int size);						// создать таблицу идентификаторов, size - ёмкость таблицы идентификаторов < TI_MAXSIZE
 	void Add(IdTable& idtable, Entry entry);		// добавить строку в таблицу идентификаторов
+	//int IsId(IdTable& idtable, char id[ID_MAXSIZE], int beginPosition, IDDATATYPE currentIDDT, IDTYPE currentIDT);
+	int IsId(IdTable& idtable, char id[ID_MAXSIZE], int beginPosition);
 	Entry GetEntry(IdTable& idtable, int n);		// получить строку таблицы идентификаторов, n - номер получаемой строки
 	int IsId(IdTable& idtable, char id[ID_MAXSIZE]);// возврат: номер строки (если есть), TI_NULLIDX(если нет)
 	void Delete(IdTable& idtable);					// удалить таблицу лексем (освободить память)

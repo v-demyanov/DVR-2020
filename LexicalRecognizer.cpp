@@ -78,8 +78,10 @@ namespace LR
 		for (auto item = arr.begin(); item != arr.end(); item++)
 		{
 			currentId = *item;
-			if (currentId.id == id)
+			if (strcmp(currentId.id, id) == 0)
+			{
 				result = true;
+			}		
 		}
 		return result;
 	}	
@@ -92,8 +94,9 @@ namespace LR
 			pointerInMain = false,
 			isInteger = false,
 			isString = false;
-
 		
+		int beginPosition = 0;
+
 		std::list<Id> list_Of_Current_Ids;
 		Tables tables;
 		FST::FST_RESULT lexema;
@@ -118,133 +121,154 @@ namespace LR
 					lextype = lexema.lex_type;
 					switch (lextype)
 					{
-					case FST::LEX_NOT_FOUND:
-					{
-						break;
-					}
-					case FST::COMMON_LEX:
-					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
-						LT::Add(lexTable, itemLT);
-						switch (lexema.lex)
+						case FST::LEX_NOT_FOUND:
 						{
-						case LEX_INTEGER:
-						{
-							isInteger = true;
 							break;
 						}
-						case LEX_STRING:
+						case FST::COMMON_LEX:
 						{
-							isString = true;
-							break;
-						}
-						case LEX_FUNCTION:
-						{
-							pointerInDeclareFunc = true;
-							break;
-						}
-						case LEX_MAIN:
-						{
-							pointerInMain = true;
-							break;
-						}
-						case LEX_LEFTBRACE:
-						{
-							pointerInFunc = true;
-							break;
-						}
-						case LEX_BRACELET:
-						{
-							removeItemFromSight(list_Of_Current_Ids);
-							pointerInFunc = false;
-							pointerInMain = false;
-							break;
-						}
-						}
-						break;
-					}
-					case FST::LEX_ID_TABLE:
-					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
-						LT::Add(lexTable, itemLT);
-						if (!findId(list_Of_Current_Ids, lexStr))
-						{
-							if (pointerInDeclareFunc && isInteger)
+							itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+							LT::Add(lexTable, itemLT);
+							switch (lexema.lex)
 							{
-								itemIT = CreateId(lexTable.size, lexStr, IT::INT, IT::F, TI_INT_DEFAULT);
-								IT::Add(idTable, itemIT);
-								Id currentId = CreateCurrentId(lexStr, IT::F);
-								list_Of_Current_Ids.push_back(currentId);
-								pointerInDeclareFunc = false;
-								isInteger = false;
+								case LEX_INTEGER:
+								{
+									isInteger = true;
+									break;
+								}
+								case LEX_STRING:
+								{
+									isString = true;
+									break;
+								}
+								case LEX_FUNCTION:
+								{
+									pointerInDeclareFunc = true;
+									break;
+								}
+								case LEX_MAIN:
+								{
+									pointerInMain = true;
+									break;
+								}
+								case LEX_LEFTBRACE:
+								{
+									pointerInFunc = true;
+									break;
+								}
+								case LEX_BRACELET:
+								{
+									removeItemFromSight(list_Of_Current_Ids);
+									pointerInFunc = false;
+									pointerInMain = false;
+									beginPosition = 0;
+									break;
+								}
 							}
-							else if (pointerInDeclareFunc && isString)
+							break;
+						}
+						case FST::LEX_ID_TABLE:
+						{
+							IT::IDDATATYPE currentIDDT = IT::NDT;
+							IT::IDTYPE currentIDT = IT::NT;
+							if (!findId(list_Of_Current_Ids, lexStr))
 							{
-								itemIT = CreateId(lexTable.size, lexStr, IT::STR, IT::F, TI_STR_DEFAULT);
-								IT::Add(idTable, itemIT);
-								Id currentId = CreateCurrentId(lexStr, IT::F);
-								list_Of_Current_Ids.push_back(currentId);
-								pointerInDeclareFunc = false;
-								isString = false;
-							}
-							else if (pointerInProperties && isInteger)
-							{
-								itemIT = CreateId(lexTable.size, lexStr, IT::INT, IT::P, TI_INT_DEFAULT);
-								IT::Add(idTable, itemIT);
-								Id currentId = CreateCurrentId(lexStr, IT::P);
-								list_Of_Current_Ids.push_back(currentId);
-								isInteger = false;
-							}
-							else if (pointerInProperties && isString)
-							{
-								itemIT = CreateId(lexTable.size, lexStr, IT::STR, IT::P, TI_STR_DEFAULT);
-								IT::Add(idTable, itemIT);
-								Id currentId = CreateCurrentId(lexStr, IT::P);
-								list_Of_Current_Ids.push_back(currentId);
-								isString = false;
-							}
-							else if (isInteger)
-							{
-								itemIT = CreateId(lexTable.size, lexStr, IT::INT, IT::V, TI_INT_DEFAULT);
-								IT::Add(idTable, itemIT);
-								Id currentId = CreateCurrentId(lexStr, IT::V);
-								list_Of_Current_Ids.push_back(currentId);
-								isInteger = false;
-							}
-							else if (isString)
-							{
-								itemIT = CreateId(lexTable.size, lexStr, IT::STR, IT::V, TI_STR_DEFAULT);
-								IT::Add(idTable, itemIT);
-								Id currentId = CreateCurrentId(lexStr, IT::V);
-								list_Of_Current_Ids.push_back(currentId);
-								isString = false;
+								if (pointerInDeclareFunc && isInteger)
+								{	
+									itemIT = CreateId(lexTable.size, lexStr, IT::INT, IT::F, TI_INT_DEFAULT);
+									IT::Add(idTable, itemIT);
+									Id currentId = CreateCurrentId(lexStr, IT::F);
+									list_Of_Current_Ids.push_back(currentId);
+									pointerInDeclareFunc = false;
+									isInteger = false;
+									currentIDDT = IT::INT;
+									currentIDT = IT::F;
+								}
+								else if (pointerInDeclareFunc && isString)
+								{
+									itemIT = CreateId(lexTable.size, lexStr, IT::STR, IT::F, TI_STR_DEFAULT);
+									IT::Add(idTable, itemIT);
+									Id currentId = CreateCurrentId(lexStr, IT::F);
+									list_Of_Current_Ids.push_back(currentId);
+									pointerInDeclareFunc = false;
+									isString = false;
+									currentIDDT = IT::STR;
+									currentIDT = IT::F;
+								}
+								else if (pointerInProperties && isInteger)
+								{
+									itemIT = CreateId(lexTable.size, lexStr, IT::INT, IT::P, TI_INT_DEFAULT);
+									IT::Add(idTable, itemIT);
+									Id currentId = CreateCurrentId(lexStr, IT::P);
+									list_Of_Current_Ids.push_back(currentId);
+									isInteger = false;
+									currentIDDT = IT::INT;
+									currentIDT = IT::P;
+								}
+								else if (pointerInProperties && isString)
+								{
+									itemIT = CreateId(lexTable.size, lexStr, IT::STR, IT::P, TI_STR_DEFAULT);
+									IT::Add(idTable, itemIT);
+									Id currentId = CreateCurrentId(lexStr, IT::P);
+									list_Of_Current_Ids.push_back(currentId);
+									isString = false;
+									currentIDDT = IT::STR;
+									currentIDT = IT::P;
+								}
+								else if (isInteger)
+								{
+									itemIT = CreateId(lexTable.size, lexStr, IT::INT, IT::V, TI_INT_DEFAULT);
+									IT::Add(idTable, itemIT);
+									Id currentId = CreateCurrentId(lexStr, IT::V);
+									list_Of_Current_Ids.push_back(currentId);
+									isInteger = false;
+									currentIDDT = IT::INT;
+									currentIDT = IT::V;
+								}
+								else if (isString)
+								{
+									itemIT = CreateId(lexTable.size, lexStr, IT::STR, IT::V, TI_STR_DEFAULT);
+									IT::Add(idTable, itemIT);
+									Id currentId = CreateCurrentId(lexStr, IT::V);
+									list_Of_Current_Ids.push_back(currentId);
+									isString = false;
+									currentIDDT = IT::STR;
+									currentIDT = IT::V;
+								}
+								beginPosition++;
 							}
 
+							int indexIdTable = IsId(idTable, lexStr, beginPosition);
+							if (indexIdTable == -1 && findId(list_Of_Current_Ids, lexStr))
+							{
+								indexIdTable = IsId(idTable, lexStr, idTable.size);
+							}
+							itemLT = CreateLex(lexema.lex, i, indexIdTable);
+							LT::Add(lexTable, itemLT);
+							break;
 						}
-						break;
-					}
-					case FST::ACTION_LEX:
-					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
-						LT::Add(lexTable, itemLT);
-						break;
-					}
-					case FST::LITERAL_LEX:
-					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
-						LT::Add(lexTable, itemLT);
-						break;
-					}
-					case FST::PRIORITY_LEX:
-					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
-						LT::Add(lexTable, itemLT);
-						if (lexema.lex == LEX_LEFTHESIS)
-							pointerInProperties = true;
-						else if (lexema.lex == LEX_RIGHTHESIS)
-							pointerInProperties = false;
-						break;
-					}
+						case FST::ACTION_LEX:
+						{
+							itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+							LT::Add(lexTable, itemLT);
+							break;
+						}
+						case FST::LITERAL_LEX:
+						{
+							itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+							LT::Add(lexTable, itemLT);
+							break;
+						}
+						case FST::PRIORITY_LEX:
+						{
+							itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+							LT::Add(lexTable, itemLT);
+							if (lexema.lex == LEX_LEFTHESIS)
+								pointerInProperties = true;
+							else if (lexema.lex == LEX_RIGHTHESIS)
+								pointerInProperties = false;
+							break;
+						}
 					}
 					k = 0;
 				}
@@ -295,6 +319,7 @@ namespace LR
 									removeItemFromSight(list_Of_Current_Ids);
 									pointerInFunc = false;
 									pointerInMain = false;
+									beginPosition = 0;
 									break;
 								}
 							}
@@ -302,8 +327,8 @@ namespace LR
 						}
 						case FST::LEX_ID_TABLE:
 						{
-							itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
-							LT::Add(lexTable, itemLT);
+							IT::IDDATATYPE currentIDDT = IT::NDT;
+							IT::IDTYPE currentIDT = IT::NT;
 							if (!findId(list_Of_Current_Ids, lexStr))
 							{
 								if (pointerInDeclareFunc && isInteger)
@@ -314,6 +339,8 @@ namespace LR
 									list_Of_Current_Ids.push_back(currentId);
 									pointerInDeclareFunc = false;
 									isInteger = false;
+									currentIDDT = IT::INT;
+									currentIDT = IT::F;
 								}
 								else if (pointerInDeclareFunc && isString)
 								{
@@ -323,6 +350,8 @@ namespace LR
 									list_Of_Current_Ids.push_back(currentId);
 									pointerInDeclareFunc = false;
 									isString = false;
+									currentIDDT = IT::STR;
+									currentIDT = IT::F;
 								}
 								else if (pointerInProperties && isInteger)
 								{
@@ -331,6 +360,8 @@ namespace LR
 									Id currentId = CreateCurrentId(lexStr, IT::P);
 									list_Of_Current_Ids.push_back(currentId);
 									isInteger = false;
+									currentIDDT = IT::INT;
+									currentIDT = IT::P;
 								}
 								else if (pointerInProperties && isString)
 								{
@@ -339,6 +370,8 @@ namespace LR
 									Id currentId = CreateCurrentId(lexStr, IT::P);
 									list_Of_Current_Ids.push_back(currentId);
 									isString = false;
+									currentIDDT = IT::STR;
+									currentIDT = IT::P;
 								}
 								else if (isInteger)
 								{
@@ -347,6 +380,8 @@ namespace LR
 									Id currentId = CreateCurrentId(lexStr, IT::V);
 									list_Of_Current_Ids.push_back(currentId);
 									isInteger = false;
+									currentIDDT = IT::INT;
+									currentIDT = IT::V;
 								}
 								else if (isString)
 								{
@@ -355,9 +390,19 @@ namespace LR
 									Id currentId = CreateCurrentId(lexStr, IT::V);
 									list_Of_Current_Ids.push_back(currentId);
 									isString = false;
+									currentIDDT = IT::STR;
+									currentIDT = IT::V;
 								}
-
+								beginPosition++;
 							}
+
+							int indexIdTable = IsId(idTable, lexStr, beginPosition);
+							if (indexIdTable == -1 && findId(list_Of_Current_Ids, lexStr))
+							{
+								indexIdTable = IsId(idTable, lexStr, idTable.size);
+							}
+							itemLT = CreateLex(lexema.lex, i, indexIdTable);
+							LT::Add(lexTable, itemLT);
 							break;
 						}
 						case FST::ACTION_LEX:
@@ -400,13 +445,13 @@ namespace LR
 		std::cout << "\t......Test......" << std::endl;
 		for (int i = 0; i < lexTable.size; i++)
 		{
-			std::cout << "\t\t" << lexTable.table[i].lexema << std::endl;
+			std::cout << "\t\t" << lexTable.table[i].lexema << "\tlineSource " << lexTable.table[i].lineSource << "\tindexIdTable " << lexTable.table[i].indexIdTable << std::endl;
 		}
 
 		std::cout << "\n\n\t\t////////////////////////" << std::endl;
 		for (int i = 0; i < idTable.size; i++)
 		{
-			std::cout << "\t\t" << idTable.table[i].id << "\t" << idTable.table[i].idtype << std::endl;
+			std::cout << "\t\t" << idTable.table[i].id << "\t" << idTable.table[i].idtype << "\tidxfirstLE: " << idTable.table[i].idxfirstLE << std::endl;
 		}
 		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
 		tables.lexTable = lexTable;

@@ -230,7 +230,7 @@ namespace FST
 				RELATION('÷', 2), RELATION('ø', 2), RELATION('ù', 2), RELATION('ú', 2), RELATION('û', 2), RELATION('ü', 2),
 				RELATION('ý', 2), RELATION('þ', 2), RELATION('ÿ', 2), RELATION(' ', 2), RELATION('.', 2), RELATION(',', 2),
 				RELATION('?', 2), RELATION('!', 2), RELATION(';', 2), RELATION(':', 2), RELATION('-', 2), RELATION(')', 2),
-				RELATION('(', 2)),
+				RELATION('(', 2) ),
 			NODE(1, RELATION('\'', 3)),
 			NODE()
 		);
