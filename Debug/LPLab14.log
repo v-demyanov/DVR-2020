@@ -1,3 +1,4 @@
-﻿  FST.cpp
-D:\Study\LP3sem\LPLab14\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+﻿  LexicalRecognizer.cpp
+D:\Study\LP3sem\LPLab14\LexicalRecognizer.cpp(107,18): warning C4101: iddatatype: неиспользованная локальная переменная
+D:\Study\LP3sem\LPLab14\LexicalRecognizer.cpp(108,14): warning C4101: idtype: неиспользованная локальная переменная
   LPLab14.vcxproj -> D:\Study\LP3sem\LPLab14\Debug\LPLab14.exe

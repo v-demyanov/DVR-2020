@@ -34,11 +34,12 @@ namespace LR
 	{
 		IT::Entry result;
 		result.id = new char[ID_MAXSIZE];
+		result.value.vstr->str = new char[TI_STR_MAXSIZE];
 		result.idxfirstLE = idxfirstLE;
 		strcpy(result.id, id);
 		result.iddatatype = iddatatype;
 		result.idtype = idtype;
-		result.value.vstr->str = str;
+		strcpy(result.value.vstr->str, str);
 		return result;
 	}
 
@@ -81,10 +82,10 @@ namespace LR
 			if (strcmp(currentId.id, id) == 0)
 			{
 				result = true;
-			}		
+			}
 		}
 		return result;
-	}	
+	}
 
 	Tables FillingTables(In::IN in)
 	{
@@ -329,6 +330,7 @@ namespace LR
 						{
 							IT::IDDATATYPE currentIDDT = IT::NDT;
 							IT::IDTYPE currentIDT = IT::NT;
+								
 							if (!findId(list_Of_Current_Ids, lexStr))
 							{
 								if (pointerInDeclareFunc && isInteger)
@@ -401,6 +403,7 @@ namespace LR
 							{
 								indexIdTable = IsId(idTable, lexStr, idTable.size);
 							}
+
 							itemLT = CreateLex(lexema.lex, i, indexIdTable);
 							LT::Add(lexTable, itemLT);
 							break;
@@ -413,7 +416,25 @@ namespace LR
 						}
 						case FST::LITERAL_LEX:
 						{
-							itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+							if (lexema.lex == LEX_NUMERICAL_LITERAL)
+							{
+								int lexNum = atoi(lexStr);
+								char* lexNumName = new char[ID_MAXSIZE];
+								strcpy(lexNumName, "num");
+								itemIT = CreateId(lexTable.size, lexNumName, IT::INT, IT::L, lexNum);
+								IT::Add(idTable, itemIT);
+								beginPosition++;
+							}
+							else if (lexema.lex == LEX_STRING_LITERAL)
+							{
+								char* lexStrName = new char[ID_MAXSIZE];
+								strcpy(lexStrName, "str");
+								itemIT = CreateId(lexTable.size, lexStrName, IT::STR, IT::L, lexStr);
+								IT::Add(idTable, itemIT);
+								beginPosition++;
+							}
+
+							itemLT = CreateLex(lexema.lex, i, idTable.size);
 							LT::Add(lexTable, itemLT);
 							break;
 						}
