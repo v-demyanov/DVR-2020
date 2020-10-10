@@ -1,4 +1,14 @@
-﻿  LexicalRecognizer.cpp
+﻿  FST.cpp
+D:\Study\LP3sem\LPLab14\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+  IT.cpp
+  In.cpp
+  LPLab14.cpp
+  LT.cpp
+  LexicalRecognizer.cpp
 D:\Study\LP3sem\LPLab14\LexicalRecognizer.cpp(107,18): warning C4101: iddatatype: неиспользованная локальная переменная
 D:\Study\LP3sem\LPLab14\LexicalRecognizer.cpp(108,14): warning C4101: idtype: неиспользованная локальная переменная
+  Log.cpp
+  Создание кода...
+D:\Study\LP3sem\LPLab14\In.cpp(114): warning C4172: возвращение адреса локальной или временной переменной : ASCII_Table
+  LINK : не найден или не выполнена сборка D:\Study\LP3sem\LPLab14\Debug\LPLab14.exe при последней инкрементной компоновке; выполняется полная компоновка
   LPLab14.vcxproj -> D:\Study\LP3sem\LPLab14\Debug\LPLab14.exe
