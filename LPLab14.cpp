@@ -23,9 +23,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::wcout << "-in:" << parm.in << ", -out:" << parm.out << ", -log:" << parm.log << std::endl << std::endl;
 		In::IN in = In::getin(parm.in);
 		Log::WriteIn(log, in);
-		Log::Close(log);
 		Log::WriteOut(out, in);
-		LR::FillingTables(in);
+		LR::Tables tables = LR::FillingTables(in);
+		Log::WriteLexTable(tables, log);
+		Log::WriteIdTable(tables, log);
+		Log::Close(log);
 		Log::CloseOut(out);
 	}
 	catch (Error::ERROR e)

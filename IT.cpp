@@ -1,6 +1,6 @@
 #include "IT.h"
 #include <iostream>
-
+#include "Error.h"
 
 namespace IT
 {
@@ -15,6 +15,8 @@ namespace IT
 
 	void Add(IdTable& idtable, Entry entry)
 	{
+		if (idtable.size + 1 > TI_MAXSIZE)
+			throw ERROR_THROW_IN(124, -1, -1);
 		idtable.table[idtable.size++] = entry;
 	}
 

@@ -1,10 +1,12 @@
 
 #include "Error.h"
 #include "Log.h"
+#include "LexicalRecognizer.h"
 #include <wchar.h>
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <iomanip>
 
 
 namespace Log
@@ -91,26 +93,130 @@ namespace Log
 		*log.stream << "Количество символов: " << in.size << "\n";
 		*log.stream << "Проигнорировано: " << in.ignor << "\n";
 		*log.stream << "Количество строк: " << in.lines << "\n";
+	}
 
-		/*for (int i = 0; i < in.lmyStr; i++)
+	void WriteLexTable(LR::Tables tables , LOG log)
+	{
+		LT::LexTable lexTable = tables.lexTable;
+		*log.stream << "\n" << "LEX_TABLE: " << "\n";
+		int line = -1;
+		char* strLine = new char[5];
+		for (int i = 0; i < lexTable.size; i++)
 		{
-			FST::FST myStr(
-				in.myStr[i],
-				7,
-				FST::NODE(1, FST::RELATION('a', 1)),
-				FST::NODE(5, FST::RELATION('b', 1), FST::RELATION('g', 5), FST::RELATION('c', 2), FST::RELATION('d', 4), FST::RELATION('e', 5)),
-				FST::NODE(2, FST::RELATION('c', 2), FST::RELATION('b', 3)),
-				FST::NODE(2, FST::RELATION('f', 6), FST::RELATION('b', 3)),
-				FST::NODE(2, FST::RELATION('b', 3), FST::RELATION('d', 4)),
-				FST::NODE(2, FST::RELATION('e', 5), FST::RELATION('b', 3)),
-				FST::NODE()
-			);
+			if (line < lexTable.table[i].lineSource)
+			{
+				line = lexTable.table[i].lineSource;
+				_itoa(line + 1, strLine, 10);
+				*log.stream << "\n";
+				if (line < 10)
+					*log.stream << '\t' << std::setw(2) << std::setfill('0') << strLine << ' ';
+				else
+					*log.stream << '\t' << strLine << ' ';
+			}
+			*log.stream << lexTable.table[i].lexema;
+		}
+		*log.stream << '\n';
+		delete[] strLine;
+	}
 
-			if (FST::execute(myStr))
-				*log.stream << "Цепочка " << myStr.string << " распознана\n";
-			else
-				*log.stream << "Цепочка " << myStr.string << " не распознана\n";
-		}*/
+	void fillStr(LOG log, std::string id, std::string dataType, std::string idType, int vint, int idxfirstLE)
+	{
+		int l1 = 45 - id.length();
+		int l2 = 35 - dataType.length();
+		int l3 = 45 - idType.length();
+		int l4 = 45 - idType.length();
+		*log.stream << '\t' << std::setw(l1) << std::setfill(' ') << std::left << id
+			<< std::setw(l2) << std::setfill(' ') << dataType
+			<< std::setw(l3) << std::setfill(' ') << idType
+			<< std::setw(l4) << std::setfill(' ') << vint
+			<< std::setw(35) << std::setfill(' ') << idxfirstLE
+			<< std::endl;
+	}
+
+	void fillStr(LOG log, std::string id, std::string dataType, std::string idType, std::string str, int idxfirstLE)
+	{
+		int l1 = 45 - id.length();
+		int l2 = 35 - dataType.length();
+		int l3 = 45 - idType.length();
+		int l4 = 45 - idType.length();
+		*log.stream << '\t' << std::setw(l1) << std::setfill(' ') << std::left << id
+			<< std::setw(l2) << std::setfill(' ') << dataType
+			<< std::setw(l3) << std::setfill(' ') << idType
+			<< std::setw(l4) << std::setfill(' ') << str
+			<< std::setw(35) << std::setfill(' ') << idxfirstLE
+			<< std::endl;
+	}
+
+	void WriteIdTable(LR::Tables tables, LOG log)
+	{
+		IT::IdTable idTable = tables.idTable;
+		IT::IDDATATYPE iddatatype;
+		IT::IDTYPE idtype;
+		*log.stream << "\n" << "ID_TABLE: " << "\n";
+		*log.stream << '\n' << '\t' << std::setw(30) << std::setfill(' ') << std::left << "ID_NAME"
+			<< std::setw(30) << std::setfill(' ') << "DATA_TYPE"
+			<< std::setw(30) << std::setfill(' ') << "ID_TYPE"
+			<< std::setw(30) << std::setfill(' ') << "VALUE"
+			<< std::setw(30) << std::setfill(' ') << "ID_FIRST_LT"
+			<< std::endl << std::endl;
+		for (int i = 0; i < idTable.size; i++)
+		{
+			iddatatype = idTable.table[i].iddatatype;
+			idtype = idTable.table[i].idtype;
+			switch (idtype)
+			{
+				case IT::V:
+				{
+					if (iddatatype == IT::INT)
+					{
+						fillStr(log, idTable.table[i].id, "INT", "variable", idTable.table[i].value.vint, idTable.table[i].idxfirstLE);
+					}
+					else if (iddatatype == IT::STR)
+					{
+						fillStr(log, idTable.table[i].id, "STR", "variable", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}	
+					break;
+				}
+				case IT::F:
+				{
+					if (iddatatype == IT::INT)
+					{
+						fillStr(log, idTable.table[i].id, "INT", "Function", idTable.table[i].value.vint, idTable.table[i].idxfirstLE);
+					}
+					else if (iddatatype == IT::STR)
+					{
+						fillStr(log, idTable.table[i].id, "STR", "Function", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
+					break;
+				}
+				case IT::P:
+				{
+					if (iddatatype == IT::INT)
+					{
+						fillStr(log, idTable.table[i].id, "INT", "PARAMETER", idTable.table[i].value.vint, idTable.table[i].idxfirstLE);
+					}
+					else if (iddatatype == IT::STR)
+					{
+						fillStr(log, idTable.table[i].id, "STR", "PARAMETER", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
+					break;
+				}
+				case IT::L:
+				{
+					if (iddatatype == IT::INT)
+					{
+						fillStr(log, idTable.table[i].id, "INT", "Literal", idTable.table[i].value.vint, idTable.table[i].idxfirstLE);
+					}
+					else if (iddatatype == IT::STR)
+					{
+						fillStr(log, idTable.table[i].id, "STR", "Literal", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
+					break;
+				}
+			}
+			
+		}
+
 	}
 
 	void WriteOut(OUT out, In::IN in) //*

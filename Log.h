@@ -4,6 +4,8 @@
 #include "Parm.h"
 #include "Error.h"
 #include <stdarg.h>
+#include "LexicalRecognizer.h"
+
 namespace Log
 {
 	struct LOG
@@ -32,4 +34,6 @@ namespace Log
 	void WriteError(LOG log, Error::ERROR error);
 	void Close(LOG log);
 	void CloseOut(OUT out); //*
+	void WriteLexTable(LR::Tables tables, LOG log);
+	void WriteIdTable(LR::Tables tables, LOG log);
 };

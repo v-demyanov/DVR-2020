@@ -1,6 +1,12 @@
 #include "Error.h"
 namespace Error
 {
+
+	//	0   -  99  -  системные
+	//	100 - 109  -  параметров
+	//	110 - 119  -  открытия и чтения файлов
+	//	120 - 129  -  ошибки лексического анализа
+
 	ERROR errors[ERROR_MAX_ENTRY] =
 	{
 		ERROR_ENTRY(0, "Недопустимый код ошибки"),
@@ -19,7 +25,11 @@ namespace Error
 		ERROR_ENTRY(112, "Ошибка при создании файла протокола (-log)"),
 		ERROR_ENTRY_NODEF(113), ERROR_ENTRY_NODEF(114), ERROR_ENTRY_NODEF(115),
 		ERROR_ENTRY_NODEF(116), ERROR_ENTRY_NODEF(117), ERROR_ENTRY_NODEF(118), ERROR_ENTRY_NODEF(119),
-		ERROR_ENTRY_NODEF10(120), ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
+		ERROR_ENTRY(120, "Цепочка символов не распознана"),
+		ERROR_ENTRY(121, "Длина идентификатора превышает допустимую длину"),
+		ERROR_ENTRY(122, "Превышено макс кол-во строк в таблице идентификаторов"),
+		ERROR_ENTRY(123, "Превышено макс кол-во строк в таблице лексем"),
+		ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
 		ERROR_ENTRY_NODEF10(160), ERROR_ENTRY_NODEF10(170), ERROR_ENTRY_NODEF10(180), ERROR_ENTRY_NODEF10(190),
 		ERROR_ENTRY_NODEF100(200), ERROR_ENTRY_NODEF100(300), ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
 		ERROR_ENTRY_NODEF100(600), ERROR_ENTRY_NODEF100(700), ERROR_ENTRY_NODEF100(800), ERROR_ENTRY_NODEF100(900)
