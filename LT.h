@@ -3,6 +3,7 @@
 #define LT_MAXSIZE					4096			// макс кол-во строк в таблице лексем
 #define LT_TI_NULLIDX				0xffffffff		// нет элемента таблицы идентификаторов
 #define LEX_MAIN					'm'				// main
+#define LEX_TYPE					't'
 #define LEX_INTEGER					'x'				// integer
 #define LEX_STRING					'y'				// string
 #define LEX_ID						'i'				// идентификатор

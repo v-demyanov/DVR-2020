@@ -119,7 +119,7 @@ namespace FST
 			NODE(1, RELATION(';', 1)),
 			NODE()
 		);
-		FST integerFST("", 8, LEX_INTEGER, COMMON_LEX,
+		FST integerFST("", 8, LEX_TYPE, COMMON_LEX,
 			NODE(1, RELATION('i', 1)),
 			NODE(1, RELATION('n', 2)),
 			NODE(1, RELATION('t', 3)),
@@ -129,7 +129,7 @@ namespace FST
 			NODE(1, RELATION('r', 7)),
 			NODE()
 		);
-		FST stringFST("", 7, LEX_STRING, COMMON_LEX,
+		FST stringFST("", 7, LEX_TYPE, COMMON_LEX,
 			NODE(1, RELATION('s', 1)),
 			NODE(1, RELATION('t', 2)),
 			NODE(1, RELATION('r', 3)),

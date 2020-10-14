@@ -56,6 +56,7 @@ namespace LR
 		result.iddatatype = iddatatype;
 		result.idtype = idtype;
 		strcpy(result.value.vstr->str, str);
+		result.value.vstr->len = strlen(result.value.vstr->str);
 		return result;
 	}
 
@@ -150,14 +151,12 @@ namespace LR
 						LT::Add(lexTable, itemLT);
 						switch (lexema.lex)
 						{
-						case LEX_INTEGER:
+						case LEX_TYPE:
 						{
-							isInteger = true;
-							break;
-						}
-						case LEX_STRING:
-						{
-							isString = true;
+							if (strcmp(lexStr, "integer") == 0)
+								isInteger = true;
+							if (strcmp(lexStr, "string") == 0)
+								isString = true;
 							break;
 						}
 						case LEX_FUNCTION:
@@ -322,14 +321,12 @@ namespace LR
 						LT::Add(lexTable, itemLT);
 						switch (lexema.lex)
 						{
-						case LEX_INTEGER:
+						case LEX_TYPE:
 						{
-							isInteger = true;
-							break;
-						}
-						case LEX_STRING:
-						{
-							isString = true;
+							if (strcmp(lexStr, "integer") == 0)
+								isInteger = true;
+							if (strcmp(lexStr, "string") == 0)
+								isString = true;
 							break;
 						}
 						case LEX_FUNCTION:
