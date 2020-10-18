@@ -27,6 +27,12 @@ int _tmain(int argc, _TCHAR* argv[])
 		LR::Tables tables = LR::FillingTables(in);
 		Log::WriteLexTable(tables, log);
 		Log::WriteIdTable(tables, log);
+		PN::PolishNotation(18, tables.lexTable, tables.idTable);
+		PN::PolishNotation(26, tables.lexTable, tables.idTable);
+		PN::PolishNotation(36, tables.lexTable, tables.idTable);
+		PN::PolishNotation(40, tables.lexTable, tables.idTable);
+		PN::PolishNotation(46, tables.lexTable, tables.idTable);
+		PN::PolishNotation(69, tables.lexTable, tables.idTable);
 		Log::Close(log);
 		Log::CloseOut(out);
 	}

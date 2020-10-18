@@ -7,6 +7,7 @@
 #include "FST.h"
 #include "IT.h"
 #include "LexicalRecognizer.h"
+#include "PolishNotation.h"
 
 #include <TCHAR.H>
 #include <iostream>

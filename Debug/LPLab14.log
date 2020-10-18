@@ -1,4 +1,2 @@
-﻿  LexicalRecognizer.cpp
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(124,18): warning C4101: iddatatype: неиспользованная локальная переменная
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(125,14): warning C4101: idtype: неиспользованная локальная переменная
+﻿  PolishNotation.cpp
   LPLab14.vcxproj -> D:\Study\LP3sem\CourseProject_ProgrammingLanguages\Debug\LPLab14.exe
