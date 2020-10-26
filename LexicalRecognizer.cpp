@@ -11,12 +11,13 @@ namespace LR
 	LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 	IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 
-	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable)
+	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, char sign)
 	{
 		LT::Entry result;
 		result.lexema = lex;
 		result.lineSource = lineSource;
 		result.indexIdTable = indexIdTable;
+		result.sign = sign;
 		return result;
 	}
 
@@ -147,7 +148,7 @@ namespace LR
 					}
 					case FST::COMMON_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						switch (lexema.lex)
 						{
@@ -273,25 +274,25 @@ namespace LR
 						{
 							indexIdTable = IsId(idTable, lexStr, idTable.size);
 						}
-						itemLT = CreateLex(lexema.lex, i, indexIdTable);
+						itemLT = CreateLex(lexema.lex, i, indexIdTable, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::ACTION_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr[0]);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::LITERAL_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::PRIORITY_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						if (lexema.lex == LEX_LEFTHESIS)
 							pointerInProperties = true;
@@ -317,7 +318,7 @@ namespace LR
 					}
 					case FST::COMMON_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						switch (lexema.lex)
 						{
@@ -445,13 +446,13 @@ namespace LR
 							indexIdTable = IsId(idTable, lexStr, idTable.size);
 						}
 
-						itemLT = CreateLex(lexema.lex, i, indexIdTable);
+						itemLT = CreateLex(lexema.lex, i, indexIdTable, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::ACTION_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr[0]);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
@@ -475,13 +476,13 @@ namespace LR
 							beginPosition++;
 						}
 
-						itemLT = CreateLex(lexema.lex, i, idTable.size - 1);
+						itemLT = CreateLex(lexema.lex, i, idTable.size - 1, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::PRIORITY_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
 						LT::Add(lexTable, itemLT);
 						if (lexema.lex == LEX_LEFTHESIS)
 							pointerInProperties = true;

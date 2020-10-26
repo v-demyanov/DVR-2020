@@ -32,7 +32,8 @@ namespace LT									// таблица лексем
 	{
 		char lexema;							// лексема
 		int lineSource;							// номер строки в исходном коде
-		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX	
+		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
+		char sign;
 	};
 
 	struct LexTable								// экзэмпляр таблицы лексем

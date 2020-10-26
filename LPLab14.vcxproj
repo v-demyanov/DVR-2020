@@ -157,6 +157,7 @@
     <ClCompile Include="LT.cpp" />
     <ClCompile Include="Parm.cpp" />
     <ClCompile Include="PolishNotation.cpp" />
+    <ClCompile Include="sdfsdf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
