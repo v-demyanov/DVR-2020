@@ -1,64 +1,63 @@
 Тест:без ошибок 
- ---- Протокол ---- Дата: 26.10.2020 14:46:39 ----
+ ---- Протокол ---- Дата: 26.10.2020 21:16:52 ----
 ---- Параметры ----
 -log: In.txt.log
 -out: In.txt.out
 -in: In.txt
 ---- Исходные данные ----
-Количество символов: 847
-Проигнорировано: 79
-Количество строк: 50
+Количество символов: 834
+Проигнорировано: 69
+Количество строк: 49
 
 LEX_TABLE: 
 
 	01 ttfi(ti,ti)
 	02 {
 	03 dti;
-	04 i=iv(ivi)viv(ivi);
-	05 i=iv(ivi)vi(i,i);
+	04 i=(iv(ivi)vi(i,i))vi(i)viv(ivi);
+	05 i=iv(ivi)viv(ivi);
 	06 i=iv(ivi)viv(ivi);
-	07 i=iv(ivi)viv(ivi);
-	08 iv(iv(ivi))
-	11 i=iv(ivi)vi(i,i);
-	12 iv(ivi)viv(ivi);
-	13 ivivivi;
-	14 ivivi;
-	15 (ivi)vi;
-	16 dtfi(ti,ti,
-	17 ti);
-	18 i(i,n,n)vi;
-	19 ri;
-	20 };
-	21 tfi(ti,ti)
-	22 {
-	23 dti;
-	24 dtfi(ti,ti,
-	25 ti);
-	26 i=i(i,n,n)vi;
-	27 ri;
-	28 };
-	29 m
-	30 {
+	07 iv(iv(ivi))
+	10 i=iv(ivi)vi(i,i);
+	11 iv(ivi)viv(ivi);
+	12 ivivivi;
+	13 ivivi;
+	14 (ivi)vi;
+	15 dtfi(ti,ti,
+	16 ti);
+	17 i(i,n,n)vi;
+	18 ri;
+	19 };
+	20 tfi(ti,ti)
+	21 {
+	22 dti;
+	23 dtfi(ti,ti,
+	24 ti);
+	25 i=i(i,n,n)vi;
+	26 ri;
+	27 };
+	28 m
+	29 {
+	30 dti;
 	31 dti;
 	32 dti;
 	33 dti;
 	34 dti;
 	35 dti;
-	36 dti;
-	37 dti(ti);
+	36 dti(ti);
+	37 i=n;
 	38 i=n;
-	39 i=n;
+	39 i=s;
 	40 i=s;
-	41 i=s;
+	41 i=i(i,i);
 	42 i=i(i,i);
-	43 i=i(i,i);
-	44 ps;
-	45 pi;
-	46 n
-	47 pi;
-	48 pi(i);
-	49 rn;
-	50 };
+	43 ps;
+	44 pi;
+	45 n
+	46 pi;
+	47 pi(i);
+	48 rn;
+	49 };
 
 ID_TABLE: 
 
@@ -68,31 +67,31 @@ ID_TABLE:
 	x                                           INT                             PARAMETER                           0                                   6                                  
 	y                                           INT                             PARAMETER                           0                                   9                                  
 	z                                           INT                             variable                             0                                    14                                 
-	substr                                 STR                             Function                                                                  156                                
-	a                                           STR                             PARAMETER                                                               159                                
-	p                                           INT                             PARAMETER                           0                                   162                                
-	n                                           INT                             PARAMETER                           0                                   165                                
-	num                                       INT                             Literal                               1                                     172                                
-	num                                       INT                             Literal                               3                                     174                                
-	fs                                         STR                             Function                                                                  186                                
-	a                                           STR                             PARAMETER                                                               189                                
-	b                                           STR                             PARAMETER                                                               192                                
-	c                                           STR                             variable                                                                  197                                
-	p                                           INT                             Function                             0                                    208                                
-	n                                           INT                             PARAMETER                           0                                   211                                
-	num                                       INT                             Literal                               1                                     220                                
-	num                                       INT                             Literal                               3                                     222                                
-	x                                           INT                             variable                             0                                    236                                
-	y                                           INT                             variable                             0                                    240                                
-	z                                           INT                             variable                             0                                    244                                
-	sa                                         STR                             variable                                                                  248                                
-	sb                                         STR                             variable                                                                  252                                
-	sc                                         STR                             variable                                                                  256                                
-	strlen                                 INT                             variable                             0                                    260                                
-	num                                       INT                             Literal                               1                                     268                                
-	num                                       INT                             Literal                               5                                     272                                
-	str                                       STR                             Literal                               '1234567890'                          276                                
-	str                                       STR                             Literal                               '1234567890'                          280                                
-	str                                       STR                             Literal                               'контрольныйпример'                   301                                
-	num                                       INT                             Literal                               4                                     306                                
-	num                                       INT                             Literal                               0                                     317                                
+	substr                                 STR                             Function                                                                  153                                
+	a                                           STR                             PARAMETER                                                               156                                
+	p                                           INT                             PARAMETER                           0                                   159                                
+	n                                           INT                             PARAMETER                           0                                   162                                
+	num                                       INT                             Literal                               1                                     169                                
+	num                                       INT                             Literal                               3                                     171                                
+	fs                                         STR                             Function                                                                  183                                
+	a                                           STR                             PARAMETER                                                               186                                
+	b                                           STR                             PARAMETER                                                               189                                
+	c                                           STR                             variable                                                                  194                                
+	p                                           INT                             Function                             0                                    205                                
+	n                                           INT                             PARAMETER                           0                                   208                                
+	num                                       INT                             Literal                               1                                     217                                
+	num                                       INT                             Literal                               3                                     219                                
+	x                                           INT                             variable                             0                                    233                                
+	y                                           INT                             variable                             0                                    237                                
+	z                                           INT                             variable                             0                                    241                                
+	sa                                         STR                             variable                                                                  245                                
+	sb                                         STR                             variable                                                                  249                                
+	sc                                         STR                             variable                                                                  253                                
+	strlen                                 INT                             variable                             0                                    257                                
+	num                                       INT                             Literal                               1                                     265                                
+	num                                       INT                             Literal                               5                                     269                                
+	str                                       STR                             Literal                               '1234567890'                          273                                
+	str                                       STR                             Literal                               '1234567890'                          277                                
+	str                                       STR                             Literal                               'контрольныйпример'                   298                                
+	num                                       INT                             Literal                               4                                     303                                
+	num                                       INT                             Literal                               0                                     314                                

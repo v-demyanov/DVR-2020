@@ -1,8 +1,7 @@
 integer string function fi( integer x, integer y)
 {
 declare integer z;
-z= x + (z - y) * x / (x + y);
-z= x*(x+y) + fi (x, y);
+z= (x*(x+y) + fi (x, y))+fi (x)/x/(x+y);
 z= x + (z - y) * x / (x + y);
 z= x+(x+y) +x+(x+y);
 x*(x*(x+y))
