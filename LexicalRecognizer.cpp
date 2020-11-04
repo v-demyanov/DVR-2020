@@ -505,7 +505,7 @@ namespace LR
 		}
 
 		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
-		std::cout << "\t......Test......" << std::endl;
+		/*std::cout << "\t......Test......" << std::endl;
 		for (int i = 0; i < lexTable.size; i++)
 		{
 			std::cout << "\t\t" << lexTable.table[i].lexema << "\tlineSource " << lexTable.table[i].lineSource << "\tindexIdTable " << lexTable.table[i].indexIdTable << std::endl;
@@ -515,7 +515,7 @@ namespace LR
 		for (int i = 0; i < idTable.size; i++)
 		{
 			std::cout << "\t\t" << idTable.table[i].id << "\t" << idTable.table[i].idtype << "\tidxfirstLE: " << idTable.table[i].idxfirstLE << std::endl;
-		}
+		}*/
 		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
 		tables.lexTable = lexTable;
 		tables.idTable = idTable;
