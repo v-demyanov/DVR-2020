@@ -40,12 +40,13 @@ namespace GRB
 			char* b,				// буфер
 			short nchain			// номер цепочки (правой части) в правиле
 		);
-
+		
 		short getNextChain(		// получить следующую за j подходящую цепочку, вернуть её номер или -1
 			GRBALPHABET t,				// первый символ цепочки
 			Rule::Chain& pchain,		// возвращаемая цепочка
 			short j						// номер цепочки
 		);
+		
 	};
 
 	struct Greibach			// грамматика Грейбах

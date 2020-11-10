@@ -9,17 +9,18 @@ namespace GRB
 
 	Greibach greibach(
 		NS('S'), TS('$'),			// стартовый символ, дно стека NS-нетерминал(большие буквы),TS-терминал
-		6, 							// количество правил
+		3, 							// количество правил
 		Rule(
 			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы  
-			3,                                // S->tfi(F){N}S | m{N};
+			4,		// S->m{NrE;}; | tfi(F){NrE;};S | m{NrE;};S | tfi(F){NrE;}
 			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(14, TS('t'), TS('i'), TS('f'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}')),
-			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
+			Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
+			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
+			Rule::Chain(12, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'))
 		),
 		Rule(
 			NS('N'), GRB_ERROR_SERIES + 1,   // ошибочный оператор
-			8,                               // N->vti;N | rE; | i=E;N | o(i);N | o(y);N |o(x);N |o(y); |o(i);|o(x); 
+			8,		// N->dti; | rE; | i=E; | dtfi(F); | dti;N | rE;N | i=E;N | dtfi(F);N
 			Rule::Chain(4, TS('d'), TS('t'), TS('i'), TS(';')),
 			Rule::Chain(3, TS('r'), NS('E'), TS(';')),
 			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
@@ -31,7 +32,7 @@ namespace GRB
 		),
 		Rule(
 			NS('E'), GRB_ERROR_SERIES + 2,		// ошибка в выражении
-			8,									// E->i | y | x | (E) | xM | i(W) | iM | vM | (E)M | i(W)M | p(i,x) | p(x,i)| p(x,x) |p(i,i) |n(y) |n(i) |
+			8,		// E->i | l | (E) | i(W) | iM | lM | (E)M | i(W)M
 			Rule::Chain(1, TS('i')),
 			Rule::Chain(1, TS('l')),
 			Rule::Chain(3, TS('('), NS('E'), TS(')')),
@@ -40,27 +41,26 @@ namespace GRB
 			Rule::Chain(2, TS('l'), NS('M')),
 			Rule::Chain(4, TS('('), NS('E'), TS(')'), NS('M')),
 			Rule::Chain(5, TS('i'), TS('('), NS('W'), TS(')'), NS('M'))
-		),// три следующих узла неправильные, временное
-		Rule(
-			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы  
-			3,                                // S->tfi(F){N}S | m{N};
-			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(14, TS('t'), TS('i'), TS('f'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}')),
-			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
 		),
 		Rule(
-			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы  
-			3,                                // S->tfi(F){N}S | m{N};
-			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(14, TS('t'), TS('i'), TS('f'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}')),
-			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
+			NS('M'), GRB_ERROR_SERIES + 3,		// оператор
+			2,		// M->vE | vEM
+			Rule::Chain(2, TS('v'), NS('E')),
+			Rule::Chain(3, TS('v'), NS('E'), NS('M'))
 		),
 		Rule(
-			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы  
-			3,                                // S->tfi(F){N}S | m{N};
-			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-			Rule::Chain(14, TS('t'), TS('i'), TS('f'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}')),
-			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
+			NS('F'), GRB_ERROR_SERIES + 4,		// ошибка в параметрах функции
+			2,		// M->ti | ti,F
+			Rule::Chain(2, TS('t'), TS('i')),
+			Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('F'))
+		),
+		Rule(
+			NS('W'), GRB_ERROR_SERIES + 5,		// ошибка в параметрах вызываемой функции 
+			4,		// M->i | l | i,W | l,W
+			Rule::Chain(1, TS('i')),
+			Rule::Chain(1, TS('l')),
+			Rule::Chain(3, TS('i'), TS(','), NS('W')),
+			Rule::Chain(3, TS('l'), TS(','), NS('W'))
 		)
 	);
 

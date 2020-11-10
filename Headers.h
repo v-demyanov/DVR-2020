@@ -8,6 +8,8 @@
 #include "IT.h"
 #include "LexicalRecognizer.h"
 #include "PolishNotation.h"
+#include "GRB.h"
+#include "MFST.h"
 
 #include <TCHAR.H>
 #include <iostream>

@@ -156,9 +156,9 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="LPLab14.cpp" />
     <ClCompile Include="LT.cpp" />
+    <ClCompile Include="MFST.cpp" />
     <ClCompile Include="Parm.cpp" />
     <ClCompile Include="PolishNotation.cpp" />
-    <ClCompile Include="sdfsdf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
@@ -170,6 +170,7 @@
     <ClInclude Include="LexicalRecognizer.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="LT.h" />
+    <ClInclude Include="MFST.h" />
     <ClInclude Include="Parm.h" />
     <ClInclude Include="PolishNotation.h" />
   </ItemGroup>

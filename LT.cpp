@@ -23,11 +23,28 @@ namespace LT
 	Entry GetEntry(LexTable& lextable, int n)
 	{
 		return lextable.table[n];
-	}
+	}	
 
 	void Delete(LexTable& lextable)
 	{
 		delete[] lextable.table;
 		delete[] &lextable;
 	}
+
+	Entry::Entry() {};
+	
+	Entry::Entry(char l, int n)
+	{
+		lexema = l;
+		lineSource = n;
+	};
+
+	Entry::Entry(char l, int ls, int i, char s)
+	{
+		lexema = l;
+		lineSource = ls;
+		indexIdTable = i;
+		sign = s;
+	};
+	
 }

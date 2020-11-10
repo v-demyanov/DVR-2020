@@ -1,20 +1,4 @@
-﻿  LexicalRecognizer.cpp
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(151,63): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(151,53): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(277,65): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(277,55): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(289,63): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(289,53): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(295,63): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(295,53): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(321,63): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(321,53): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(449,65): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(449,55): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(479,69): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(479,59): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(485,63): warning C4305: аргумент: усечение из "unsigned int" в "char"
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(485,53): warning C4309: аргумент: усечение константного значения
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(125,18): warning C4101: iddatatype: неиспользованная локальная переменная
-D:\Study\LP3sem\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(126,14): warning C4101: idtype: неиспользованная локальная переменная
-  LPLab14.vcxproj -> D:\Study\LP3sem\CourseProject_ProgrammingLanguages\Debug\LPLab14.exe
+﻿  GRB.cpp
+  LPLab14.cpp
+  Создание кода...
+  LPLab14.vcxproj -> F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\Debug\LPLab14.exe
