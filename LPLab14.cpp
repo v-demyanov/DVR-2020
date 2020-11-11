@@ -3,6 +3,19 @@
 
 #define LOG_TEST 1
 
+
+//z = (x * (x + y) + fi()) + fi(x, x, y, x, y) / x / (x + y);
+//z = x + (z - y) * x / (x + y);
+//z = x + (x + y) + x + (x + y);
+//x* (x* (x + y))
+//
+//
+//z = x * (x + y) + fi(x, y);
+//x + (z - y) * x / (x + y);
+//x + y / x + y;
+//x + y * z;
+//(x + y)* z;
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "rus");
@@ -22,29 +35,38 @@ int _tmain(int argc, _TCHAR* argv[])
 		In::IN in = In::getin(parm.in);
 		Log::WriteIn(log, in);
 		Log::WriteOut(out, in);
-		/*LR::Tables tables = LR::FillingTables(in);
+		LR::Tables tables = LR::FillingTables(in);
 		Log::WriteLexTable(tables, log);
 		Log::WriteIdTable(tables, log);
-		PN::PolishNotation(18, tables.lexTable, tables.idTable);*/
+		PN::PolishNotation(18, tables.lexTable, tables.idTable);
 
 		int s = 0;
-		LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
+		/*LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 		IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 		LR::Tables tables;
 		tables.idTable = idTable;
 		tables.lexTable = lexTable;
 		tables.lexTable.table[s]	=	LT::Entry('t', 1);
+		tables.lexTable.table[++s] = LT::Entry('f', 1);
 		tables.lexTable.table[++s]	=	LT::Entry('i', 1);
-		tables.lexTable.table[++s]	=	LT::Entry('f', 1);
-		tables.lexTable.table[++s]	=	LT::Entry(';', 11);
-		tables.lexTable.table[++s]	=	LT::Entry('$', 12);
-		tables.lexTable.size = ++s;
+		tables.lexTable.table[++s] = LT::Entry('(', 1);
+		tables.lexTable.table[++s] = LT::Entry('t', 1);
+		tables.lexTable.table[++s] = LT::Entry('i', 1);
+		tables.lexTable.table[++s] = LT::Entry(')', 1);
+		tables.lexTable.table[++s] = LT::Entry('{', 2);
+		tables.lexTable.table[++s] = LT::Entry('r', 3);
+		tables.lexTable.table[++s] = LT::Entry('i', 3);
+		tables.lexTable.table[++s] = LT::Entry(';', 3);
+		tables.lexTable.table[++s] = LT::Entry('}', 4);
+		tables.lexTable.table[++s]	=	LT::Entry(';', 4);
+		tables.lexTable.table[++s]	=	LT::Entry('$', 5);
+		tables.lexTable.size = ++s;*/
 		MFST_TRACE_START
 		MFST::Mfst mfst(tables, GRB::getGreibach());
 		mfst.start();
 
-		/*mfst.saveDeducation();
-		mfst.printRules();*/
+		mfst.saveDeducation();
+		mfst.printRules();
 
 		Log::Close(log);
 		Log::CloseOut(out);

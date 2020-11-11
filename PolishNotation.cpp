@@ -23,6 +23,7 @@ namespace PN
 		std::list <LT::Entry> list_of_LT_Entries;
 		std::stack <LT::Entry> stack;
 		int leftHesisCount = 0;
+		int paramCount = 0;
 		bool isFunction = false;
 		for (int i = lextable_pos; lextable.table[i].lexema != LEX_SEMICOLON; i++)
 		{
@@ -30,7 +31,14 @@ namespace PN
 				lextable.table[i].lexema == LEX_STRING_LITERAL)
 			{
 				if (idtable.table[lextable.table[i].indexIdTable].idtype == IT::F)
+				{
 					isFunction = true;
+					paramCount = 0;
+				}
+
+				if (isFunction)
+					paramCount++;
+					
 				list_of_LT_Entries.push_back(lextable.table[i]);
 			}
 			else if (lextable.table[i].lexema == LEX_LEFTHESIS)
@@ -52,6 +60,7 @@ namespace PN
 				{
 					list_of_LT_Entries.push_back({ '@', -1, -1, (char)TI_NULLIDX });
 					isFunction = false;
+					paramCount = 0;
 				}
 			}
 			else if (lextable.table[i].lexema == LEX_COMMA)
