@@ -39,6 +39,31 @@ int _tmain(int argc, _TCHAR* argv[])
 		Log::WriteLexTable(tables, log);
 		Log::WriteIdTable(tables, log);
 		PN::PolishNotation(18, tables.lexTable, tables.idTable);
+<<<<<<< HEAD
+=======
+
+		int s = 0;
+		/*LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
+		IT::IdTable idTable = IT::Create(TI_MAXSIZE);
+		LR::Tables tables;
+		tables.idTable = idTable;
+		tables.lexTable = lexTable;
+		tables.lexTable.table[s]	=	LT::Entry('t', 1);
+		tables.lexTable.table[++s] = LT::Entry('f', 1);
+		tables.lexTable.table[++s]	=	LT::Entry('i', 1);
+		tables.lexTable.table[++s] = LT::Entry('(', 1);
+		tables.lexTable.table[++s] = LT::Entry('t', 1);
+		tables.lexTable.table[++s] = LT::Entry('i', 1);
+		tables.lexTable.table[++s] = LT::Entry(')', 1);
+		tables.lexTable.table[++s] = LT::Entry('{', 2);
+		tables.lexTable.table[++s] = LT::Entry('r', 3);
+		tables.lexTable.table[++s] = LT::Entry('i', 3);
+		tables.lexTable.table[++s] = LT::Entry(';', 3);
+		tables.lexTable.table[++s] = LT::Entry('}', 4);
+		tables.lexTable.table[++s]	=	LT::Entry(';', 4);
+		tables.lexTable.table[++s]	=	LT::Entry('$', 5);
+		tables.lexTable.size = ++s;*/
+>>>>>>> 82d83a8419a192cb262a4aabf6dfbbd868fbef56
 		MFST_TRACE_START
 		MFST::Mfst mfst(tables, GRB::getGreibach());
 		mfst.start();

@@ -1,13 +1,23 @@
 Тест:без ошибок 
+<<<<<<< HEAD
  ---- Протокол ---- Дата: 12.11.2020 12:03:20 ----
+=======
+ ---- Протокол ---- Дата: 11.11.2020 18:39:44 ----
+>>>>>>> 82d83a8419a192cb262a4aabf6dfbbd868fbef56
 ---- Параметры ----
 -log: In.txt.log
 -out: In.txt.out
 -in: In.txt
 ---- Исходные данные ----
+<<<<<<< HEAD
 Количество символов: 573
 Проигнорировано: 25
 Количество строк: 35
+=======
+Количество символов: 441
+Проигнорировано: 19
+Количество строк: 29
+>>>>>>> 82d83a8419a192cb262a4aabf6dfbbd868fbef56
 
 LEX_TABLE: 
 
@@ -22,16 +32,25 @@ LEX_TABLE:
 	09 dti;
 	10 dtfi(ti,ti,
 	11 ti);
+<<<<<<< HEAD
 	12 i=i(i,n,n)vi;
 	13 ri;
 	14 };
 	15 m
 	16 {
+=======
+	12 ri;
+	13 };
+	14 m
+	15 {
+	16 dti;
+>>>>>>> 82d83a8419a192cb262a4aabf6dfbbd868fbef56
 	17 dti;
 	18 dti;
 	19 dti;
 	20 dti;
 	21 dti;
+<<<<<<< HEAD
 	22 dti;
 	23 dtfi(ti);
 	24 i=n;
@@ -46,6 +65,16 @@ LEX_TABLE:
 	33 pi;
 	34 rn;
 	35 };
+=======
+	22 i=n;
+	23 i=n;
+	24 i=s;
+	25 i=s;
+	26 i=i(i,i);
+	27 i=i(i,i);
+	28 rn;
+	29 };
+>>>>>>> 82d83a8419a192cb262a4aabf6dfbbd868fbef56
 
 ID_TABLE: 
 
@@ -62,6 +91,7 @@ ID_TABLE:
 	substr                                 STR                             Function                                                                  48                                 
 	p                                           INT                             PARAMETER                           0                                   54                                 
 	n                                           INT                             PARAMETER                           0                                   57                                 
+<<<<<<< HEAD
 	num                                       INT                             Literal                               1                                     66                                 
 	num                                       INT                             Literal                               3                                     68                                 
 	x                                           INT                             variable                             0                                    82                                 
@@ -78,3 +108,16 @@ ID_TABLE:
 	str                                       STR                             Literal                               '1234567890'                          127                                
 	str                                       STR                             Literal                               'контрольныйпример'                   154                                
 	num                                       INT                             Literal                               0                                     163                                
+=======
+	x                                           INT                             variable                             0                                    69                                 
+	y                                           INT                             variable                             0                                    73                                 
+	z                                           INT                             variable                             0                                    77                                 
+	sa                                         STR                             variable                                                                  81                                 
+	sb                                         STR                             variable                                                                  85                                 
+	sc                                         STR                             variable                                                                  89                                 
+	num                                       INT                             Literal                               1                                     93                                 
+	num                                       INT                             Literal                               5                                     97                                 
+	str                                       STR                             Literal                               '1234567890'                          101                                
+	str                                       STR                             Literal                               '1234567890'                          105                                
+	num                                       INT                             Literal                               0                                     126                                
+>>>>>>> 82d83a8419a192cb262a4aabf6dfbbd868fbef56
