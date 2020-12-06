@@ -34,17 +34,21 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::wcout << "-in:" << parm.in << ", -out:" << parm.out << ", -log:" << parm.log << std::endl << std::endl;
 		In::IN in = In::getin(parm.in);
 		Log::WriteIn(log, in);
+		for (int i = 0; i < in.lmyStr; i++)
+		{
+			std::cout << in.myStr[i] << "\n";
+		}
 		Log::WriteOut(out, in);
 		LR::Tables tables = LR::FillingTables(in);
 		Log::WriteLexTable(tables, log);
 		Log::WriteIdTable(tables, log);
-		PN::PolishNotation(18, tables.lexTable, tables.idTable);
+		/*PN::PolishNotation(18, tables.lexTable, tables.idTable);
 		MFST_TRACE_START
 		MFST::Mfst mfst(tables, GRB::getGreibach());
 		mfst.start();
 
 		mfst.saveDeducation();
-		mfst.printRules();
+		mfst.printRules();*/
 
 		Log::Close(log);
 		Log::CloseOut(out);

@@ -11,13 +11,24 @@ namespace LR
 	LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 	IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 
-	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, char sign)
+	/*LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, char sign)
 	{
 		LT::Entry result;
 		result.lexema = lex;
 		result.lineSource = lineSource;
 		result.indexIdTable = indexIdTable;
-		result.sign = sign;
+		result.sign[0] = sign;
+		return result;
+	}*/
+
+	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, const char str[TI_STR_MAXSIZE - 1])
+	{
+		LT::Entry result;
+		result.lexema = lex;
+		result.lineSource = lineSource;
+		result.indexIdTable = indexIdTable;
+		result.sign = str;
+		//strcpy(result.sign, str);
 		return result;
 	}
 
@@ -112,7 +123,8 @@ namespace LR
 			pointerInFunc = false,
 			pointerInMain = false,
 			isInteger = false,
-			isString = false;
+			isString = false,
+			isSymbol = false;
 
 		int beginPosition = 0;
 
@@ -136,6 +148,8 @@ namespace LR
 				{
 					lexStr[k] = in.myStr[i][j];
 					lexStr[++k] = '\0';
+					if ((strcmp(lexStr, "=") == 0 && in.myStr[i][j + 1] == '=') || (strcmp(lexStr, "<") == 0 && in.myStr[i][j + 1] == '=') || (strcmp(lexStr, ">") == 0 && in.myStr[i][j + 1] == '='))
+						continue;
 					lexema = FST::CheckLexem(lexStr);
 					lextype = lexema.lex_type;
 					switch (lextype)
@@ -148,16 +162,18 @@ namespace LR
 					}
 					case FST::COMMON_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						switch (lexema.lex)
 						{
 						case LEX_TYPE:
 						{
-							if (strcmp(lexStr, "integer") == 0)
+							if (strcmp(lexStr, "posint") == 0)
 								isInteger = true;
 							if (strcmp(lexStr, "string") == 0)
 								isString = true;
+							if (strcmp(lexStr, "symbol") == 0)
+								isSymbol = true;
 							break;
 						}
 						case LEX_FUNCTION:
@@ -218,6 +234,19 @@ namespace LR
 								currentIDDT = IT::STR;
 								currentIDT = IT::F;
 							}
+							else if (pointerInDeclareFunc && isSymbol)	// *!
+							{
+								if (strlen(lexStr) > ID_MAXSIZE)
+									throw ERROR_THROW_IN(121, i, j);
+								itemIT = CreateId(lexTable.size, lexStr, IT::SYBM, IT::F, TI_STR_DEFAULT);
+								IT::Add(idTable, itemIT);
+								Id currentId = CreateCurrentId(lexStr, IT::F);
+								list_Of_Current_Ids.push_back(currentId);
+								pointerInDeclareFunc = false;
+								isSymbol = false;
+								currentIDDT = IT::SYBM;
+								currentIDT = IT::F;
+							}
 							else if (pointerInProperties && isInteger)
 							{
 								if (strlen(lexStr) > ID_MAXSIZE)
@@ -240,6 +269,18 @@ namespace LR
 								list_Of_Current_Ids.push_back(currentId);
 								isString = false;
 								currentIDDT = IT::STR;
+								currentIDT = IT::P;
+							}
+							else if (pointerInProperties && isSymbol)
+							{
+								if (strlen(lexStr) > ID_MAXSIZE)
+									throw ERROR_THROW_IN(121, i, j);
+								itemIT = CreateId(lexTable.size, lexStr, IT::SYBM, IT::P, TI_STR_DEFAULT);
+								IT::Add(idTable, itemIT);
+								Id currentId = CreateCurrentId(lexStr, IT::P);
+								list_Of_Current_Ids.push_back(currentId);
+								isSymbol = false;
+								currentIDDT = IT::SYBM;
 								currentIDT = IT::P;
 							}
 							else if (isInteger)
@@ -266,6 +307,18 @@ namespace LR
 								currentIDDT = IT::STR;
 								currentIDT = IT::V;
 							}
+							else if (isSymbol)
+							{
+							if (strlen(lexStr) > ID_MAXSIZE)
+								throw ERROR_THROW_IN(121, i, j);
+							itemIT = CreateId(lexTable.size, lexStr, IT::SYBM, IT::V, TI_STR_DEFAULT);
+							IT::Add(idTable, itemIT);
+							Id currentId = CreateCurrentId(lexStr, IT::V);
+							list_Of_Current_Ids.push_back(currentId);
+							isSymbol = false;
+							currentIDDT = IT::SYBM;
+							currentIDT = IT::V;
+							}
 							beginPosition++;
 						}
 
@@ -274,25 +327,25 @@ namespace LR
 						{
 							indexIdTable = IsId(idTable, lexStr, idTable.size);
 						}
-						itemLT = CreateLex(lexema.lex, i, indexIdTable, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, indexIdTable, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::ACTION_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr[0]);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::LITERAL_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::PRIORITY_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						if (lexema.lex == LEX_LEFTHESIS)
 							pointerInProperties = true;
@@ -306,6 +359,13 @@ namespace LR
 				else if ((in.myStr[i][j] == SPACE) || (ASCII_Table[(int)(in.myStr[i][j])] == in.S) || (in.myStr[i][j] == END_OF_STR && in.myStr[i][j + 1] == '\0'))
 				{
 					lexStr[k] = '\0';
+
+					if ((strcmp(lexStr, "=") == 0 && in.myStr[i][j] == '=') || (strcmp(lexStr, "<") == 0 && in.myStr[i][j] == '=') || (strcmp(lexStr, ">") == 0 && in.myStr[i][j] == '='))
+					{
+						lexStr[k] = in.myStr[i][j];
+						lexStr[++k] = '\0';
+					}
+
 					lexema = FST::CheckLexem(lexStr);
 					lextype = lexema.lex_type;
 					switch (lextype)
@@ -318,16 +378,18 @@ namespace LR
 					}
 					case FST::COMMON_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						switch (lexema.lex)
 						{
 						case LEX_TYPE:
 						{
-							if (strcmp(lexStr, "integer") == 0)
+							if (strcmp(lexStr, "posint") == 0)
 								isInteger = true;
 							if (strcmp(lexStr, "string") == 0)
 								isString = true;
+							if (strcmp(lexStr, "symbol") == 0)
+								isSymbol = true;
 							break;
 						}
 						case LEX_FUNCTION:
@@ -389,6 +451,19 @@ namespace LR
 								currentIDDT = IT::STR;
 								currentIDT = IT::F;
 							}
+							else if (pointerInDeclareFunc && isSymbol)
+							{
+								if (strlen(lexStr) > ID_MAXSIZE)
+									throw ERROR_THROW_IN(121, i, j);
+								itemIT = CreateId(lexTable.size, lexStr, IT::SYBM, IT::F, TI_STR_DEFAULT);
+								IT::Add(idTable, itemIT);
+								Id currentId = CreateCurrentId(lexStr, IT::F);
+								list_Of_Current_Ids.push_back(currentId);
+								pointerInDeclareFunc = false;
+								isSymbol = false;
+								currentIDDT = IT::SYBM;
+								currentIDT = IT::F;
+							}
 							else if (pointerInProperties && isInteger)
 							{
 								if (strlen(lexStr) > ID_MAXSIZE)
@@ -411,6 +486,18 @@ namespace LR
 								list_Of_Current_Ids.push_back(currentId);
 								isString = false;
 								currentIDDT = IT::STR;
+								currentIDT = IT::P;
+							}
+							else if (pointerInProperties && isSymbol)
+							{
+								if (strlen(lexStr) > ID_MAXSIZE)
+									throw ERROR_THROW_IN(121, i, j);
+								itemIT = CreateId(lexTable.size, lexStr, IT::SYBM, IT::P, TI_STR_DEFAULT);
+								IT::Add(idTable, itemIT);
+								Id currentId = CreateCurrentId(lexStr, IT::P);
+								list_Of_Current_Ids.push_back(currentId);
+								isSymbol = false;
+								currentIDDT = IT::SYBM;
 								currentIDT = IT::P;
 							}
 							else if (isInteger)
@@ -437,6 +524,18 @@ namespace LR
 								currentIDDT = IT::STR;
 								currentIDT = IT::V;
 							}
+							else if (isSymbol)
+							{
+							if (strlen(lexStr) > ID_MAXSIZE)
+								throw ERROR_THROW_IN(121, i, j);
+							itemIT = CreateId(lexTable.size, lexStr, IT::SYBM, IT::V, TI_STR_DEFAULT);
+							IT::Add(idTable, itemIT);
+							Id currentId = CreateCurrentId(lexStr, IT::V);
+							list_Of_Current_Ids.push_back(currentId);
+							isSymbol = false;
+							currentIDDT = IT::SYBM;
+							currentIDT = IT::V;
+							}
 							beginPosition++;
 						}
 
@@ -446,13 +545,13 @@ namespace LR
 							indexIdTable = IsId(idTable, lexStr, idTable.size);
 						}
 
-						itemLT = CreateLex(lexema.lex, i, indexIdTable, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, indexIdTable, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::ACTION_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr[0]);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
@@ -475,14 +574,22 @@ namespace LR
 							IT::Add(idTable, itemIT);
 							beginPosition++;
 						}
+						else if (lexema.lex == LEX_SYMBOL_LITERAL)
+						{
+							char* lexStrName = new char[ID_MAXSIZE];
+							strcpy(lexStrName, "symbol");
+							itemIT = CreateId(lexTable.size, lexStrName, IT::SYBM, IT::L, lexStr);
+							IT::Add(idTable, itemIT);
+							beginPosition++;
+						}
 
-						itemLT = CreateLex(lexema.lex, i, idTable.size - 1, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, idTable.size - 1, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::PRIORITY_LEX:
 					{
-						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, TI_NULLIDX);
+						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						if (lexema.lex == LEX_LEFTHESIS)
 							pointerInProperties = true;
@@ -493,7 +600,8 @@ namespace LR
 					}
 					if (ASCII_Table[(int)in.myStr[i][j]] == in.S)
 					{
-						j--;
+						if (strcmp(lexStr, "==") != 0 && strcmp(lexStr, "<=") != 0 && strcmp(lexStr, ">=") != 0)
+							j--;
 					}
 					k = 0;
 				}

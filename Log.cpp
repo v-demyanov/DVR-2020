@@ -174,7 +174,11 @@ namespace Log
 					else if (iddatatype == IT::STR)
 					{
 						fillStr(log, idTable.table[i].id, "STR", "variable", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
-					}	
+					}
+					else if (iddatatype == IT::SYBM)
+					{
+						fillStr(log, idTable.table[i].id, "SYMB", "variable", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
 					break;
 				}
 				case IT::F:
@@ -186,6 +190,10 @@ namespace Log
 					else if (iddatatype == IT::STR)
 					{
 						fillStr(log, idTable.table[i].id, "STR", "Function", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
+					else if (iddatatype == IT::SYBM)
+					{
+						fillStr(log, idTable.table[i].id, "SYMB", "Function", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
 					}
 					break;
 				}
@@ -199,6 +207,10 @@ namespace Log
 					{
 						fillStr(log, idTable.table[i].id, "STR", "PARAMETER", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
 					}
+					else if (iddatatype == IT::SYBM)
+					{
+						fillStr(log, idTable.table[i].id, "SYMB", "PARAMETER", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
 					break;
 				}
 				case IT::L:
@@ -210,6 +222,10 @@ namespace Log
 					else if (iddatatype == IT::STR)
 					{
 						fillStr(log, idTable.table[i].id, "STR", "Literal", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
+					}
+					else if (iddatatype == IT::SYBM)
+					{
+						fillStr(log, idTable.table[i].id, "SYMB", "Literal", idTable.table[i].value.vstr->str, idTable.table[i].idxfirstLE);
 					}
 					break;
 				}

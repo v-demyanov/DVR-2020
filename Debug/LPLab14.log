@@ -1,2 +1,13 @@
-﻿  LPLab14.cpp
+﻿  FST.cpp
+F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+  LPLab14.cpp
+  LT.cpp
+  LexicalRecognizer.cpp
+F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(137,18): warning C4101: iddatatype: неиспользованная локальная переменная
+F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\LexicalRecognizer.cpp(138,14): warning C4101: idtype: неиспользованная локальная переменная
+  Log.cpp
+  MFST.cpp
+F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\MFST.cpp(293,68): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+  PolishNotation.cpp
+  Создание кода...
   LPLab14.vcxproj -> F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\Debug\LPLab14.exe

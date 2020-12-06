@@ -48,7 +48,7 @@ namespace In
 			{
 				throw ERROR_THROW_IN(111, structIN.lines, col);
 			}
-			else if (ASCII_Table[index] == structIN.I || (symbol == SPACE && (ASCII_Table[prevSymbolId] == structIN.S || ASCII_Table[nextSymbolId] == structIN.S)))
+			else if (ASCII_Table[index] == structIN.I || ((symbol == SPACE || symbol == '\t') && (ASCII_Table[prevSymbolId] == structIN.S || ASCII_Table[nextSymbolId] == structIN.S || letter == 0)))
 			{
 				structIN.ignor++;
 			}
@@ -56,31 +56,20 @@ namespace In
 			{
 				if (symbol == '\n')
 				{
+					if (structIN.lines == 6)
+						int asdasd = 0;
 					structIN.lines++;
-					col = 1;
-
-					/*if (prevSymbol != '|')
+					if (col != 1 && letter != 0)		// *!
 					{
+						str[word][letter] = '?';
+						letter++;
 						str[word][letter] = '\0';
 						word++;
-					}*/
-					
-					str[word][letter] = '?';
-					letter++;
-					str[word][letter] = '\0';
-					word++;
+					}
+					col = 0;
 					letter = 0;
 					continue;
 				}
-
-				/*if (symbol == '|')
-				{
-					str[word][letter] = '\0';
-					word++;
-					letter = 0;
-					prevSymbol = symbol;
-					continue;
-				}*/
 
 				str[word][letter] = symbol;
 				prevSymbolId = (int)symbol;

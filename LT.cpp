@@ -1,6 +1,7 @@
 
 #include "LT.h"
 #include "Error.h"
+#include <iomanip>
 
 namespace LT
 {	
@@ -39,12 +40,13 @@ namespace LT
 		lineSource = n;
 	};
 
-	Entry::Entry(char l, int ls, int i, char s)
+	Entry::Entry(char l, int ls, int i, const char* s)
 	{
 		lexema = l;
 		lineSource = ls;
 		indexIdTable = i;
 		sign = s;
+		//strcpy(sign, s);
 	};
 	
 }

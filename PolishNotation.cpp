@@ -4,17 +4,32 @@
 #include "LT.h"
 #include "IT.h"
 #include "PolishNotation.h"
+#include <map>
 
 namespace PN
 {
-	int getPriority(char l)
+	int getPriority(std::string l)
 	{
-		switch (l)
-		{
-			case '*': case '/': return 3;
-			case '-': case '+': return 2;
-			case '(': return 1;
+		std::map <std::string, int> mapping;
+
+		mapping["*"] = 3;
+		mapping["/"] = 3;
+		mapping["-"] = 2;
+		mapping["+"] = 2;
+		mapping["("] = 1;
+
+		switch (mapping[l]) {
+		case 3:  return 3;  break;
+		case 2:  return 2;  break;
+		case 1:  return 1; break;
 		}
+
+		/*switch (l)
+		{
+			case (mult): case div: return 3;
+			case minus: case plus: return 2;
+			case brace: return 1;
+		}*/
 		return 0;
 	}
 
@@ -58,7 +73,7 @@ namespace PN
 				}
 				if (isFunction)
 				{
-					list_of_LT_Entries.push_back({ '@', -1, -1, (char)TI_NULLIDX });
+					list_of_LT_Entries.push_back({ '@', -1, -1, SIGN_DEFAULT });
 					isFunction = false;
 					paramCount = 0;
 				}
@@ -86,7 +101,7 @@ namespace PN
 		std::cout << "\n\n\tВыражение в польской записи:\t";
 		for (auto iter = list_of_LT_Entries.begin(); iter != list_of_LT_Entries.end(); iter++)
 		{
-			if ((*iter).sign == TI_NULLIDX)
+			if (strcmp((*iter).sign, SIGN_DEFAULT) == 0)
 			{
 				std::cout << (*iter).lexema << "\t";
 			}
