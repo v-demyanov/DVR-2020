@@ -1,19 +1,20 @@
 
-==
-<=
->=
-$ posint func 1fA (posint aA1, string aA2)
+posint func 1fA (posint x, string y)
 {
-   $ posint i = 0;
-   posint aA1;
+   $ posint i;
+ (x * (x + y) + 1fA()) + 1fA(x, x, y, x, y) / x / (x + y);
+   i = 0;
+   $ posint x;
 
-   until (i <= aA1)
-      posint aA1;
+
+
+   until (i <= x)
+      $ posint x;
       puts  #bnv#;
       i = i + 1;
-   loop;
-   
-   posint aA1;
+   loop;   
+
+   $ posint x;
 
    if (i >= aA1)
       ret 1;
@@ -21,7 +22,8 @@ $ posint func 1fA (posint aA1, string aA2)
       ret 0;
    end;
 
-   posint aA1;
+   $ posint x;
+   ret 0;
 };
 
 go
@@ -29,13 +31,16 @@ go
    $ posint aA1;
    $ string aA2;
    $ posint check;
-   $ symbol test = #g#;
-   $ symbol tre = #sdfdf#;
+   $ symbol test;
+   $ symbol tre;
 
+   test = #g#;
+   tre = #sdfdf#;
    aA1 = 5;
    aA2 = #Magazine#;
    check = 1fA( aA1 , aA2 );
    if (check == 0)
       puts #Ошибка!#;
    end;
+   ret 0;
 };

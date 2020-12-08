@@ -40,13 +40,12 @@ namespace LT
 		lineSource = n;
 	};
 
-	Entry::Entry(char l, int ls, int i, const char* s)
+	Entry::Entry(char l, int ls, int i, char* s)
 	{
 		lexema = l;
 		lineSource = ls;
 		indexIdTable = i;
 		sign = s;
-		//strcpy(sign, s);
 	};
 	
 }

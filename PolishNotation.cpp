@@ -73,7 +73,9 @@ namespace PN
 				}
 				if (isFunction)
 				{
-					list_of_LT_Entries.push_back({ '@', -1, -1, SIGN_DEFAULT });
+					char* test = new char[2];
+					strcpy(test, " ");
+					list_of_LT_Entries.push_back({ '@', -1, -1, test });
 					isFunction = false;
 					paramCount = 0;
 				}

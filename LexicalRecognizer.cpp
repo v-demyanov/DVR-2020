@@ -24,11 +24,12 @@ namespace LR
 	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, const char str[TI_STR_MAXSIZE - 1])
 	{
 		LT::Entry result;
+		result.sign = new char[TI_STR_MAXSIZE - 1];
 		result.lexema = lex;
 		result.lineSource = lineSource;
 		result.indexIdTable = indexIdTable;
-		result.sign = str;
-		//strcpy(result.sign, str);
+		//result.sign = str;
+		strcpy(result.sign, str);
 		return result;
 	}
 
@@ -127,7 +128,7 @@ namespace LR
 			isSymbol = false;
 
 		int beginPosition = 0;
-
+		
 		std::list<Id> list_Of_Current_Ids;
 		Tables tables;
 		FST::FST_RESULT lexema;
@@ -611,6 +612,8 @@ namespace LR
 				}
 			}
 		}
+		
+		strcpy(lexStr, "test");
 
 		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
 		/*std::cout << "\t......Test......" << std::endl;

@@ -42,8 +42,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		LR::Tables tables = LR::FillingTables(in);
 		Log::WriteLexTable(tables, log);
 		Log::WriteIdTable(tables, log);
-		/*PN::PolishNotation(18, tables.lexTable, tables.idTable);
-		MFST_TRACE_START
+		int t = 0;
+		std::cout << tables.lexTable.table[17].sign << std::endl;
+		PN::PolishNotation(15, tables.lexTable, tables.idTable);
+
+		/*MFST_TRACE_START
 		MFST::Mfst mfst(tables, GRB::getGreibach());
 		mfst.start();
 

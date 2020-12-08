@@ -9,18 +9,18 @@ namespace GRB
 
 	Greibach greibach(
 		NS('S'), TS('$'),			// стартовый символ, дно стека NS-нетерминал(большие буквы),TS-терминал
-		6, 							// количество правил
+		7, 							// количество правил
 		Rule(
 			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы  
 			4,		// S->m{NrE;}; | tfi(F){NrE;};S | m{NrE;};S | tfi(F){NrE;};
-			Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
+			Rule::Chain(8, TS('g'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
 			Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
-			Rule::Chain(9, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
+			Rule::Chain(9, TS('g'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
 			Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'))
 		),
 		Rule(
 			NS('N'), GRB_ERROR_SERIES + 1,   // ошибочный оператор
-			16,		// N->dti; | rE; | i=E; | dtfi(F); | dti;N | rE;N | i=E;N | dtfi(F);N | pi; | pn; | ps; |  pi;N | pn;N | ps;N | pi(F); | pi(F);N
+			24,		// N->dti; | rE; | i=E; | dtfi(F); | dti;N | rE;N | i=E;N | dtfi(F);N | pi; | pn; | ps; |  pi;N | pn;N | ps;N | pi(F); | pi(F);N
 			Rule::Chain(4, TS('$'), TS('t'), TS('i'), TS(';')),
 			Rule::Chain(3, TS('r'), NS('E'), TS(';')),
 			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
@@ -38,7 +38,13 @@ namespace GRB
 			Rule::Chain(4, TS('p'), TS('s'), TS(';'), NS('N')),
 			Rule::Chain(4, TS('p'), TS('c'), TS(';'), NS('N')),
 			Rule::Chain(6, TS('p'), TS('i'), TS('('), NS('W'), TS(')'), TS(';')),
-			Rule::Chain(7, TS('p'), TS('i'), TS('('), NS('W'), TS(')'), TS(';'), NS('N'))
+			Rule::Chain(7, TS('p'), TS('i'), TS('('), NS('W'), TS(')'), TS(';'), NS('N')),
+			Rule::Chain(7, TS('u'), TS('('), NS('I'), TS(')'), NS('N'), TS('l'), TS(';')),
+			Rule::Chain(8, TS('u'), TS('('), NS('I'), TS(')'), NS('N'), TS('l'), TS(';'), NS('N')),
+			Rule::Chain(9, TS('q'), TS('('), NS('I'), TS(')'), NS('N'), TS('e'), NS('N'), TS('d'), TS(';')),
+			Rule::Chain(10, TS('q'), TS('('), NS('I'), TS(')'), NS('N'), TS('e'), NS('N'), TS('d'), TS(';'), NS('N')),
+			Rule::Chain(7, TS('q'), TS('('), NS('I'), TS(')'), NS('N'), TS('d'), TS(';')),
+			Rule::Chain(8, TS('q'), TS('('), NS('I'), TS(')'), NS('N'), TS('d'), TS(';'), NS('N'))
 		),
 		Rule(
 			NS('E'), GRB_ERROR_SERIES + 2,		// ошибка в выражении
@@ -79,6 +85,14 @@ namespace GRB
 			Rule::Chain(3, TS('c'), TS(','), NS('W')),
 			Rule::Chain(3, TS('n'), TS(','), NS('W')),
 			Rule::Chain(3, TS('s'), TS(','), NS('W'))
+		),
+		Rule(
+			NS('I'), GRB_ERROR_SERIES + 6,		// ошибка в параметрах цикла или оператора ветвления ?????
+			4,
+			Rule::Chain(3, TS('i'), TS('w'), TS('c')),
+			Rule::Chain(3, TS('i'), TS('w'), TS('s')),
+			Rule::Chain(3, TS('i'), TS('w'), TS('n')),
+			Rule::Chain(3, TS('i'), TS('w'), TS('i'))
 		)
 	);
 

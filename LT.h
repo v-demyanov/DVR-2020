@@ -31,11 +31,11 @@
 #define LEX_STAR					'v'				// *
 #define LEX_DIRSLASH				'v'				// /
 #define LEX_EQUAL					'='				// =
-#define LEX_MORE					'v'				// >
-#define LEX_LESS					'v'				// <
-#define LEX_COMPARE_EQUAL			'v'				// ==
-#define LEX_COMPARE_LESS			'v'				// <=
-#define LEX_COMPARE_MORE			'v'				// >=
+#define LEX_MORE					'w'				// >
+#define LEX_LESS					'w'				// <
+#define LEX_COMPARE_EQUAL			'w'				// ==
+#define LEX_COMPARE_LESS			'w'				// <=
+#define LEX_COMPARE_MORE			'w'				// >=
 
 namespace LT									// таблица лексем
 {
@@ -44,10 +44,10 @@ namespace LT									// таблица лексем
 		char lexema;							// лексема
 		int lineSource;							// номер строки в исходном коде
 		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
-		const char* sign;
+		char* sign;
 		Entry();
 		Entry(char l, int n);
-		Entry(char l, int ls, int i, const char* s);
+		Entry(char l, int ls, int i, char* s);
 	};
 
 	struct LexTable								// экзэмпляр таблицы лексем
