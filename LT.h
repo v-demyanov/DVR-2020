@@ -1,4 +1,7 @@
 #pragma once
+#include <list>
+#include <stack>
+#include <vector>
 #define LEXEMA_FIXSIZE				1				// фикс размер лексемы
 #define LT_MAXSIZE					4096			// макс кол-во строк в таблице лексем
 #define LT_TI_NULLIDX				0xffffffff		// нет элемента таблицы идентификаторов
@@ -45,6 +48,7 @@ namespace LT									// таблица лексем
 		int lineSource;							// номер строки в исходном коде
 		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
 		char* sign;
+		int numberOfParams;
 		Entry();
 		Entry(char l, int n);
 		Entry(char l, int ls, int i, char* s);
@@ -54,6 +58,7 @@ namespace LT									// таблица лексем
 	{
 		int maxsize;							// ёмкость таблицы лексем < LT_MAXSIZE
 		int size;								// текущий размер таблицы лексем < maxsize
+		std::vector<int> refsToAssigns;			// индексы таблицы лексем, которые содержат =
 		Entry* table;							// массив строк таблицы лексем
 	};
 
@@ -61,5 +66,5 @@ namespace LT									// таблица лексем
 	void Add(LexTable& lextable, Entry entry);	// добавить строку в таблицу лексем 
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем, n - номер получаемой строки
 	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
-	
+	void AddList(LexTable& lextable, std::list <LT::Entry> list_of_LT_Entries);
 }

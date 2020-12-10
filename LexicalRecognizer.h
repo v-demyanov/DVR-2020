@@ -9,7 +9,6 @@ namespace LR
 	{
 		LT::LexTable lexTable;
 		IT::IdTable idTable;
-		
 	};
 
 	Tables FillingTables(In::IN in);

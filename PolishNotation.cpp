@@ -33,14 +33,36 @@ namespace PN
 		return 0;
 	}
 
-	bool PolishNotation(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable)
+	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable)
+	{
+		int ref = 0;
+		int semicolon;
+		std::list <LT::Entry> list_of_LT_Entries;
+		LT::LexTable result = LT::Create(LT_MAXSIZE);
+		for (int i = 0; i < lextable.size; i++)
+		{
+			if (ref < lextable.refsToAssigns.size() && i == lextable.refsToAssigns[ref])
+			{
+				LT::Add(result, lextable.table[i]);
+				list_of_LT_Entries = ConvertToPN(i + 1, lextable, idtable, semicolon);
+				LT::AddList(result, list_of_LT_Entries);
+				i = semicolon;
+				ref++;
+			}
+			LT::Add(result, lextable.table[i]);
+		}
+		return result;
+	}
+
+	std::list <LT::Entry> ConvertToPN(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable, int& semicolon)
 	{
 		std::list <LT::Entry> list_of_LT_Entries;
 		std::stack <LT::Entry> stack;
 		int leftHesisCount = 0;
 		int paramCount = 0;
 		bool isFunction = false;
-		for (int i = lextable_pos; lextable.table[i].lexema != LEX_SEMICOLON; i++)
+		int i;
+		for (i = lextable_pos; lextable.table[i].lexema != LEX_SEMICOLON; i++)
 		{
 			if (lextable.table[i].lexema == LEX_ID || lextable.table[i].lexema == LEX_NUMERICAL_LITERAL ||
 				lextable.table[i].lexema == LEX_STRING_LITERAL)
@@ -49,12 +71,17 @@ namespace PN
 				{
 					isFunction = true;
 					paramCount = 0;
+					lextable.table[i].lexema = '@';
+					list_of_LT_Entries.push_back(lextable.table[i]);
 				}
+				else
+				{
+					if (isFunction)
+						paramCount++;
 
-				if (isFunction)
-					paramCount++;
-					
-				list_of_LT_Entries.push_back(lextable.table[i]);
+					list_of_LT_Entries.push_back(lextable.table[i]);
+				}
+	
 			}
 			else if (lextable.table[i].lexema == LEX_LEFTHESIS)
 			{
@@ -73,9 +100,9 @@ namespace PN
 				}
 				if (isFunction)
 				{
-					char* test = new char[2];
-					strcpy(test, " ");
-					list_of_LT_Entries.push_back({ '@', -1, -1, test });
+					//char* test = new char[2];
+					//strcpy(test, " ");
+					//list_of_LT_Entries.push_back({ '@', -1, -1, test });
 					isFunction = false;
 					paramCount = 0;
 				}
@@ -114,7 +141,8 @@ namespace PN
 
 		}
 		std::cout << std::endl;
-		return true;
+		semicolon = i;
+		return list_of_LT_Entries;
 	}
 
 }

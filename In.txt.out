@@ -1,21 +1,17 @@
 posint func 1fA(posint x,string y)?
 {?
 $ posint i;?
-(x*(x+y)+1fA())+1fA(x,x,y,x,y)/x/(x+y);?
+i=(x*(x+y)+1fA())+1fA(x,x,y,x,y)/x/(x+y);?
 i=0;?
-$ posint x;?
 until(i<=x)?
-$ posint x;?
 puts  #bnv#;?
 i=i+1;?
 loop;?
-$ posint x;?
-if(i>=aA1)?
+if(i>=x)?
 ret 1;?
 else?
-ret 0;?
+ret 1;?
 end;?
-$ posint x;?
 ret 0;?
 };?
 go?

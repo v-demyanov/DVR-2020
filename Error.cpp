@@ -31,7 +31,17 @@ namespace Error
 		
 		ERROR_ENTRY_NODEF10(130), ERROR_ENTRY_NODEF10(140), ERROR_ENTRY_NODEF10(150),
 		ERROR_ENTRY_NODEF10(160), ERROR_ENTRY_NODEF10(170), ERROR_ENTRY_NODEF10(180), ERROR_ENTRY_NODEF10(190),
-		ERROR_ENTRY_NODEF100(200), ERROR_ENTRY_NODEF100(300), ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
+		//	ошибки семантического анализа
+		ERROR_ENTRY(200, "Ошибка: переопределение идентификатора"),					// +
+		ERROR_ENTRY(201, "Ошибка: идентификатор не определён, но используется"),	// +
+		ERROR_ENTRY(202, "Ошибка: все операнды в выражениях и операциях должны иметь типы, допустимые для данного выражения или операции"),
+		ERROR_ENTRY(203, "Ошибка: количество или типы фактических параметров не согласованы с количеством или типами формальных параметров"),
+		ERROR_ENTRY(204, "Ошибка: тип возвращаемого значения функции"),				// +
+		ERROR_ENTRY_NODEF(205), ERROR_ENTRY_NODEF(206), ERROR_ENTRY_NODEF(207), ERROR_ENTRY_NODEF(208), ERROR_ENTRY_NODEF(209),
+		ERROR_ENTRY_NODEF10(210), ERROR_ENTRY_NODEF10(220), ERROR_ENTRY_NODEF10(230),
+		ERROR_ENTRY_NODEF10(240), ERROR_ENTRY_NODEF10(250), ERROR_ENTRY_NODEF10(260),
+		ERROR_ENTRY_NODEF10(270), ERROR_ENTRY_NODEF10(280), ERROR_ENTRY_NODEF10(290),
+		ERROR_ENTRY_NODEF100(300), ERROR_ENTRY_NODEF100(400), ERROR_ENTRY_NODEF100(500),
 		//	ошибки синтаксического анализа
 		ERROR_ENTRY(600, "Неверная структура программы"),
 		ERROR_ENTRY(601, "Ошибочный оператор"),

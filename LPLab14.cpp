@@ -3,19 +3,6 @@
 
 #define LOG_TEST 1
 
-
-//z = (x * (x + y) + fi()) + fi(x, x, y, x, y) / x / (x + y);
-//z = x + (z - y) * x / (x + y);
-//z = x + (x + y) + x + (x + y);
-//x* (x* (x + y))
-//
-//
-//z = x * (x + y) + fi(x, y);
-//x + (z - y) * x / (x + y);
-//x + y / x + y;
-//x + y * z;
-//(x + y)* z;
-
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "rus");
@@ -42,9 +29,16 @@ int _tmain(int argc, _TCHAR* argv[])
 		LR::Tables tables = LR::FillingTables(in);
 		Log::WriteLexTable(tables, log);
 		Log::WriteIdTable(tables, log);
-		int t = 0;
-		std::cout << tables.lexTable.table[17].sign << std::endl;
-		PN::PolishNotation(15, tables.lexTable, tables.idTable);
+
+		//PN::PolishNotation(15, tables.lexTable, tables.idTable);
+
+			// перебор в цикле
+		for (int n : tables.lexTable.refsToAssigns)
+			std::cout << n << "\t";
+		
+		tables.lexTable = PN::PolishNotation(tables.lexTable, tables.idTable);
+
+		Log::WriteLexTable(tables, log);
 
 		/*MFST_TRACE_START
 		MFST::Mfst mfst(tables, GRB::getGreibach());

@@ -11,16 +11,6 @@ namespace LR
 	LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 	IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 
-	/*LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, char sign)
-	{
-		LT::Entry result;
-		result.lexema = lex;
-		result.lineSource = lineSource;
-		result.indexIdTable = indexIdTable;
-		result.sign[0] = sign;
-		return result;
-	}*/
-
 	LT::Entry CreateLex(char lex, int lineSource, int indexIdTable, const char str[TI_STR_MAXSIZE - 1])
 	{
 		LT::Entry result;
@@ -28,7 +18,6 @@ namespace LR
 		result.lexema = lex;
 		result.lineSource = lineSource;
 		result.indexIdTable = indexIdTable;
-		//result.sign = str;
 		strcpy(result.sign, str);
 		return result;
 	}
@@ -127,6 +116,10 @@ namespace LR
 			isString = false,
 			isSymbol = false;
 
+		IT::IDDATATYPE functionType = IT::NDT;
+		bool declare = false;
+		bool ret = false; 
+
 		int beginPosition = 0;
 		
 		std::list<Id> list_Of_Current_Ids;
@@ -200,6 +193,22 @@ namespace LR
 							beginPosition = 0;
 							break;
 						}
+						case LEX_DECLARE:
+						{
+							declare = true;
+							break;
+						}
+						case LEX_SEMICOLON:
+						{
+							ret = false;
+							declare = false;
+							break;
+						}
+						case LEX_RETURN:
+						{
+							ret = true;
+							break;
+						}
 						}
 						break;
 					}
@@ -221,6 +230,8 @@ namespace LR
 								isInteger = false;
 								currentIDDT = IT::INT;
 								currentIDT = IT::F;
+								if (!declare)
+									functionType = IT::INT;
 							}
 							else if (pointerInDeclareFunc && isString)
 							{
@@ -234,6 +245,8 @@ namespace LR
 								isString = false;
 								currentIDDT = IT::STR;
 								currentIDT = IT::F;
+								if (!declare)
+									functionType = IT::STR;
 							}
 							else if (pointerInDeclareFunc && isSymbol)	// *!
 							{
@@ -247,6 +260,8 @@ namespace LR
 								isSymbol = false;
 								currentIDDT = IT::SYBM;
 								currentIDT = IT::F;
+								if (!declare)
+									functionType = IT::SYBM;
 							}
 							else if (pointerInProperties && isInteger)
 							{
@@ -320,20 +335,29 @@ namespace LR
 							currentIDDT = IT::SYBM;
 							currentIDT = IT::V;
 							}
+							else throw ERROR_THROW_IN(201, i, j);
 							beginPosition++;
 						}
+						else if (isInteger || isString || isSymbol) throw ERROR_THROW_IN(200, i, j);
 
 						int indexIdTable = IsId(idTable, lexStr, beginPosition);
 						if (indexIdTable == -1 && findId(list_Of_Current_Ids, lexStr))
 						{
 							indexIdTable = IsId(idTable, lexStr, idTable.size);
 						}
+
+						isInteger = false;
+						isString = false;
+						isSymbol = false;
+
 						itemLT = CreateLex(lexema.lex, i, indexIdTable, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::ACTION_LEX:
 					{
+						if (lexema.lex == LEX_EQUAL)
+							lexTable.refsToAssigns.push_back(lexTable.size);
 						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr);
 						LT::Add(lexTable, itemLT);
 						break;
@@ -416,6 +440,22 @@ namespace LR
 							beginPosition = 0;
 							break;
 						}
+						case LEX_DECLARE:
+						{
+							declare = true;
+							break;
+						}
+						case LEX_SEMICOLON:
+						{
+							ret = false;
+							declare = false;
+							break;
+						}
+						case LEX_RETURN:
+						{
+							ret = true;
+							break;
+						}
 						}
 						break;
 					}
@@ -438,6 +478,8 @@ namespace LR
 								isInteger = false;
 								currentIDDT = IT::INT;
 								currentIDT = IT::F;
+								if (!declare)
+									functionType = IT::INT;
 							}
 							else if (pointerInDeclareFunc && isString)
 							{
@@ -451,6 +493,8 @@ namespace LR
 								isString = false;
 								currentIDDT = IT::STR;
 								currentIDT = IT::F;
+								if (!declare)
+									functionType = IT::STR;
 							}
 							else if (pointerInDeclareFunc && isSymbol)
 							{
@@ -464,6 +508,8 @@ namespace LR
 								isSymbol = false;
 								currentIDDT = IT::SYBM;
 								currentIDT = IT::F;
+								if (!declare)
+									functionType = IT::SYBM;
 							}
 							else if (pointerInProperties && isInteger)
 							{
@@ -537,8 +583,10 @@ namespace LR
 							currentIDDT = IT::SYBM;
 							currentIDT = IT::V;
 							}
+							else throw ERROR_THROW_IN(201, i, j);
 							beginPosition++;
 						}
+						else if (isInteger || isString || isSymbol) throw ERROR_THROW_IN(200, i, j);
 
 						int indexIdTable = IsId(idTable, lexStr, beginPosition);
 						if (indexIdTable == -1 && findId(list_Of_Current_Ids, lexStr))
@@ -546,12 +594,18 @@ namespace LR
 							indexIdTable = IsId(idTable, lexStr, idTable.size);
 						}
 
+						isInteger = false;
+						isString = false;
+						isSymbol = false;
+
 						itemLT = CreateLex(lexema.lex, i, indexIdTable, SIGN_DEFAULT);
 						LT::Add(lexTable, itemLT);
 						break;
 					}
 					case FST::ACTION_LEX:
 					{
+						if (lexema.lex == LEX_EQUAL)
+							lexTable.refsToAssigns.push_back(lexTable.size);
 						itemLT = CreateLex(lexema.lex, i, TI_NULLIDX, lexStr);
 						LT::Add(lexTable, itemLT);
 						break;
@@ -560,6 +614,8 @@ namespace LR
 					{
 						if (lexema.lex == LEX_NUMERICAL_LITERAL)
 						{
+							if (ret && functionType != IT::INT)
+								throw ERROR_THROW_IN(204, i, j);
 							int lexNum = atoi(lexStr);
 							char* lexNumName = new char[ID_MAXSIZE];
 							strcpy(lexNumName, "num");
@@ -569,6 +625,8 @@ namespace LR
 						}
 						else if (lexema.lex == LEX_STRING_LITERAL)
 						{
+							if ((ret && functionType != IT::STR) || (ret && pointerInMain))
+								throw ERROR_THROW_IN(204, i, j);
 							char* lexStrName = new char[ID_MAXSIZE];
 							strcpy(lexStrName, "str");
 							itemIT = CreateId(lexTable.size, lexStrName, IT::STR, IT::L, lexStr);
@@ -577,6 +635,8 @@ namespace LR
 						}
 						else if (lexema.lex == LEX_SYMBOL_LITERAL)
 						{
+							if ((ret && functionType != IT::SYBM) || (ret && pointerInMain))
+								throw ERROR_THROW_IN(204, i, j);
 							char* lexStrName = new char[ID_MAXSIZE];
 							strcpy(lexStrName, "symbol");
 							itemIT = CreateId(lexTable.size, lexStrName, IT::SYBM, IT::L, lexStr);
@@ -612,8 +672,6 @@ namespace LR
 				}
 			}
 		}
-		
-		strcpy(lexStr, "test");
 
 		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
 		/*std::cout << "\t......Test......" << std::endl;

@@ -21,6 +21,15 @@ namespace LT
 		lextable.table[lextable.size++] = entry;
 	}
 
+	void AddList(LexTable& lextable, std::list <LT::Entry> list_of_LT_Entries)
+	{
+		while (!list_of_LT_Entries.empty())
+		{
+			Add(lextable, list_of_LT_Entries.front());
+			list_of_LT_Entries.pop_front();
+		}
+	}
+
 	Entry GetEntry(LexTable& lextable, int n)
 	{
 		return lextable.table[n];

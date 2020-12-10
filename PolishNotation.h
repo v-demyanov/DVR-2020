@@ -8,10 +8,11 @@
 
 namespace PN
 {
-	bool PolishNotation(
+	std::list <LT::Entry> ConvertToPN(
 		int				lextable_pos,	// позиция выражения в lextable
 		LT::LexTable&	lextable,
-		IT::IdTable&	idtable
+		IT::IdTable&	idtable,
+		int&			semicolon
 	);
-
+	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable);
 }

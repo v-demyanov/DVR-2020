@@ -1,53 +1,49 @@
 Тест:без ошибок 
- ---- Протокол ---- Дата: 08.12.2020 21:19:56 ----
+ ---- Протокол ---- Дата: 10.12.2020 23:26:54 ----
 ---- Параметры ----
 -log: In.txt.log
 -out: In.txt.out
 -in: In.txt
 ---- Исходные данные ----
-Количество символов: 583
-Проигнорировано: 161
-Количество строк: 47
+Количество символов: 525
+Проигнорировано: 153
+Количество строк: 41
 
 LEX_TABLE: 
 
 	01 tfi(ti,ti)
 	02 {
 	03 $ti;
-	04 (iv(ivi)vi())vi(i,i,i,i,i)viv(ivi);
+	04 i=(iv(ivi)vi())vi(i,i,i,i,i)viv(ivi);
 	05 i=n;
-	06 $ti;
-	07 u(iwi)
-	08 $ti;
-	09 ps;
-	10 i=ivn;
-	11 l;
-	12 $ti;
-	13 q(iwi)
-	14 rn;
-	15 e
-	16 rn;
-	17 d;
-	18 $ti;
-	19 rn;
-	20 };
-	21 g
-	22 {
+	06 u(iwi)
+	07 ps;
+	08 i=ivn;
+	09 l;
+	10 q(iwi)
+	11 rn;
+	12 e
+	13 rn;
+	14 d;
+	15 rn;
+	16 };
+	17 g
+	18 {
+	19 $ti;
+	20 $ti;
+	21 $ti;
+	22 $ti;
 	23 $ti;
-	24 $ti;
-	25 $ti;
-	26 $ti;
-	27 $ti;
-	28 i=c;
-	29 i=s;
-	30 i=n;
-	31 i=s;
-	32 i=i(i,i);
-	33 q(iwn)
-	34 ps;
-	35 d;
-	36 rn;
-	37 };
+	24 i=c;
+	25 i=s;
+	26 i=n;
+	27 i=s;
+	28 i=i(i,i);
+	29 q(iwn)
+	30 ps;
+	31 d;
+	32 rn;
+	33 };
 
 ID_TABLE: 
 
@@ -57,22 +53,57 @@ ID_TABLE:
 	x                                           INT                             PARAMETER                           0                                   5                                  
 	y                                           STR                             PARAMETER                                                               8                                  
 	i                                           INT                             variable                             0                                    13                                 
-	num                                       INT                             Literal                               0                                     52                                 
-	str                                       STR                             Literal                               #bnv#                                 69                                 
-	num                                       INT                             Literal                               1                                     75                                 
-	aA1                                       INT                             PARAMETER                           0                                   87                                 
-	num                                       INT                             Literal                               1                                     90                                 
-	num                                       INT                             Literal                               0                                     94                                 
-	num                                       INT                             Literal                               0                                     103                                
-	aA1                                       INT                             variable                             0                                    111                                
-	aA2                                       STR                             variable                                                                  115                                
-	check                                   INT                             variable                             0                                    119                                
-	test                                     SYMB                           variable                                                                  123                                
-	tre                                       SYMB                           variable                                                                  127                                
-	symbol                                 SYMB                           Literal                               #g#                                   131                                
-	str                                       STR                             Literal                               #sdfdf#                               135                                
-	num                                       INT                             Literal                               5                                     139                                
-	str                                       STR                             Literal                               #Magazine#                            143                                
-	num                                       INT                             Literal                               0                                     158                                
-	str                                       STR                             Literal                               #Ошибка!#                             161                                
-	num                                       INT                             Literal                               0                                     166                                
+	num                                       INT                             Literal                               0                                     54                                 
+	str                                       STR                             Literal                               #bnv#                                 63                                 
+	num                                       INT                             Literal                               1                                     69                                 
+	num                                       INT                             Literal                               1                                     80                                 
+	num                                       INT                             Literal                               1                                     84                                 
+	num                                       INT                             Literal                               0                                     89                                 
+	aA1                                       INT                             variable                             0                                    97                                 
+	aA2                                       STR                             variable                                                                  101                                
+	check                                   INT                             variable                             0                                    105                                
+	test                                     SYMB                           variable                                                                  109                                
+	tre                                       SYMB                           variable                                                                  113                                
+	symbol                                 SYMB                           Literal                               #g#                                   117                                
+	str                                       STR                             Literal                               #sdfdf#                               121                                
+	num                                       INT                             Literal                               5                                     125                                
+	str                                       STR                             Literal                               #Magazine#                            129                                
+	num                                       INT                             Literal                               0                                     144                                
+	str                                       STR                             Literal                               #Ошибка!#                             147                                
+	num                                       INT                             Literal                               0                                     152                                
+
+LEX_TABLE: 
+
+	10 tfi(ti,ti)
+	20 {
+	30 $ti;
+	40 i=iiivv@v@iiiiiiviivvv;
+	50 i=n;
+	60 u(iwi)
+	70 ps;
+	80 i=inv;
+	90 l;
+	10 q(iwi)
+	11 rn;
+	12 e
+	13 rn;
+	14 d;
+	15 rn;
+	16 };
+	17 g
+	18 {
+	19 $ti;
+	20 $ti;
+	21 $ti;
+	22 $ti;
+	23 $ti;
+	24 i=c;
+	25 i=s;
+	26 i=n;
+	27 i=s;
+	28 i=@ii;
+	29 q(iwn)
+	30 ps;
+	31 d;
+	32 rn;
+	33 };
