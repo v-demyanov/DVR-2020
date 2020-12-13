@@ -1,4 +1,0 @@
-F:\HDD\ЯП2Курс\LPLab\Compiler\Debug\LPLab14.exe
-F:\HDD\ЯП2Курс\LPLab\Compiler\Debug\LPLab14.pdb
-F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\Debug\LPLab14.exe
-F:\HDD\ЯП2Курс\LPLab\CourseProject_ProgrammingLanguages\Debug\LPLab14.pdb
