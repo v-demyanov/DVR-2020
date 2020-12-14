@@ -1,2 +1,15 @@
-﻿  Generation.cpp
+﻿  FST.cpp
+F:\HDD\ЯП2Курс\LPLab\DVR2020\General\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+  Generation.cpp
+  LPLab14.cpp
+  LT.cpp
+  LexicalRecognizer.cpp
+F:\HDD\ЯП2Курс\LPLab\DVR2020\General\LexicalRecognizer.cpp(136,18): warning C4101: iddatatype: неиспользованная локальная переменная
+F:\HDD\ЯП2Курс\LPLab\DVR2020\General\LexicalRecognizer.cpp(137,14): warning C4101: idtype: неиспользованная локальная переменная
+  Log.cpp
+  MFST.cpp
+F:\HDD\ЯП2Курс\LPLab\DVR2020\General\MFST.cpp(293,68): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+  PolishNotation.cpp
+F:\HDD\ЯП2Курс\LPLab\DVR2020\General\PolishNotation.cpp(44,12): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
   LPLab14.vcxproj -> F:\HDD\ЯП2Курс\LPLab\DVR2020\General\Debug\LPLab14.exe

@@ -1,113 +1,88 @@
 Тест:без ошибок 
- ---- Протокол ---- Дата: 13.12.2020 23:17:04 ----
+ ---- Протокол ---- Дата: 15.12.2020 0:15:46 ----
 ---- Параметры ----
 -log: In.txt.log
 -out: In.txt.out
 -in: In.txt
 -asm: generation.asm
 ---- Исходные данные ----
-Количество символов: 540
-Проигнорировано: 156
-Количество строк: 42
+Количество символов: 371
+Проигнорировано: 86
+Количество строк: 28
 
 LEX_TABLE: 
 
 	01 tfi(ti,ti)
 	02 {
 	03 $ti;
-	04 i=(iv(ivi)vi())vi(i,i,i,i,i)viv(ivi);
-	05 i=n;
-	06 u(iwi)
-	07 ps;
-	08 i=ivn;
-	09 l;
-	10 q(iwi)
-	11 rn;
-	12 e
-	13 rn;
-	14 d;
-	15 rn;
-	16 };
-	17 g
-	18 {
-	19 $ti;
+	04 i=ivi;
+	05 rn;
+	06 }
+	07 g
+	08 {
+	09 $ti;
+	10 $ti;
+	11 $ti;
+	12 $ti;
+	13 $ti;
+	14 i=s;
+	15 i=n;
+	16 i=nvi;
+	17 i=n;
+	18 i=i(i,i);
+	19 pi;
 	20 $ti;
-	21 $ti;
-	22 $ti;
-	23 $ti;
-	24 $ti;
-	25 i=c;
-	26 i=s;
-	27 i=n;
-	28 i=s;
-	29 i=i(i,i);
-	30 q(iwn)
-	31 ps;
-	32 d;
-	33 rn;
-	34 };
+	21 i=((ivi)vivivivi)vi;
+	22 pi;
+	23 pi;
+	24 rn;
+	25 };
 
 ID_TABLE: 
 
 	ID_NAME                       DATA_TYPE                     ID_TYPE                       VALUE                         ID_FIRST_LT                   
 
-	1fA                                       INT                             Function                             0                                    2                                  
+	fu                                         INT                             Function                             0                                    2                                  
 	x                                           INT                             PARAMETER                           0                                   5                                  
 	y                                           STR                             PARAMETER                                                               8                                  
-	i                                           INT                             variable                             0                                    13                                 
-	num0                                     INT                             Literal                               0                                     54                                 
-	str0                                     STR                             Literal                               "bnv"                                 63                                 
-	num1                                     INT                             Literal                               1                                     69                                 
-	num2                                     INT                             Literal                               1                                     80                                 
-	num3                                     INT                             Literal                               1                                     84                                 
-	num4                                     INT                             Literal                               0                                     89                                 
-	aA1                                       INT                             variable                             0                                    97                                 
-	i                                           INT                             variable                             0                                    101                                
-	aA2                                       STR                             variable                                                                  105                                
-	check                                   INT                             variable                             0                                    109                                
-	test                                     SYMB                           variable                                                                  113                                
-	tre                                       SYMB                           variable                                                                  117                                
-	symb0                                   SYMB                           Literal                               "g"                                   121                                
-	str1                                     STR                             Literal                               "sdfdf"                               125                                
-	num5                                     INT                             Literal                               5                                     129                                
-	str2                                     STR                             Literal                               "Magazine"                            133                                
-	num6                                     INT                             Literal                               0                                     148                                
-	str3                                     STR                             Literal                               "Ошибка!"                             151                                
-	num7                                     INT                             Literal                               0                                     156                                
+	result                                 INT                             variable                             0                                    13                                 
+	num0                                     INT                             Literal                               0                                     22                                 
+	furesult                             INT                             variable                             0                                    29                                 
+	k                                           INT                             variable                             0                                    33                                 
+	a                                           INT                             variable                             0                                    37                                 
+	b                                           INT                             variable                             0                                    41                                 
+	c                                           STR                             variable                                                                  45                                 
+	str0                                     STR                             Literal                               "Result:"                             49                                 
+	num1                                     INT                             Literal                               2                                     53                                 
+	num2                                     INT                             Literal                               4                                     57                                 
+	num3                                     INT                             Literal                               4                                     63                                 
+	result                                 INT                             variable                             0                                    79                                 
+	num4                                     INT                             Literal                               0                                     108                                
 
 LEX_TABLE: 
 
 	10 tfi(ti,ti)
 	20 {
 	30 $ti;
-	40 i=iiivv@v@iiiiiiviivvv;
-	50 i=n;
-	60 u(iwi)
-	70 ps;
-	80 i=inv;
-	90 l;
-	10 q(iwi)
-	11 rn;
-	12 e
-	13 rn;
-	14 d;
-	15 rn;
-	16 };
-	17 g
-	18 {
-	19 $ti;
+	40 i=iiv;
+	50 rn;
+	60 }
+	70 g
+	80 {
+	90 $ti;
+	10 $ti;
+	11 $ti;
+	12 $ti;
+	13 $ti;
+	14 i=s;
+	15 i=n;
+	16 i=niv;
+	17 i=n;
+	18 i=ii@;
+	19 pi;
 	20 $ti;
-	21 $ti;
-	22 $ti;
-	23 $ti;
-	24 $ti;
-	25 i=c;
-	26 i=s;
-	27 i=n;
-	28 i=s;
-	29 i=@ii;
-	30 q(iwn)
-	31 ps;
-	32 d;
-	33 rn;
-	34 };
+	21 i=iiviviviivviv;
+	22 pi;
+	23 pi;
+	24 rn;
+	25 };

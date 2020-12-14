@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LPLab14", "LPLab14.vcxproj", "{74840AD6-4B59-4895-89B4-A98DD7678786}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Asm", "..\Asm\Asm.vcxproj", "{68608129-A74A-481E-A168-41466AB19092}"
+	ProjectSection(ProjectDependencies) = postProject
+		{74840AD6-4B59-4895-89B4-A98DD7678786} = {74840AD6-4B59-4895-89B4-A98DD7678786}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

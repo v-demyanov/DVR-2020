@@ -33,8 +33,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		Log::WriteIdTable(tables, log);
 
 			// перебор в цикле
-		for (int n : tables.lexTable.refsToAssigns)
-			std::cout << n << "\t";
+		/*for (int n : tables.lexTable.refsToAssigns)
+			std::cout << n << "\t";*/
 		
 		tables.lexTable = PN::PolishNotation(tables.lexTable, tables.idTable);
 		GEN::Generation(tables, asmbl);

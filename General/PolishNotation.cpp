@@ -58,6 +58,7 @@ namespace PN
 	{
 		std::list <LT::Entry> list_of_LT_Entries;
 		std::stack <LT::Entry> stack;
+		LT::Entry func;
 		int leftHesisCount = 0;
 		int paramCount = 0;
 		bool isFunction = false;
@@ -71,8 +72,9 @@ namespace PN
 				{
 					isFunction = true;
 					paramCount = 0;
-					lextable.table[i].lexema = '@';
-					list_of_LT_Entries.push_back(lextable.table[i]);
+					lextable.table[i].lexema = LEX_FUNC_CALL;
+					func = lextable.table[i];
+					//list_of_LT_Entries.push_back(lextable.table[i]);
 				}
 				else
 				{
@@ -103,6 +105,8 @@ namespace PN
 					//char* test = new char[2];
 					//strcpy(test, " ");
 					//list_of_LT_Entries.push_back({ '@', -1, -1, test });
+					func.numberOfParams = paramCount;
+					list_of_LT_Entries.push_back(func);
 					isFunction = false;
 					paramCount = 0;
 				}
@@ -132,7 +136,16 @@ namespace PN
 		{
 			if (strcmp((*iter).sign, SIGN_DEFAULT) == 0)
 			{
-				std::cout << (*iter).lexema << "\t";
+				
+				if ((*iter).lexema == LEX_FUNC_CALL)
+				{
+					std::cout << (*iter).lexema << " ";
+					std::cout << (*iter).numberOfParams << "\t";
+				}
+				else
+				{
+					std::cout << (*iter).lexema << "\t";
+				}
 			}
 			else
 			{

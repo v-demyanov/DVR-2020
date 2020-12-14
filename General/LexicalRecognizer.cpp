@@ -617,13 +617,9 @@ namespace LR
 					}
 					case FST::LITERAL_LEX:
 					{
-
-						
-						
-						
 						if (lexema.lex == LEX_NUMERICAL_LITERAL)
 						{
-							if (ret && functionType != IT::INT)
+							if ((ret && functionType != IT::INT) && !pointerInMain)
 								throw ERROR_THROW_IN(204, i, j);
 							int lexNum = atoi(lexStr);
 							char* lexNumName = new char[ID_MAXSIZE];

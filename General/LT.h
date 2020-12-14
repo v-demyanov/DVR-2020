@@ -21,6 +21,7 @@
 #define LEX_SYMBOL_LITERAL			'c'				// symbol
 #define LEX_STRING_LITERAL			's'				// строковый литерал
 #define LEX_NUMERICAL_LITERAL		'n'				// числовой литерал
+#define LEX_FUNC_CALL				'@'				// вызов функции
 
 #define LEX_DECLARE					'$'				// $
 #define LEX_SEMICOLON				';'				// ;
@@ -29,10 +30,11 @@
 #define LEX_BRACELET				'}'				// }
 #define LEX_LEFTHESIS				'('				// (
 #define LEX_RIGHTHESIS				')'				// )
-#define LEX_PLUS					'v'				// +
-#define LEX_MINUS					'v'				// -
-#define LEX_STAR					'v'				// *
-#define LEX_DIRSLASH				'v'				// /
+#define LEX_ACTION					'v'
+#define LEX_PLUS					'+'				// +
+#define LEX_MINUS					'-'				// -
+#define LEX_STAR					'*'				// *
+#define LEX_DIRSLASH				'/'				// /
 #define LEX_EQUAL					'='				// =
 #define LEX_MORE					'w'				// >
 #define LEX_LESS					'w'				// <

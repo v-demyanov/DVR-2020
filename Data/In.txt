@@ -1,41 +1,27 @@
 
-posint func 1fA (posint x, string y)
+posint func fu (posint x, string y)
 {
-   
-   $ posint i;
-   i = (x * (x + y) + 1fA()) + 1fA(x, x, y, x, y) / x / (x + y);
-   i = 0;
-
-   until (i <= x)
-      puts  #bnv#;
-      i = i + 1;
-   loop;   
-
-   if (i >= x)
-      ret 1;
-   else
-      ret 1;
-   end;
-
+   $ posint result;
+   result = x + y;
    ret 0;
-};
+}
 
 go
 {
-   $ posint aA1;
-   $ posint i;
-   $ string aA2;
-   $ posint check;
-   $ symbol test;
-   $ symbol tre;
-
-   test = #g#;
-   tre = #sdfdf#;
-   aA1 = 5;
-   aA2 = #Magazine#;
-   check = 1fA( aA1 , aA2 );
-   if (check == 0)
-      puts #Ошибка!#;
-   end;
+   $ posint furesult;
+   $ posint k;
+   $ posint a;
+   $ posint b;
+   $ string c;
+   c = #Result:#;
+   a = 2;
+   k = 4 / a;
+   b = 4;
+   furesult = fu(a, b);
+   puts furesult;
+   $ posint result;
+   result = ((a + b)*k / a + b*k) / k;
+   puts c;
+   puts result;
    ret 0;
 };

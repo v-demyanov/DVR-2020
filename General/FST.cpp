@@ -102,19 +102,19 @@ namespace FST
 			NODE(1, RELATION('<', 1)),
 			NODE()
 		);
-		FST dirslashFST("", 2, LEX_DIRSLASH, ACTION_LEX,
+		FST dirslashFST("", 2, LEX_ACTION, ACTION_LEX,
 			NODE(1, RELATION('/', 1)),
 			NODE()
 		);
-		FST starFST("", 2, LEX_STAR, ACTION_LEX,
+		FST starFST("", 2, LEX_ACTION, ACTION_LEX,
 			NODE(1, RELATION('*', 1)),
 			NODE()
 		);
-		FST minusFST("", 2, LEX_MINUS, ACTION_LEX,
+		FST minusFST("", 2, LEX_ACTION, ACTION_LEX,
 			NODE(1, RELATION('-', 1)),
 			NODE()
 		);
-		FST plusFST("", 2, LEX_PLUS, ACTION_LEX,
+		FST plusFST("", 2, LEX_ACTION, ACTION_LEX,
 			NODE(1, RELATION('+', 1)),
 			NODE()
 		);
@@ -314,7 +314,7 @@ namespace FST
 				RELATION('÷', 2), RELATION('ø', 2), RELATION('ù', 2), RELATION('ú', 2), RELATION('û', 2), RELATION('ü', 2),
 				RELATION('ý', 2), RELATION('þ', 2), RELATION('ÿ', 2), RELATION(' ', 2), RELATION('.', 2), RELATION(',', 2),
 				RELATION('?', 2), RELATION('!', 2), RELATION(';', 2), RELATION(':', 2), RELATION('-', 2), RELATION(')', 2),
-				RELATION('(', 2) ),
+				RELATION('(', 2)),
 			NODE(1, RELATION('#', 3)),
 			NODE()
 		);
