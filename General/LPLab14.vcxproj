@@ -161,6 +161,7 @@
     <ClCompile Include="MyFuncs.cpp" />
     <ClCompile Include="Parm.cpp" />
     <ClCompile Include="PolishNotation.cpp" />
+    <ClCompile Include="SemanticAnalyzer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="MyFuncs.h" />
     <ClInclude Include="Parm.h" />
     <ClInclude Include="PolishNotation.h" />
+    <ClInclude Include="SemanticAnalyzer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

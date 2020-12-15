@@ -49,8 +49,8 @@ namespace LT									// таблица лексем
 		char lexema;							// лексема
 		int lineSource;							// номер строки в исходном коде
 		int indexIdTable;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
-		char* sign;
-		int numberOfParams;
+		char* sign;								// поле для хранения оператора (арифметического или логического)
+		int numberOfParams;						// количество параметров функции
 		Entry();
 		Entry(char l, int n);
 		Entry(char l, int ls, int i, char* s);

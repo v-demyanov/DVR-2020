@@ -125,8 +125,7 @@ namespace LR
 		int numCount = 0;
 		int strCount = 0;
 		int symbCount = 0;
-		
-		
+			
 		std::list<Id> list_Of_Current_Ids;
 		Tables tables;
 		FST::FST_RESULT lexema;
@@ -156,8 +155,8 @@ namespace LR
 					case FST::LEX_NOT_FOUND:
 					{
 						if (lexStr[0] != '\0')
-							throw ERROR_THROW_IN(120, i, j);
-						break;
+							throw ERROR_THROW_IN(120, i, j);	
+						break;									
 					}
 					case FST::COMMON_LEX:
 					{
@@ -698,19 +697,6 @@ namespace LR
 			}
 		}
 
-		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
-		/*std::cout << "\t......Test......" << std::endl;
-		for (int i = 0; i < lexTable.size; i++)
-		{
-			std::cout << "\t\t" << lexTable.table[i].lexema << "\tlineSource " << lexTable.table[i].lineSource << "\tindexIdTable " << lexTable.table[i].indexIdTable << std::endl;
-		}
-
-		std::cout << "\n\n\t\t////////////////////////" << std::endl;
-		for (int i = 0; i < idTable.size; i++)
-		{
-			std::cout << "\t\t" << idTable.table[i].id << "\t" << idTable.table[i].idtype << "\tidxfirstLE: " << idTable.table[i].idxfirstLE << std::endl;
-		}*/
-		//ׂוסעûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûûû
 		tables.lexTable = lexTable;
 		tables.idTable = idTable;
 		return tables;

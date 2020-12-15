@@ -12,7 +12,7 @@ namespace GRB
 		7, 							// количество правил
 		Rule(
 			NS('S'), GRB_ERROR_SERIES + 0,    // неверная структура программы  
-			4,		// S->m{NrE;}; | tfi(F){NrE;};S | m{NrE;};S | tfi(F){NrE;};
+			4,		// S->g{NrE;}; | tfi(F){NrE;};S | g{NrE;};S | tfi(F){NrE;};
 			Rule::Chain(8, TS('g'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
 			Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
 			Rule::Chain(9, TS('g'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
@@ -20,7 +20,7 @@ namespace GRB
 		),
 		Rule(
 			NS('N'), GRB_ERROR_SERIES + 1,   // ошибочный оператор
-			24,		// N->dti; | rE; | i=E; | dtfi(F); | dti;N | rE;N | i=E;N | dtfi(F);N | pi; | pn; | ps; |  pi;N | pn;N | ps;N | pi(F); | pi(F);N
+			24,		// N->$ti; | rE; | i=E; | $tfi(F); | $ti;N | rE;N | i=E;N | $tfi(F);N | pi; | pn; | ps; | pc; |  pi;N | pn;N | ps;N | pc;N |pi(F); | pi(F);N | u(I)Nl; | u(I)Nl;N | q(I)NeNd; | q(I)NeNd;N | q(I)Nd; | q(I)NeNd;N
 			Rule::Chain(4, TS('$'), TS('t'), TS('i'), TS(';')),
 			Rule::Chain(3, TS('r'), NS('E'), TS(';')),
 			Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
@@ -70,13 +70,13 @@ namespace GRB
 		),
 		Rule(
 			NS('F'), GRB_ERROR_SERIES + 4,		// ошибка в параметрах функции
-			2,		// M->ti | ti,F
+			2,		// F->ti | ti,F
 			Rule::Chain(2, TS('t'), TS('i')),
 			Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('F'))
 		),
 		Rule(
 			NS('W'), GRB_ERROR_SERIES + 5,		// ошибка в параметрах вызываемой функции 
-			8,		// M->i | c | i,W | c,W | n | s | n,W | s,W
+			8,		// W->i | c | i,W | c,W | n | s | n,W | s,W
 			Rule::Chain(1, TS('i')),
 			Rule::Chain(1, TS('c')),
 			Rule::Chain(1, TS('n')),
@@ -88,7 +88,7 @@ namespace GRB
 		),
 		Rule(
 			NS('I'), GRB_ERROR_SERIES + 6,		// ошибка в параметрах цикла или оператора ветвления ?????
-			4,
+			4, // iwc | iws | iwn | iwi
 			Rule::Chain(3, TS('i'), TS('w'), TS('c')),
 			Rule::Chain(3, TS('i'), TS('w'), TS('s')),
 			Rule::Chain(3, TS('i'), TS('w'), TS('n')),

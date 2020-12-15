@@ -57,6 +57,9 @@
     <ClCompile Include="MyFuncs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="SemanticAnalyzer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h">
@@ -99,6 +102,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="MyFuncs.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="SemanticAnalyzer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

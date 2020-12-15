@@ -8,7 +8,7 @@
 
 namespace PN
 {
-	int getPriority(std::string l)
+	int getPriority(std::string l)	//	приоритет операции
 	{
 		std::map <std::string, int> mapping;
 
@@ -23,16 +23,9 @@ namespace PN
 		case 2:  return 2;  break;
 		case 1:  return 1; break;
 		}
-
-		/*switch (l)
-		{
-			case (mult): case div: return 3;
-			case minus: case plus: return 2;
-			case brace: return 1;
-		}*/
 		return 0;
 	}
-
+	//	создание новой таблице лексем с преобразованными выражениями
 	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable)
 	{
 		int ref = 0;
@@ -53,7 +46,7 @@ namespace PN
 		}
 		return result;
 	}
-
+	//	трансформация выражения в форму обратной польской записи 
 	std::list <LT::Entry> ConvertToPN(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable, int& semicolon)
 	{
 		std::list <LT::Entry> list_of_LT_Entries;
@@ -74,7 +67,6 @@ namespace PN
 					paramCount = 0;
 					lextable.table[i].lexema = LEX_FUNC_CALL;
 					func = lextable.table[i];
-					//list_of_LT_Entries.push_back(lextable.table[i]);
 				}
 				else
 				{
@@ -102,9 +94,6 @@ namespace PN
 				}
 				if (isFunction)
 				{
-					//char* test = new char[2];
-					//strcpy(test, " ");
-					//list_of_LT_Entries.push_back({ '@', -1, -1, test });
 					func.numberOfParams = paramCount;
 					list_of_LT_Entries.push_back(func);
 					isFunction = false;
@@ -151,7 +140,6 @@ namespace PN
 			{
 				std::cout << (*iter).sign << "\t";
 			}
-
 		}
 		std::cout << std::endl;
 		semicolon = i;

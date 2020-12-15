@@ -5,7 +5,7 @@
 #define LEN 100
 #define END_OF_STR '?'
 #define SPACE ' '
-// 3 1
+
 #define IN_CODE_TABLE {\
 	IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, \
 	IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, IN::T, \

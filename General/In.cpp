@@ -61,7 +61,7 @@ namespace In
 					if (structIN.lines == 6)
 						int asdasd = 0;
 					structIN.lines++;
-					if (col != 1 && letter != 0)		// *!
+					if (col != 1 && letter != 0)
 					{
 						str[word][letter] = '?';
 						letter++;
@@ -83,7 +83,6 @@ namespace In
 			}
 		}
 
-		//*
 		str[word][letter] = END_OF_STR;
 		letter++;
 
