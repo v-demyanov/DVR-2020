@@ -2,6 +2,7 @@
 #include "Generation.h"
 #include "IT.h"
 #include <iostream>
+#include <map>
 
 
 namespace GEN
@@ -18,6 +19,9 @@ namespace GEN
 		std::string variable;
 		std::string result_variable;
 		std::vector<std::string> variables;
+		std::stack<std::string> stack;
+		std::string mark = "";
+		int markCount = 0;
 
 		//	Вывод сегмента констант
 		*(asmbl.stream) << ".CONST\n";
@@ -78,10 +82,8 @@ namespace GEN
 		visibility_area = "";
 		variable = "";
 		result_variable = "";
-
-		//LEX_MAIN LEX_FUNCTION LEX_RETURN LEX_PRINT LEX_IF LEX_UNTIL LEX_LOOP LEX_ELSE LEX_END LEX_EQUAL LEX_BRACELET
-
 		bool main = false, function = false;
+		
 		//	Вывод сегмента кода
 		*(asmbl.stream) << ".CODE\n\n";
 		for (int i = 0; i < tables.lexTable.size; i++)
@@ -115,6 +117,68 @@ namespace GEN
 					function = true;
 					break;
 				}
+				case LEX_UNTIL:
+				{
+					mark = "CYCLE" + markCount;
+					*(asmbl.stream) << "\t" + mark + ":" << "\n";
+					i = i + 2;
+					//	Записываем в EAX итератор
+					variable = tables.idTable.table[tables.lexTable.table[i].indexIdTable].id;
+					result_variable = visibility_area + variable;
+					*(asmbl.stream) << "\tmov EAX, " << result_variable << "\n";
+					//	Сравниваем итератор с другим значением
+					variable = tables.idTable.table[tables.lexTable.table[i + 2].indexIdTable].id;
+					result_variable = visibility_area + variable;
+					*(asmbl.stream) << "\tcmp EAX, " << result_variable << "\n";
+
+					std::string sign = tables.lexTable.table[i + 1].sign;
+					std::map <std::string, int> mapping;
+
+					mapping["<="] = 1;
+					mapping[">="] = 2;
+					mapping["<"] = 3;
+					mapping[">"] = 4;
+					mapping["=="] = 5;
+
+					switch (mapping[sign]) 
+					{
+						case 1:
+						{
+							*(asmbl.stream) << "\tjbe cycle_body\n";
+							break;
+						}
+						case 2:
+						{
+							*(asmbl.stream) << "\tjae cycle_body\n";
+							break;
+						}
+						case 3:
+						{
+							*(asmbl.stream) << "\tjb cycle_body\n";
+							break;
+						}
+						case 4:
+						{
+							*(asmbl.stream) << "\tja cycle_body\n";
+							break;
+						}
+						case 5:
+						{
+							*(asmbl.stream) << "\tje cycle_body\n";
+							break;
+						}
+					}
+					*(asmbl.stream) << "\tcycle_end:\n\t\tjmp " << mark + "end" << "\n";
+					*(asmbl.stream) << "\tcycle_body:\n";
+					i = i + 3;
+					break;
+				}
+				case LEX_LOOP:
+				{
+					*(asmbl.stream) << "\tjmp " + mark << "\n";
+					*(asmbl.stream) << "\t" + mark + "end:" << "\n";
+					break;
+				}
 				case LEX_MAIN:
 				{
 					*(asmbl.stream) << "main PROC\n";
@@ -136,13 +200,13 @@ namespace GEN
 						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR buf, BSIZE, ADDR cWritten, 0" << "\n";
 						break;
 					}
-
 					else if (tables.lexTable.table[i + 1].lexema == LEX_ID)
 					{
 						variable = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id;
 						result_variable = visibility_area + variable;
-						*(asmbl.stream) << "\tmov ESI, offset " << result_variable << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, lengthof " << result_variable << ", ADDR cWritten, 0" << "\n";
+
+						*(asmbl.stream) << "\tmov ESI, " << result_variable << "\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9 " << ", ADDR cWritten, 0" << "\n";	
 						break;
 					}
 
@@ -155,7 +219,7 @@ namespace GEN
 					else
 					{
 						*(asmbl.stream) << "\tmov ESI, offset " << tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 16, ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9, ADDR cWritten, 0" << "\n";
 						break;
 					}
 					break;
@@ -169,6 +233,7 @@ namespace GEN
 						{
 							case LEX_NUMERICAL_LITERAL:
 							{
+								stack.push(tables.idTable.table[tables.lexTable.table[i].indexIdTable].id);
 								*(asmbl.stream) << "\tpush " << tables.idTable.table[tables.lexTable.table[i].indexIdTable].id << "\n";
 								break;
 							}
@@ -176,12 +241,15 @@ namespace GEN
 							{
 								variable = tables.idTable.table[tables.lexTable.table[i].indexIdTable].id;
 								result_variable = visibility_area + variable;
+								stack.push(result_variable);
 								*(asmbl.stream) << "\tpush " << result_variable << "\n";
 								break;
 							}
 							case LEX_SYMBOL_LITERAL:
 							case LEX_STRING_LITERAL:
 							{
+								variable = tables.idTable.table[tables.lexTable.table[i].indexIdTable].id;
+								stack.push("offset " + variable);
 								*(asmbl.stream) << "\tpush offset " << tables.idTable.table[tables.lexTable.table[i].indexIdTable].id << "\n";
 								break;
 							}
@@ -217,6 +285,18 @@ namespace GEN
 								}
 								break;
 							}
+							case LEX_FUNC_CALL:
+							{
+								for (int k = 0; k < tables.lexTable.table[i].numberOfParams; k++)
+									*(asmbl.stream) << "\tpop edx\n";
+								for (int k = 0; k < tables.lexTable.table[i].numberOfParams; k++)
+								{
+									*(asmbl.stream) << "\tpush " << stack.top() << "\n";
+									stack.pop();
+								}
+								*(asmbl.stream) << "\tcall " << tables.idTable.table[tables.lexTable.table[i].indexIdTable].id << "\n\tpush EAX\n";
+								break;
+							}
 							// switch
 						}
 						// for
@@ -241,9 +321,12 @@ namespace GEN
 						}
 						else
 						{
-							*(asmbl.stream) << tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id << "\n";
+							variable = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id;
+							result_variable = visibility_area + variable;
+							*(asmbl.stream) << result_variable << "\n";
 						}
-						*(asmbl.stream) << "\tret\n";
+						*(asmbl.stream) << "\tpop EAX\n";
+						*(asmbl.stream) << "\tret";
 					}
 					break;
 				}

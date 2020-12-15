@@ -10,11 +10,15 @@
 .STACK 4096
 .CONST
 	num0 DWORD 0
-	str0 BYTE "Result:", 0
-	num1 DWORD 2
-	num2 DWORD 4
-	num3 DWORD 4
-	num4 DWORD 0
+	num1 DWORD 3
+	str0 BYTE "bnv", 0
+	num2 DWORD 1
+	str1 BYTE "Result:", 0
+	num3 DWORD 2
+	num4 DWORD 4
+	num5 DWORD 4
+	str2 BYTE "test", 0
+	num6 DWORD 0
 	BSIZE equ 15
 .DATA
 	furesult DWORD ?
@@ -23,6 +27,8 @@
 	maina DWORD ?
 	mainb DWORD ?
 	mainc DWORD ?
+	maini DWORD ?
+	mainx DWORD ?
 	mainresult DWORD ?
 	ifmt DB "%d", 0
 	buf DB BSIZE dup(?)
@@ -32,7 +38,9 @@
 	cRead DD ?
 .CODE
 
-fu PROC fux : DWORD, fuy : DWORD
+fu PROC fux : DWORD, fuy : DWORD, fuz : DWORD
+	mov ESI, fuz
+	invoke WriteConsoleA, stdout, ESI, 9 , ADDR cWritten, 0
 	push fux
 	push fuy
 	pop EAX
@@ -40,9 +48,9 @@ fu PROC fux : DWORD, fuy : DWORD
 	add EAX, EBX
 	push EAX
 	pop furesult
-	push 0
+	push furesult
+	pop EAX
 	ret
-
 fu ENDP
 
 main PROC
@@ -50,11 +58,33 @@ main PROC
 	mov stdout, EAX
 	invoke GetStdHandle, -10
 	mov stdin, EAX
-	push offset str0
-	pop mainc
+	push num0
+	pop maini
 	push num1
-	pop maina
+	pop mainx
+	CYCLE:
+	mov EAX, maini
+	cmp EAX, mainx
+	jbe cycle_body
+	cycle_end:
+		jmp CYCLEend
+	cycle_body:
+	mov ESI, offset str0
+	invoke WriteConsoleA, stdout, ESI, 9, ADDR cWritten, 0
+	push maini
 	push num2
+	pop EAX
+	pop EBX
+	add EAX, EBX
+	push EAX
+	pop maini
+	jmp CYCLE
+	CYCLEend:
+	push offset str1
+	pop mainc
+	push num3
+	pop maina
+	push num4
 	push maina
 	mov EDX, 0
 	pop EBX
@@ -62,10 +92,19 @@ main PROC
 	div EBX
 	push EAX
 	pop maink
-	push num3
+	push num5
 	pop mainb
 	push maina
 	push mainb
+	push offset str2
+	pop edx
+	pop edx
+	pop edx
+	push offset str2
+	push mainb
+	push maina
+	call fu
+	push EAX
 	pop mainfuresult
 	invoke wsprintf, ADDR buf, ADDR ifmt, mainfuresult
 	invoke WriteConsoleA, stdout, ADDR buf, BSIZE, ADDR cWritten, 0
@@ -103,8 +142,8 @@ main PROC
 	div EBX
 	push EAX
 	pop mainresult
-	mov ESI, offset mainc
-	invoke WriteConsoleA, stdout, ESI, lengthof mainc, ADDR cWritten, 0
+	mov ESI, mainc
+	invoke WriteConsoleA, stdout, ESI, 9 , ADDR cWritten, 0
 	invoke wsprintf, ADDR buf, ADDR ifmt, mainresult
 	invoke WriteConsoleA, stdout, ADDR buf, BSIZE, ADDR cWritten, 0
 	INVOKE ReadConsole, stdin, ADDR buf, 20, ADDR cRead, 0

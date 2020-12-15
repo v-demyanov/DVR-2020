@@ -1,42 +1,51 @@
 Тест:без ошибок 
- ---- Протокол ---- Дата: 15.12.2020 0:15:46 ----
+ ---- Протокол ---- Дата: 15.12.2020 15:04:32 ----
 ---- Параметры ----
 -log: In.txt.log
 -out: In.txt.out
 -in: In.txt
 -asm: generation.asm
 ---- Исходные данные ----
-Количество символов: 371
-Проигнорировано: 86
-Количество строк: 28
+Количество символов: 520
+Проигнорировано: 133
+Количество строк: 38
 
 LEX_TABLE: 
 
-	01 tfi(ti,ti)
+	01 tfi(ti,ti,ti)
 	02 {
-	03 $ti;
-	04 i=ivi;
-	05 rn;
-	06 }
-	07 g
-	08 {
-	09 $ti;
+	03 pi;
+	04 $ti;
+	05 i=ivi;
+	06 ri;
+	07 }
+	08 g
+	09 {
 	10 $ti;
 	11 $ti;
 	12 $ti;
 	13 $ti;
-	14 i=s;
-	15 i=n;
-	16 i=nvi;
+	14 $ti;
+	15 $ti;
+	16 $ti;
 	17 i=n;
-	18 i=i(i,i);
-	19 pi;
-	20 $ti;
-	21 i=((ivi)vivivivi)vi;
-	22 pi;
-	23 pi;
-	24 rn;
-	25 };
+	18 i=n;
+	19 u(iwi)
+	20 ps;
+	21 i=ivn;
+	22 l;
+	23 i=s;
+	24 i=n;
+	25 i=nvi;
+	26 i=n;
+	27 i=i(i,i,s);
+	28 pi;
+	29 $ti;
+	30 i=((ivi)vivivivi)vi;
+	31 pi;
+	32 pi;
+	33 rn;
+	34 };
 
 ID_TABLE: 
 
@@ -44,45 +53,61 @@ ID_TABLE:
 
 	fu                                         INT                             Function                             0                                    2                                  
 	x                                           INT                             PARAMETER                           0                                   5                                  
-	y                                           STR                             PARAMETER                                                               8                                  
-	result                                 INT                             variable                             0                                    13                                 
-	num0                                     INT                             Literal                               0                                     22                                 
-	furesult                             INT                             variable                             0                                    29                                 
-	k                                           INT                             variable                             0                                    33                                 
-	a                                           INT                             variable                             0                                    37                                 
-	b                                           INT                             variable                             0                                    41                                 
-	c                                           STR                             variable                                                                  45                                 
-	str0                                     STR                             Literal                               "Result:"                             49                                 
-	num1                                     INT                             Literal                               2                                     53                                 
-	num2                                     INT                             Literal                               4                                     57                                 
-	num3                                     INT                             Literal                               4                                     63                                 
-	result                                 INT                             variable                             0                                    79                                 
-	num4                                     INT                             Literal                               0                                     108                                
+	y                                           INT                             PARAMETER                           0                                   8                                  
+	z                                           STR                             PARAMETER                                                               11                                 
+	result                                 INT                             variable                             0                                    19                                 
+	furesult                             INT                             variable                             0                                    35                                 
+	k                                           INT                             variable                             0                                    39                                 
+	a                                           INT                             variable                             0                                    43                                 
+	b                                           INT                             variable                             0                                    47                                 
+	c                                           STR                             variable                                                                  51                                 
+	i                                           INT                             variable                             0                                    55                                 
+	x                                           INT                             variable                             0                                    59                                 
+	num0                                     INT                             Literal                               0                                     63                                 
+	num1                                     INT                             Literal                               3                                     67                                 
+	str0                                     STR                             Literal                               "bnv"                                 76                                 
+	num2                                     INT                             Literal                               1                                     82                                 
+	str1                                     STR                             Literal                               "Result:"                             88                                 
+	num3                                     INT                             Literal                               2                                     92                                 
+	num4                                     INT                             Literal                               4                                     96                                 
+	num5                                     INT                             Literal                               4                                     102                                
+	str2                                     STR                             Literal                               "test"                                112                                
+	result                                 INT                             variable                             0                                    120                                
+	num6                                     INT                             Literal                               0                                     149                                
 
 LEX_TABLE: 
 
-	10 tfi(ti,ti)
+	10 tfi(ti,ti,ti)
 	20 {
-	30 $ti;
-	40 i=iiv;
-	50 rn;
-	60 }
-	70 g
-	80 {
-	90 $ti;
+	30 pi;
+	40 $ti;
+	50 i=iiv;
+	60 ri;
+	70 }
+	80 g
+	90 {
 	10 $ti;
 	11 $ti;
 	12 $ti;
 	13 $ti;
-	14 i=s;
-	15 i=n;
-	16 i=niv;
+	14 $ti;
+	15 $ti;
+	16 $ti;
 	17 i=n;
-	18 i=ii@;
-	19 pi;
-	20 $ti;
-	21 i=iiviviviivviv;
-	22 pi;
-	23 pi;
-	24 rn;
-	25 };
+	18 i=n;
+	19 u(iwi)
+	20 ps;
+	21 i=inv;
+	22 l;
+	23 i=s;
+	24 i=n;
+	25 i=niv;
+	26 i=n;
+	27 i=iis@;
+	28 pi;
+	29 $ti;
+	30 i=iiviviviivviv;
+	31 pi;
+	32 pi;
+	33 rn;
+	34 };
