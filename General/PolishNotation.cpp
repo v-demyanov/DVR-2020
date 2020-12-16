@@ -26,7 +26,7 @@ namespace PN
 		return 0;
 	}
 	//	создание новой таблице лексем с преобразованными выражени€ми
-	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable)
+	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable, Log::LOG pn)
 	{
 		int ref = 0;
 		int semicolon;
@@ -37,7 +37,7 @@ namespace PN
 			if (ref < lextable.refsToAssigns.size() && i == lextable.refsToAssigns[ref])
 			{
 				LT::Add(result, lextable.table[i]);
-				list_of_LT_Entries = ConvertToPN(i + 1, lextable, idtable, semicolon);
+				list_of_LT_Entries = ConvertToPN(i + 1, lextable, idtable, semicolon, pn);
 				LT::AddList(result, list_of_LT_Entries);
 				i = semicolon;
 				ref++;
@@ -47,7 +47,7 @@ namespace PN
 		return result;
 	}
 	//	трансформаци€ выражени€ в форму обратной польской записи 
-	std::list <LT::Entry> ConvertToPN(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable, int& semicolon)
+	std::list <LT::Entry> ConvertToPN(int lextable_pos, LT::LexTable& lextable, IT::IdTable& idtable, int& semicolon, Log::LOG pn)
 	{
 		std::list <LT::Entry> list_of_LT_Entries;
 		std::stack <LT::Entry> stack;
@@ -120,7 +120,7 @@ namespace PN
 			list_of_LT_Entries.push_back(stack.top());
 			stack.pop();
 		}
-		std::cout << "\n\n\t¬ыражение в польской записи:\t";
+		*(pn.stream) << "\n\t¬ыражение в польской записи:\t";
 		for (auto iter = list_of_LT_Entries.begin(); iter != list_of_LT_Entries.end(); iter++)
 		{
 			if (strcmp((*iter).sign, SIGN_DEFAULT) == 0)
@@ -128,20 +128,20 @@ namespace PN
 				
 				if ((*iter).lexema == LEX_FUNC_CALL)
 				{
-					std::cout << (*iter).lexema << " ";
-					std::cout << (*iter).numberOfParams << "\t";
+					*(pn.stream) << (*iter).lexema << " ";
+					*(pn.stream) << (*iter).numberOfParams << " ";
 				}
 				else
 				{
-					std::cout << (*iter).lexema << "\t";
+					*(pn.stream) << (*iter).lexema << " ";
 				}
 			}
 			else
 			{
-				std::cout << (*iter).sign << "\t";
+				*(pn.stream) << (*iter).sign << " ";
 			}
 		}
-		std::cout << std::endl;
+		*(pn.stream) << std::endl;
 		semicolon = i;
 		return list_of_LT_Entries;
 	}

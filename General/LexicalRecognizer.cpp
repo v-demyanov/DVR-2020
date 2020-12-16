@@ -46,6 +46,7 @@ namespace LR
 		result.idtype = idtype;
 		result.value.vstr->str[0] = str;
 		result.value.vstr->str[1] = '\0';
+		result.value.vstr->len = 1;
 		return result;
 	}
 

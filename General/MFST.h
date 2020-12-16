@@ -8,7 +8,7 @@
 
 #define MFST_DIAGN_MAXSIZE 2*ERROR_MAXSIZE_MESSAGE
 #define MFST_DIAGN_NUMBER 3
-#define MFST_TRACE_START std::cout<<std::setw( 4)<<std::left<<"Шаг"<<":"\
+#define MFST_TRACE_START(syn) *(syn.stream)<<std::setw( 4)<<std::left<<"Шаг"<<":"\
 									<<std::setw(20)<<std::left<<"Правило"\
 									<<std::setw(30)<<std::left<<"Входная лента"\
 									<<std::setw(20)<<std::left<<"Стек"<<std::endl;
@@ -90,17 +90,17 @@ namespace MFST				// магазинный автомат
 		char* getCStack(char* buf);								// получить содержимое стека
 		char* getCLenta(char* buf, short pos, short n = 25);	// лента: n символов с pos
 		char* getDiagnosis(short n, char* buf);					// получить n-ую строку диагностики или 0х00
-		bool saveState();										// сохранить состояние автомата
-		bool restState();										// восстановить состояние автомата
+		bool saveState(Log::LOG syn);										// сохранить состояние автомата
+		bool restState(Log::LOG syn);										// восстановить состояние автомата
 		bool push_chain(										// поместить цепочку правила в стек
 			GRB::Rule::Chain chain								// цепочка правил
 		);
-		RC_STEP step();							// выполнить шаг автомата
-		bool start();							// запустить автомат
+		RC_STEP step(Log::LOG syn);							// выполнить шаг автомата
+		bool start(Log::LOG syn);							// запустить автомат
 		bool saveDiagnosis(
 			RC_STEP pprc_step					// код завершения шага
 		);
-		void printRules();						// вывести последовательность правил
+		void printRules(Log::LOG syn);						// вывести последовательность правил
 
 		struct Deducation	// вывод
 		{

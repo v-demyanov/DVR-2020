@@ -1,37 +1,44 @@
 
-posint func fu (posint x, posint y, string z)
+posint func print (string str, posint count)
 {
-   puts z;
+   $ posint i;
+   i = 0;
+   puts #InPrint#;
+   until (i <  count)
+      puts str;
+      i = i + 1;
+   loop;
+   ret i;
+};
+
+posint func makeCoef (posint x, posint y)
+{
    $ posint result;
    result = x + y;
    ret result;
-}
+};
+
+posint func makeCompute (posint x, posint y, posint z)
+{
+   $ posint result;
+   result = 0;
+   result = ((x + y + z) / z) * makeCoef(x, y);
+   ret result;
+};
 
 go
 {
-   $ posint furesult;
-   $ posint k;
-   $ posint a;
-   $ posint b;
-   $ string c;
-   $ posint i;
-   $ posint x;
-   i = 0;
-   x = 3;
-   until (i <= x)
-      puts  #bnv#;
-      i = i + 1;
-   loop; 
-
-   c = #Result:#;
-   a = 2;
-   k = 4 / a;
-   b = 4;
-   furesult = fu(1, b, #test#);
-   puts furesult;
+   $ string str;
    $ posint result;
-   result = ((a + b)*k / a + b*k) / k;
-   puts c;
+   $ posint x;
+   $ posint y;
+   str = #cycle#;
+   x = 3;
+   y = 4;
+   result = 0;
+   result = makeCompute(x, y, 2);
+   x = print(str, 5);
+   puts #Result:#;
    puts result;
    ret 0;
 };

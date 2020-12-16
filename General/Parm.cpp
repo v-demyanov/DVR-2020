@@ -16,15 +16,30 @@ namespace Parm
 				throw ERROR_THROW(104);
 		wchar_t logAuto[PARM_MAX_SIZE];
 		wchar_t outAuto[PARM_MAX_SIZE];
+		wchar_t synAuto[PARM_MAX_SIZE];
+		wchar_t lexAuto[PARM_MAX_SIZE]; 
+		wchar_t pnAuto[PARM_MAX_SIZE];
 		wcscpy_s(logAuto, argv[1] + wcslen(PARM_IN));
 		wcscat_s(logAuto, PARM_LOG_DEFAULT_EXT);
 		wcscpy_s(outAuto, argv[1] + wcslen(PARM_IN));
 		wcscat_s(outAuto, PARM_OUT_DEFAULT_EXT);
 
+		wcscpy_s(synAuto, argv[1] + wcslen(PARM_IN));
+		wcscat_s(synAuto, PARM_SYN_DEFAULT_EXT);
+
+		wcscpy_s(lexAuto, argv[1] + wcslen(PARM_IN));
+		wcscat_s(lexAuto, PARM_LEX_DEFAULT_EXT);
+
+		wcscpy_s(pnAuto, argv[1] + wcslen(PARM_IN));
+		wcscat_s(pnAuto, PARM_PN_DEFAULT_EXT);
+
 		options.in[0] = '\0';
 		options.out[0] = '\0';
 		options.log[0] = '\0';
 		options.asmbl[0] = '\0';
+		options.syn[0] = '\0';
+		options.pn[0] = '\0';
+		options.lex[0] = '\0';
 
 		for (int i = 1; i < argc; i++)
 		{
@@ -53,11 +68,15 @@ namespace Parm
 			}
 		}
 
+		wcscpy_s(options.syn, synAuto);
+		wcscpy_s(options.lex, lexAuto);
+		wcscpy_s(options.pn, pnAuto);
+
 		if (options.in[0] == '\0')
 			throw ERROR_THROW(100);
 		if (options.asmbl[0] == '\0')
 			throw ERROR_THROW(105);
-
+		
 		if (options.out[0] == '\0' && options.log[0] == '\0')
 		{
 			wcscpy_s(options.out, outAuto);

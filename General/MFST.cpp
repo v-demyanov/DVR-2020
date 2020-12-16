@@ -6,25 +6,25 @@ char rbuf[205], sbuf[205], lbuf[1024];
 #define NS(n)	GRB::Rule::Chain::N(n)
 #define TS(n)	GRB::Rule::Chain::T(n)
 #define ISNS(n)	GRB::Rule::Chain::isN(n)
-#define MFST_TRACE1			std::cout<<std::setw(4)<<std::left<<++FST_TRACE_n << ": "\
+#define MFST_TRACE1(syn)	*(syn.stream)<<std::setw(4)<<std::left<<++FST_TRACE_n << ": "\
 							<<std::setw(20)<<std::left<<rule.getCRule(rbuf, nrulechain)\
 							<<std::setw(30)<<std::left<<getCLenta(lbuf, lenta_position)\
 							<<std::setw(20)<<std::left<<getCStack(sbuf)<<std::endl;
 
-#define MFST_TRACE2			std::cout<<std::setw(4)<<std::left<< FST_TRACE_n << ": "\
+#define MFST_TRACE2(syn)	*(syn.stream)<<std::setw(4)<<std::left<< FST_TRACE_n << ": "\
 							<<std::setw(20)<<std::left<<" "\
 							<<std::setw(30)<<std::left<<getCLenta(lbuf, lenta_position)\
 							<<std::setw(20)<<std::left<<getCStack(sbuf)<<std::endl;
 
-#define MFST_TRACE3			std::cout<<std::setw(4)<<std::left<< ++FST_TRACE_n << ": "\
+#define MFST_TRACE3(syn)	*(syn.stream)<<std::setw(4)<<std::left<< ++FST_TRACE_n << ": "\
 							<<std::setw(20)<<std::left<<" "\
 							<<std::setw(30)<<std::left<<getCLenta(lbuf, lenta_position)\
 							<<std::setw(20)<<std::left<<getCStack(sbuf)<<std::endl;
 
-#define MFST_TRACE4(c)   std::cout<<std::setw(4)<<std::left<< ++FST_TRACE_n<<": "<<std::setw(20)<<std::left<<c<<std::endl;
-#define MFST_TRACE5(c)   std::cout<<std::setw(4)<<std::left<< FST_TRACE_n<<": "<<std::setw(20)<<std::left<<c<<std::endl;
-#define MFST_TRACE6(c,k) std::cout<<std::setw(4)<<std::left<< FST_TRACE_n<<": "<<std::setw(20)<<std::left<<c<<k<<std::endl;
-#define MFST_TRACE7		 std::cout<<std::setw(4)<<std::left<< state.lenta_position<<": " \
+#define MFST_TRACE4(c, syn)   *(syn.stream)<<std::setw(4)<<std::left<< ++FST_TRACE_n<<": "<<std::setw(20)<<std::left<<c<<std::endl;
+#define MFST_TRACE5(c, syn)   *(syn.stream)<<std::setw(4)<<std::left<< FST_TRACE_n<<": "<<std::setw(20)<<std::left<<c<<std::endl;
+#define MFST_TRACE6(c,k, syn) *(syn.stream)<<std::setw(4)<<std::left<< FST_TRACE_n<<": "<<std::setw(20)<<std::left<<c<<k<<std::endl;
+#define MFST_TRACE7(syn)		 *(syn.stream)<<std::setw(4)<<std::left<< state.lenta_position<<": " \
 							  <<std::setw(20)<<std::left<<rule.getCRule(rbuf,state.nrulechain)<<std::endl;
 
 namespace MFST
@@ -90,7 +90,7 @@ namespace MFST
 		nrulechain = -1;					// изначально правило равно -1
 	};
 
-	Mfst::RC_STEP Mfst::step() //выполнить шаг автомата
+	Mfst::RC_STEP Mfst::step(Log::LOG syn) //выполнить шаг автомата
 	{
 		RC_STEP rc = SURPRISE;
 		if (lenta_position < lenta_size)
@@ -103,18 +103,18 @@ namespace MFST
 					GRB::Rule::Chain chain;
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain + 1)) >= 0) //получаем следующую цепочку и выводим её номер, илбо возвращаем -1
 					{
-						MFST_TRACE1				// вывод
-							saveState();			// сохранить состояние автомата
+						MFST_TRACE1(syn)				// вывод
+							saveState(syn);			// сохранить состояние автомата
 						stack.pop();		    // извлекаем верхушку стека.
 						push_chain(chain);		// поместить цепочку правила в стек
 						rc = NS_OK;				// найдено правило и цепочка... цепочка записана в стек
-						MFST_TRACE2				// вывод
+						MFST_TRACE2(syn)				// вывод
 					}
 					else
 					{
-						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE")			// вывод
+						MFST_TRACE4("TNS_NORULECHAIN/NS_NORULE", syn)			// вывод
 							saveDiagnosis(NS_NORULECHAIN);						// код завершения
-						rc = restState() ? NS_NORULECHAIN : NS_NORULE;		// восстановить состояние автомата
+						rc = restState(syn) ? NS_NORULECHAIN : NS_NORULE;		// восстановить состояние автомата
 					};
 				}
 				else rc = NS_ERROR;		// если не подобрали никакое правило для текущ нетерминала
@@ -125,18 +125,18 @@ namespace MFST
 				stack.pop();			// вершина стека
 				nrulechain = -1;		// номер текущего правила равен -1
 				rc = TS_OK;
-				MFST_TRACE3
+				MFST_TRACE3(syn)
 			}
 			else		// пытаемся восстановить предыдущее сост и подобрать для него другую цепочку
 			{
-				MFST_TRACE4("TS_NOK/NS_NORULECHAIN")
-					rc = restState() ? TS_NOK : NS_NORULECHAIN;
+				MFST_TRACE4("TS_NOK/NS_NORULECHAIN", syn)
+					rc = restState(syn) ? TS_NOK : NS_NORULECHAIN;
 			};
 		}
 		else
 		{
 			rc = LENTA_END;
-			MFST_TRACE4("LENTA_END")
+			MFST_TRACE4("LENTA_END", syn)
 		}
 		return rc;
 	};
@@ -151,14 +151,14 @@ namespace MFST
 		return true;
 	};
 
-	bool Mfst::saveState()		//Сохранить состояние автомата
+	bool Mfst::saveState(Log::LOG syn)		//Сохранить состояние автомата
 	{
 		storestate.push(MfstState(lenta_position, stack, nrule, nrulechain));		// стек для сохранения состояния. заносим сохраняемое состояние
-		MFST_TRACE6("SAVESTATE: ", storestate.size());
+		MFST_TRACE6("SAVESTATE: ", storestate.size(), syn);
 		return true;
 	};
 
-	bool Mfst::restState()		//Восстановить состояние автомата
+	bool Mfst::restState(Log::LOG syn)		//Восстановить состояние автомата
 	{
 		bool rc = false;
 		MfstState state;		//стек состояний
@@ -170,8 +170,8 @@ namespace MFST
 			nrule = state.nrule;
 			nrulechain = state.nrulechain;
 			storestate.pop();
-			MFST_TRACE5("RESTATE")
-				MFST_TRACE2
+			MFST_TRACE5("RESTATE", syn)
+				MFST_TRACE2(syn)
 		};
 		return rc;
 	};
@@ -195,41 +195,41 @@ namespace MFST
 		return rc;
 	};
 
-	bool Mfst::start()		//Начало работы автомата
+	bool Mfst::start(Log::LOG syn)		//Начало работы автомата
 	{
 		bool rc = false;
 		RC_STEP rc_step = SURPRISE;
 		char buf[MFST_DIAGN_MAXSIZE];
-		rc_step = step();
+		rc_step = step(syn);
 		while (rc_step == NS_OK || rc_step == NS_NORULECHAIN || rc_step == TS_OK || rc_step == TS_NOK)
 		{
-			rc_step = step();
+			rc_step = step(syn);
 		}
 
 		switch (rc_step)
 		{
 		case LENTA_END:
-			MFST_TRACE4("---->LENTA_END")
-				std::cout << "-------------------------------------------------------------------\n";
+			MFST_TRACE4("---->LENTA_END", syn)
+				*(syn.stream) << "-------------------------------------------------------------------\n";
 			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: всего строк %d, синтаксический анализ выполнен без ошибок", 0, lenta_size);
-			std::cout << std::setw(4) << std::left << 0 << ": всего строк " << lenta_size << ", синтаксический анализ выполнен без ошибок\n";
+			*(syn.stream) << std::setw(4) << std::left << 0 << ": всего строк " << lenta_size << ", синтаксический анализ выполнен без ошибок\n";
 			rc = true;
 			break;
 		case NS_NORULE:
-			MFST_TRACE4("---->NS_NORULE")
-				std::cout << "-------------------------------------------------------------------\n";
-			std::cout << getDiagnosis(0, buf) << std::endl;
-			std::cout << getDiagnosis(1, buf) << std::endl;
-			std::cout << getDiagnosis(2, buf) << std::endl;
+			MFST_TRACE4("---->NS_NORULE", syn)
+				*(syn.stream) << "-------------------------------------------------------------------\n";
+			*(syn.stream) << getDiagnosis(0, buf) << std::endl;
+			*(syn.stream) << getDiagnosis(1, buf) << std::endl;
+			*(syn.stream) << getDiagnosis(2, buf) << std::endl;
 			break;
 		case NS_NORULECHAIN:
-			MFST_TRACE4("---------->NS_NORULECHAIN")
+			MFST_TRACE4("---------->NS_NORULECHAIN", syn)
 				break;
 		case NS_ERROR:
-			MFST_TRACE4("---------->NS_ERROR")
+			MFST_TRACE4("---------->NS_ERROR", syn)
 				break;
 		case SURPRISE:
-			MFST_TRACE4("---------->SURPRISE")
+			MFST_TRACE4("---------->SURPRISE", syn)
 				break;
 		};
 		return rc;
@@ -273,7 +273,7 @@ namespace MFST
 		return rc;
 	};
 
-	void Mfst::printRules()		//Выводим дерево разбора
+	void Mfst::printRules(Log::LOG syn)		//Выводим дерево разбора
 	{
 		MfstState state;
 		GRB::Rule rule;
@@ -282,7 +282,7 @@ namespace MFST
 			state = getStackElement(storestate, k);
 			//state = storestate._Get_container()[k];
 			rule = greibach.getRule(state.nrule);
-			MFST_TRACE7
+			MFST_TRACE7(syn)
 		};
 	};
 

@@ -3,6 +3,7 @@
 #include "IT.h"
 #include <iostream>
 #include <map>
+#include <time.h>
 
 
 namespace GEN
@@ -22,6 +23,7 @@ namespace GEN
 		std::stack<std::string> stack;
 		std::string mark = "";
 		int markCount = 0;
+		int lexLen = 0;
 
 		//	Вывод сегмента констант
 		*(asmbl.stream) << ".CONST\n";
@@ -204,9 +206,10 @@ namespace GEN
 					{
 						variable = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id;
 						result_variable = visibility_area + variable;
-
+						//lexLen = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].value.vstr->len;
 						*(asmbl.stream) << "\tmov ESI, " << result_variable << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9 " << ", ADDR cWritten, 0" << "\n";	
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9 " << ", ADDR cWritten, 0" << "\n";
+						//*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, " << lexLen << ", ADDR cWritten, 0" << "\n";
 						break;
 					}
 
@@ -218,8 +221,10 @@ namespace GEN
 					}
 					else
 					{
+						//lexLen = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].value.vstr->len;
 						*(asmbl.stream) << "\tmov ESI, offset " << tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id << "\n";
 						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9, ADDR cWritten, 0" << "\n";
+						//*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, " << lexLen << ", ADDR cWritten, 0" << "\n";
 						break;
 					}
 					break;
@@ -348,4 +353,5 @@ namespace GEN
 			}
 		}
 	}
+	
 };

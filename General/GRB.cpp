@@ -87,7 +87,7 @@ namespace GRB
 			Rule::Chain(3, TS('s'), TS(','), NS('W'))
 		),
 		Rule(
-			NS('I'), GRB_ERROR_SERIES + 6,		// ошибка в параметрах цикла или оператора ветвления ?????
+			NS('I'), GRB_ERROR_SERIES + 6,		// ошибка в параметрах цикла или оператора ветвления
 			4, // iwc | iws | iwn | iwi
 			Rule::Chain(3, TS('i'), TS('w'), TS('c')),
 			Rule::Chain(3, TS('i'), TS('w'), TS('s')),

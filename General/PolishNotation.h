@@ -1,6 +1,7 @@
 #pragma once
 #include "IT.h"
 #include "LT.h"
+#include "Log.h"
 
 #define EXP1 28		// позиция первого выражения
 #define EXP2 50		// позиция второго выражения
@@ -12,7 +13,8 @@ namespace PN
 		int				lextable_pos,	// позиция выражения в lextable
 		LT::LexTable&	lextable,
 		IT::IdTable&	idtable,
-		int&			semicolon
+		int&			semicolon,
+		Log::LOG		pn
 	);
-	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable);
+	LT::LexTable PolishNotation(LT::LexTable& lextable, IT::IdTable& idtable, Log::LOG pn);
 }
