@@ -27,7 +27,7 @@ go
    a = 2;
    k = 4 / a;
    b = 4;
-   furesult = fu(a, b, #test#);
+   furesult = fu(1, b, #test#);
    puts furesult;
    $ posint result;
    result = ((a + b)*k / a + b*k) / k;

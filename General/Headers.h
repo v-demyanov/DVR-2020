@@ -11,6 +11,7 @@
 #include "GRB.h"
 #include "MFST.h"
 #include "Generation.h"
+#include "SemanticAnalyzer.h"
 
 #include <TCHAR.H>
 #include <iostream>

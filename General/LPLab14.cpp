@@ -36,6 +36,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		/*for (int n : tables.lexTable.refsToAssigns)
 			std::cout << n << "\t";*/
 		
+		SA::SemanticAnalyzer(tables);
+
 		tables.lexTable = PN::PolishNotation(tables.lexTable, tables.idTable);
 		GEN::Generation(tables, asmbl);
 		Log::WriteLexTable(tables, log);

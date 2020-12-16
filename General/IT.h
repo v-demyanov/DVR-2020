@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #define ID_MAXSIZE		30			// макс кол-во символов в идентификаторе
 #define TI_MAXSIZE		4096		// макс кол-во строк в таблице идентификаторов
 #define TI_INT_DEFAULT	0x00000000	// значение по умолчанию для типа integer
@@ -18,6 +19,7 @@ namespace IT										// таблица идентификатов
 		char*		id;								// идентификатор (автоматически усекается до ID_MAXSIZE)
 		IDDATATYPE	iddatatype;						// тип данных
 		IDTYPE		idtype;							// тип идентикатора
+		std::vector<int> parameters;
 		union
 		{
 			int vint;								// значение integer

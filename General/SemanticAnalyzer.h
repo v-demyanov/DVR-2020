@@ -2,7 +2,7 @@
 #include "LT.h"
 #include "Log.h"
 
-namespace GEN
+namespace SA
 {
-	void SemanticAnalyzer(LR::Tables tables, Log::LOG log);
+	void SemanticAnalyzer(LR::Tables tables);
 };
