@@ -208,7 +208,7 @@ namespace GEN
 						result_variable = visibility_area + variable;
 						//lexLen = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].value.vstr->len;
 						*(asmbl.stream) << "\tmov ESI, " << result_variable << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9 " << ", ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 6 " << ", ADDR cWritten, 0" << "\n";
 						//*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, " << lexLen << ", ADDR cWritten, 0" << "\n";
 						break;
 					}
@@ -223,7 +223,7 @@ namespace GEN
 					{
 						//lexLen = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].value.vstr->len;
 						*(asmbl.stream) << "\tmov ESI, offset " << tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 9, ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 7, ADDR cWritten, 0" << "\n";
 						//*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, " << lexLen << ", ADDR cWritten, 0" << "\n";
 						break;
 					}

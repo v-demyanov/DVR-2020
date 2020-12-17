@@ -6,7 +6,7 @@ LEX_TABLE:
 	03 $ti;
 	04 i=n;
 	05 ps;
-	06 u(ii)
+	06 u(iwi)
 	07 pi;
 	08 i=ivn;
 	09 l;
@@ -52,26 +52,26 @@ ID_TABLE:
 	i                                           INT                             variable                             0                                    13                                 
 	num0                                     INT                             Literal                               0                                     17                                 
 	str0                                     STR                             Literal                               "InPrint"                             20                                 
-	num1                                     INT                             Literal                               1                                     34                                 
-	makeCoef                             INT                             Function                             0                                    45                                 
-	x                                           INT                             PARAMETER                           0                                   48                                 
-	y                                           INT                             PARAMETER                           0                                   51                                 
-	result                                 INT                             variable                             0                                    56                                 
-	makeCompute                       INT                             Function                             0                                    71                                 
-	x                                           INT                             PARAMETER                           0                                   74                                 
-	y                                           INT                             PARAMETER                           0                                   77                                 
-	z                                           INT                             PARAMETER                           0                                   80                                 
-	result                                 INT                             variable                             0                                    85                                 
-	num2                                     INT                             Literal                               0                                     89                                 
-	str                                       STR                             variable                                                                  121                                
-	result                                 INT                             variable                             0                                    125                                
-	x                                           INT                             variable                             0                                    129                                
-	y                                           INT                             variable                             0                                    133                                
-	str1                                     STR                             Literal                               "cycle"                               137                                
-	num3                                     INT                             Literal                               3                                     141                                
-	num4                                     INT                             Literal                               4                                     145                                
-	num5                                     INT                             Literal                               0                                     149                                
-	num6                                     INT                             Literal                               2                                     159                                
-	num7                                     INT                             Literal                               5                                     168                                
-	str2                                     STR                             Literal                               "Result:"                             172                                
-	num8                                     INT                             Literal                               0                                     178                                
+	num1                                     INT                             Literal                               1                                     35                                 
+	makeCoef                             INT                             Function                             0                                    46                                 
+	x                                           INT                             PARAMETER                           0                                   49                                 
+	y                                           INT                             PARAMETER                           0                                   52                                 
+	result                                 INT                             variable                             0                                    57                                 
+	makeCompute                       INT                             Function                             0                                    72                                 
+	x                                           INT                             PARAMETER                           0                                   75                                 
+	y                                           INT                             PARAMETER                           0                                   78                                 
+	z                                           INT                             PARAMETER                           0                                   81                                 
+	result                                 INT                             variable                             0                                    86                                 
+	num2                                     INT                             Literal                               0                                     90                                 
+	str                                       STR                             variable                                                                  122                                
+	result                                 INT                             variable                             0                                    126                                
+	x                                           INT                             variable                             0                                    130                                
+	y                                           INT                             variable                             0                                    134                                
+	str1                                     STR                             Literal                               "cycle"                               138                                
+	num3                                     INT                             Literal                               3                                     142                                
+	num4                                     INT                             Literal                               4                                     146                                
+	num5                                     INT                             Literal                               0                                     150                                
+	num6                                     INT                             Literal                               2                                     160                                
+	num7                                     INT                             Literal                               5                                     169                                
+	str2                                     STR                             Literal                               "Result:"                             173                                
+	num8                                     INT                             Literal                               0                                     179                                
