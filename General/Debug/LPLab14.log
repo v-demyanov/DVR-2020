@@ -1,2 +1,23 @@
-﻿  Generation.cpp
-  LPLab14.vcxproj -> F:\HDD\ЯП2Курс\LPLab\DVR2020\General\Debug\LPLab14.exe
+﻿  Error.cpp
+  FST.cpp
+D:\Study\LP3sem\Курсовой\DVR2020-v3\General\FST.cpp(46,37): warning C4267: инициализация: преобразование из "size_t" в "short"; возможна потеря данных
+  Generation.cpp
+  GRB.cpp
+  In.cpp
+  IT.cpp
+  LexicalRecognizer.cpp
+D:\Study\LP3sem\Курсовой\DVR2020-v3\General\LexicalRecognizer.cpp(136,18): warning C4101: iddatatype: неиспользованная локальная переменная
+D:\Study\LP3sem\Курсовой\DVR2020-v3\General\LexicalRecognizer.cpp(137,14): warning C4101: idtype: неиспользованная локальная переменная
+  Log.cpp
+  LPLab14.cpp
+  LT.cpp
+  MFST.cpp
+D:\Study\LP3sem\Курсовой\DVR2020-v3\General\MFST.cpp(293,68): warning C4267: =: преобразование из "size_t" в "short"; возможна потеря данных
+  MyFuncs.cpp
+  Parm.cpp
+  PolishNotation.cpp
+D:\Study\LP3sem\Курсовой\DVR2020-v3\General\PolishNotation.cpp(37,12): warning C4018: <: несоответствие типов со знаком и без знака
+  SemanticAnalyzer.cpp
+  Создание кода...
+D:\Study\LP3sem\Курсовой\DVR2020-v3\General\In.cpp(104): warning C4172: возвращение адреса локальной или временной переменной : ASCII_Table
+  LPLab14.vcxproj -> D:\Study\LP3sem\Курсовой\DVR2020-v3\General\Debug\LPLab14.exe

@@ -1,2 +1,3 @@
 ﻿  Assembling generation.asm...
-  Asm.vcxproj -> F:\HDD\ЯП2Курс\LPLab\DVR2020\General\Debug\Asm.exe
+generation.asm(78): warning A6004: procedure argument or local not referenced : printstr
+  Asm.vcxproj -> D:\Study\LP3sem\Курсовой\DVR2020-v3\General\Debug\Asm.exe

@@ -36,6 +36,7 @@
 	cWritten DD ?
 	stdin DWORD ?
 	cRead DD ?
+	CRLF WORD ?
 .CODE
 
 print PROC printstr : DWORD, printcount : DWORD
@@ -43,6 +44,8 @@ print PROC printstr : DWORD, printcount : DWORD
 	pop printi
 	mov ESI, offset str0
 	invoke WriteConsoleA, stdout, ESI, 7, ADDR cWritten, 0
+	mov CRLF, 0d0ah
+	invoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0
 	CYCLE:
 	mov EAX, printi
 	cmp EAX, printcount
@@ -50,8 +53,16 @@ print PROC printstr : DWORD, printcount : DWORD
 	cycle_end:
 		jmp CYCLEend
 	cycle_body:
-	mov ESI, printstr
-	invoke WriteConsoleA, stdout, ESI, 6 , ADDR cWritten, 0
+	invoke wsprintf, ADDR buf, ADDR ifmt, printi
+	mov ESI, offset buf
+	mov EDI, -1
+	count:
+	inc EDI
+	cmp BYTE ptr [ESI+EDI], 0
+	jne count
+	invoke WriteConsoleA, stdout, ADDR buf, EDI, ADDR cWritten, 0
+	mov CRLF, 0d0ah
+	invoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0
 	push printi
 	push num1
 	pop EAX
@@ -153,9 +164,19 @@ main PROC
 	pop mainx
 	mov ESI, offset str2
 	invoke WriteConsoleA, stdout, ESI, 7, ADDR cWritten, 0
+	mov CRLF, 0d0ah
+	invoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0
 	invoke wsprintf, ADDR buf, ADDR ifmt, mainresult
-	invoke WriteConsoleA, stdout, ADDR buf, BSIZE, ADDR cWritten, 0
-	INVOKE ReadConsole, stdin, ADDR buf, 20, ADDR cRead, 0
+	mov ESI, offset buf
+	mov EDI, -1
+	count:
+	inc EDI
+	cmp BYTE ptr [ESI+EDI], 0
+	jne count
+	invoke WriteConsoleA, stdout, ADDR buf, EDI, ADDR cWritten, 0
+	mov CRLF, 0d0ah
+	invoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0
+	INVOKE ReadConsole, stdin, ADDR buf, 1, ADDR cRead, 0
 	INVOKE ExitProcess, -1
 main ENDP
 end main

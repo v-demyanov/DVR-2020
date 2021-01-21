@@ -80,6 +80,7 @@ namespace GEN
 		*(asmbl.stream) << "\tcWritten DD ?\n";
 		*(asmbl.stream) << "\tstdin DWORD ?\n";
 		*(asmbl.stream) << "\tcRead DD ?\n";
+		*(asmbl.stream) << "\tCRLF WORD ?\n";
 		variables.clear();
 		visibility_area = "";
 		variable = "";
@@ -199,7 +200,16 @@ namespace GEN
 						variable = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id;
 						result_variable = visibility_area + variable;
 						*(asmbl.stream) << "\tinvoke wsprintf, ADDR buf, ADDR ifmt, " << result_variable << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR buf, BSIZE, ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tmov ESI, offset buf" << "\n";
+						*(asmbl.stream) << "\tmov EDI, -1\n";
+						*(asmbl.stream) << "\tcount:\n";
+						*(asmbl.stream) << "\tinc EDI\n";
+						*(asmbl.stream) << "\tcmp BYTE ptr" << " [ESI+EDI], 0\n";
+						*(asmbl.stream) << "\tjne count\n";
+
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR buf, EDI, ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tmov CRLF, 0d0ah\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0\n";
 						break;
 					}
 					else if (tables.lexTable.table[i + 1].lexema == LEX_ID)
@@ -208,7 +218,15 @@ namespace GEN
 						result_variable = visibility_area + variable;
 						//lexLen = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].value.vstr->len;
 						*(asmbl.stream) << "\tmov ESI, " << result_variable << "\n";
-						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 6 " << ", ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tmov EDI, -1\n";
+						*(asmbl.stream) << "\tcount:\n";
+						*(asmbl.stream) << "\tinc EDI\n";
+						*(asmbl.stream) << "\tcmp BYTE ptr" << " [ESI+EDI], 0\n";
+						*(asmbl.stream) << "\tjne count\n";
+
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, EDI " << ", ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tmov CRLF, 0d0ah\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0\n";
 						//*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, " << lexLen << ", ADDR cWritten, 0" << "\n";
 						break;
 					}
@@ -217,6 +235,8 @@ namespace GEN
 					{
 						*(asmbl.stream) << "\tinvoke wsprintf, ADDR buf, ADDR ifmt, " << tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id << "\n";
 						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR buf, BSIZE, ADDR cWritten, 0"  << "\n";
+						*(asmbl.stream) << "\tmov CRLF, 0d0ah\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0\n";
 						break;
 					}
 					else
@@ -224,6 +244,8 @@ namespace GEN
 						//lexLen = tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].value.vstr->len;
 						*(asmbl.stream) << "\tmov ESI, offset " << tables.idTable.table[tables.lexTable.table[i + 1].indexIdTable].id << "\n";
 						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, 7, ADDR cWritten, 0" << "\n";
+						*(asmbl.stream) << "\tmov CRLF, 0d0ah\n";
+						*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ADDR CRLF, 2, ADDR cWritten, 0\n";
 						//*(asmbl.stream) << "\tinvoke WriteConsoleA, stdout, ESI, " << lexLen << ", ADDR cWritten, 0" << "\n";
 						break;
 					}
@@ -344,7 +366,7 @@ namespace GEN
 					}
 					else if (main)
 					{
-						*(asmbl.stream) << "\tINVOKE ReadConsole, stdin, ADDR buf, 20, ADDR cRead, 0\n";
+						*(asmbl.stream) << "\tINVOKE ReadConsole, stdin, ADDR buf, 1, ADDR cRead, 0\n";
 						*(asmbl.stream) << "\tINVOKE ExitProcess, -1\nmain ENDP\nend main";
 						main = false;
 					}
